@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+ <mx:TitleWindow xmlns:mx="http://www.adobe.com/2006/mxml" width="550" height="302" title="Aula Virtual - Escriba aquí su mensaje:" creationComplete="inicio()">
+   <mx:DateFormatter id="dfconv" formatString="DD-MM-YYYY"/>
+<mx:Canvas width="520" height="252">
+      <mx:Button x="443" y="173"  label="Salir" width="72" height="72" click="btn_cerrar_click()" />
+      <mx:Button x="166" y="195"  label="Enviar" click="click_btn_envia()" width="184" height="26" />
+      <mx:TextArea x="5" y="6" width="510" height="162" text="" id="txt_texto"  maxChars="500" />
+      <mx:Label x="5" y="169"  text="Nota : Máx. 500 caracteres." fontWeight="bold" />
+    </mx:Canvas>
+	  <mx:Script source="frm_foro_popup_envia_opinion_script.as"/>
+	<mx:RemoteObject id="ro_foro_alumno2" destination="libreria_alm.frm_foro_alumno" showBusyCursor="true" fault="error_fx(event)">
+	<mx:method name="foro_inserta_opinion" result="result_foro_inserta_opinion(event)" />
+	
+	</mx:RemoteObject>
+	
+  </mx:TitleWindow>
+
+	
+    
+	

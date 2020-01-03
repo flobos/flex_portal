@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Module xmlns:mx="http://www.adobe.com/2006/mxml" width="100%" height="100%"><mx:DateFormatter id="dfconv" formatString="DD-MM-YYYY"/>
+<mx:TitleWindow width="340" height="370" creationComplete="f_carga()" title="Comprobante envio prueba" horizontalAlign="center" id="vb_trabajos" verticalAlign="middle">
+<mx:VBox id="vb_trabajos2">
+<mx:HBox >
+  <mx:Label text="Alumno:" color="#000099" fontWeight="bold"/>
+<mx:Label id="lbl_alumno"/>
+</mx:HBox>
+<mx:HBox>
+  <mx:Label text="Ramo:" color="#000099" fontWeight="bold"/>
+<mx:Label id="lbl_ramo"/>
+</mx:HBox>
+<mx:HBox>
+  <mx:Label text="Prueba:" color="#000099" fontWeight="bold"/>
+<mx:Label id="lbl_prueba"/>
+</mx:HBox>
+<mx:HBox>
+  <mx:Label text="Cod. Envio:" color="#000099" fontWeight="bold"/>
+<mx:Label id="lbl_codigo"/>
+</mx:HBox>
+<mx:HBox>
+  <mx:Label text="Nota" color="#000099" fontWeight="bold"/>
+<mx:Label id="lbl_nota"/>
+</mx:HBox>
+<mx:DataGrid id="dg_respuestas" width="305">
+  <mx:columns>
+    <mx:Array>
+      <mx:DataGridColumn headerText="Cod. Pregunta" dataField="campo_uno" />
+      <mx:DataGridColumn headerText="Cod. Respuesta" dataField="campo_dos" />
+      <mx:DataGridColumn headerText="Correcta?" dataField="campo_tres" />
+    </mx:Array>
+  </mx:columns>
+</mx:DataGrid>
+<mx:HBox>
+<mx:Button id="btn_imprimir" label="Imprimir" click="click_btn_imprimir()"  />
+<mx:Button id="btn_cerrar" label="Cerrar" click="click_btn_cerrar()" />
+</mx:HBox>
+</mx:VBox>
+</mx:TitleWindow>
+
+
+<mx:Script  source="frm_pruebas_objetiva_rendir_popup_conprobante_script.as"/>
+
+<mx:RemoteObject id="ro_trabajo" destination="libreria_alm.frm_pruebas_objetiva_rendir" showBusyCursor="true" fault="error_fx(event)">
+<mx:method name="muestra_info_trabajo" result="result_muestra_info_trabajo(event)" />
+<mx:method name="muestra_respuestas_trabajo" result="result_muestra_respuestas_trabajo(event)" />
+</mx:RemoteObject>
+
+</mx:Module>

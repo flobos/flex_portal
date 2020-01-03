@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml"
+layout="vertical"
+horizontalAlign="left"
+xmlns:net="flash.net.*"
+creationComplete="onCreationComplete()">
+<mx:Form>
+<mx:FormItem label="Remote URL">
+<mx:TextInput id="urlInput" width="200" />
+</mx:FormItem>
+<mx:FormItem label="File name">
+<mx:TextInput id="fileInput" editable="false" width="200" />
+</mx:FormItem>
+<mx:FormItem label="Status">
+<mx:Text text="{status}" />
+</mx:FormItem>
+<mx:ControlBar>
+<mx:Button id="selectBut" label="Select file" click="selectFile(event)" />
+<mx:Button id="uploadBut" label="Upload file" click="uploadFile(event)" enabled="{fileSelected}" />
+</mx:ControlBar>
+</mx:Form>
+
+<mx:Script source="subidaArchivos.as"/> 
+
+</mx:Application>

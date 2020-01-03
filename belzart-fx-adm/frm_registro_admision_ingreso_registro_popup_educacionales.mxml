@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:TitleWindow xmlns:mx="http://www.adobe.com/2006/mxml"
+				width="580" height="432" minWidth="955" minHeight="600" layout="absolute"
+				title="Ingreso Registro - Antecedentes Educacionales" creationComplete="inicio()">
+	
+	<mx:Script>
+		<![CDATA[
+			protected function lbl_nombre_keyUpHandler(event:KeyboardEvent):void
+			{
+				// TODO Auto-generated method stub
+				if (event.charCode == 13)
+				{
+					this.cmb_tipo.setFocus();
+				}
+				if (event.charCode == Keyboard.ESCAPE)
+				{
+					this.btn_guardar.setFocus();
+				}
+			}
+			
+			protected function lbl_institucion_keyUpHandler(event:KeyboardEvent):void
+			{
+				// TODO Auto-generated method stub
+				if (event.charCode == 13)
+				{
+					this.lbl_fecha_ingreso.setFocus();
+				}
+			}
+			
+			protected function lbl_fecha_ingreso_keyUpHandler(event:KeyboardEvent):void
+			{
+				if (lbl_fecha_ingreso.text.length == 8)
+				{
+					lbl_fecha_ingreso.text = lbl_fecha_ingreso.text.substr(0,2) + '-' + lbl_fecha_ingreso.text.substr(2,2) + '-' + lbl_fecha_ingreso.text.substr(4,4); 
+				}
+				// TODO Auto-generated method stub
+				if (event.charCode == 13)
+				{
+					this.lbl_fecha_egreso.setFocus();
+				}
+			}
+			
+			protected function lbl_fecha_egreso_keyUpHandler(event:KeyboardEvent):void
+			{
+				if (lbl_fecha_egreso.text.length == 8)
+				{
+					lbl_fecha_egreso.text = lbl_fecha_egreso.text.substr(0,2) + '-' + lbl_fecha_egreso.text.substr(2,2) + '-' + lbl_fecha_egreso.text.substr(4,4); 
+				}
+				// TODO Auto-generated method stub
+				if (event.charCode == 13)
+				{
+					this.btn_agregar.setFocus();
+				}
+			}
+			
+			protected function cmb_tipo_keyUpHandler(event:KeyboardEvent):void
+			{
+				// TODO Auto-generated method stub
+				if (event.charCode == 13)
+				{
+					this.lbl_institucion.setFocus();
+				}
+				
+			}
+			
+			protected function btn_agregar_keyUpHandler(event:KeyboardEvent):void
+			{
+				// TODO Auto-generated method stub
+				if (event.charCode == 13)
+				{
+					this.btn_agregar_click();
+				}
+			}
+			
+			protected function btn_guardar_keyUpHandler(event:KeyboardEvent):void
+			{
+				// TODO Auto-generated method stub
+				if (event.charCode == 13)
+				{
+					this.btn_guardar_click();
+				}
+			}
+			
+		]]>
+	</mx:Script>
+	
+	<mx:DateFormatter id="dfconv" formatString="DD-MM-YYYY"/>
+	<mx:HRule x="10" y="168" width="540"/>
+	<mx:HRule x="10" y="342" width="540"/>
+	<mx:Label x="10" y="174" text="Agregar Antecedente Educacional"/>
+	<mx:Label x="10" y="226" text="Tipo"/>
+	<mx:ComboBox id="cmb_tipo" x="132" y="224" width="204" keyUp="cmb_tipo_keyUpHandler(event)"></mx:ComboBox>
+	<mx:Label x="10" y="200" text="Nombre / Título"/>
+	<mx:TextInput id="lbl_nombre" x="132" y="198" width="418" maxChars="200" change="mayusculas(lbl_nombre)" keyUp="lbl_nombre_keyUpHandler(event)"/>
+	<mx:Label x="10" y="252" text="Institución"/>
+	<mx:TextInput id="lbl_institucion" keyUp="lbl_institucion_keyUpHandler(event)" x="132" y="250" width="418" maxChars="200" change="mayusculas(lbl_institucion)"/>
+	<mx:Label x="10" y="278" text="Fecha de Ingreso"/>
+	<mx:Label x="10" y="304" text="Fecha de Egreso"/>
+	<mx:DateField id="lbl_fecha_ingreso" keyUp="lbl_fecha_ingreso_keyUpHandler(event)" x="132" y="276" width="164" dayNames="['D', 'L', 'M', 'M', 'J', 'V', 'S']"
+				  enabled="true" firstDayOfWeek="1" showToday="true" editable="true"
+				  monthNames="['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre']"
+				  yearNavigationEnabled="true" formatString="DD-MM-YYYY" />
+	<mx:DateField id="lbl_fecha_egreso" keyUp="lbl_fecha_egreso_keyUpHandler(event)" x="132" y="302" width="164" dayNames="['D', 'L', 'M', 'M', 'J', 'V', 'S']"
+				  enabled="true" firstDayOfWeek="1" showToday="true" editable="true"
+				  monthNames="['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre']"
+				  yearNavigationEnabled="true" formatString="DD-MM-YYYY"/>
+	<mx:Button id="btn_agregar" x="477" y="302" label="Agregar" click="btn_agregar_click()" keyUp="btn_agregar_keyUpHandler(event)"/>
+	<mx:Button x="10" y="361" label="Cancelar" click="btn_cancelar_click()"/>
+	<mx:Button id="btn_guardar" x="427" y="361" label="Guardar Cambios" click="btn_guardar_click()"
+			   keyUp="btn_guardar_keyUpHandler(event)"/>
+	<mx:DataGrid id="dg_educacionales" x="10" y="28" width="540" height="101">
+		<mx:columns>
+			<mx:DataGridColumn dataField="campo_siete" headerText="ID" visible="false"/>
+			<mx:DataGridColumn dataField="campo_ocho" headerText="ID2" visible="false"/>
+			<mx:DataGridColumn dataField="campo_uno" headerText="Nombre"/>
+			<mx:DataGridColumn dataField="campo_dos" headerText="Institucion"/>
+			<mx:DataGridColumn dataField="campo_tres" headerText="ID TIPO" visible="false"/>
+			<mx:DataGridColumn dataField="campo_cuatro" headerText="Tipo"/>
+			<mx:DataGridColumn dataField="campo_cinco" headerText="Fecha Ingreso"/>
+			<mx:DataGridColumn dataField="campo_seis" headerText="Fecha Egreso"/>
+		</mx:columns>
+	</mx:DataGrid>
+	<mx:Button x="488" y="137" label="Quitar" click="btn_quitar_click()"/>
+	<mx:Label x="10" y="8" text="Antecedentes Educacionales"/>
+	<mx:Script source="frm_registro_admision_ingreso_registro_popup_educacionales_script.as" />
+	
+	<mx:RemoteObject id="ro_ingreso_registro" destination="libreria.frm_registro_admision_ingreso_registro" showBusyCursor="true" fault="error_fx(event)">
+		<mx:method name="muestra_tipo_educacional" result="result_muestra_tipo_educacional(event)"/>
+	</mx:RemoteObject>	
+</mx:TitleWindow>

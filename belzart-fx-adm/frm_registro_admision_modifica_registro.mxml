@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Canvas y="20" xmlns:mx="http://www.adobe.com/2006/mxml" width="754" height="608" horizontalCenter="0" creationComplete="inicio()" >
+	
+	<mx:Script>
+		<![CDATA[
+			protected function lbl_fecha_nac_keyUpHandler(event:KeyboardEvent):void
+			{
+				// TODO Auto-generated method stub
+				if (lbl_fecha_nac.text.length == 8)
+				{
+					lbl_fecha_nac.text = lbl_fecha_nac.text.substr(0,2) + '-' + lbl_fecha_nac.text.substr(2,2) + '-' + lbl_fecha_nac.text.substr(4,4); 
+				}
+			}
+		]]>
+	</mx:Script>
+	
+	<mx:DateFormatter id="dfconv" formatString="DD-MM-YYYY"/>
+		<mx:Label x="10" y="10" text="Antecedentes Personales" textDecoration="underline" fontWeight="bold"/>
+		<mx:Label x="10" y="41" text="Nombre"/>
+		<mx:Label x="10" y="67" text="Apellido Paterno" id="text_ap_paterno"/>
+		<mx:Label x="10" y="93" text="Apellido Materno" id="text_ap_materno"/>
+		<mx:Label x="10" y="119" text="Usuario" visible="false"/>
+		<mx:Label x="10" y="145" text="Password" visible="false"/>
+		<mx:HRule x="10" y="29" width="725"/>
+		<mx:TextInput x="155" y="39" width="297" id="lbl_nombre" maxChars="100" change="formato(lbl_nombre)"/>
+		<mx:TextInput x="155" y="65" width="160" maxChars="100" id="lbl_ap_paterno" change="formato(lbl_ap_paterno)"/>
+		<mx:TextInput x="155" y="91" width="160" id="lbl_ap_materno" maxChars="100" change="formato(lbl_ap_materno)"/>
+		<mx:TextInput x="155" y="117" id="lbl_usuario" visible="false"/>
+		<mx:TextInput x="155" y="143" id="lbl_password" visible="false"/>
+	<mx:Button id="btn_requisitos" x="10" y="543" width="215" label="Ver Ventana de Requisitos"
+			   click="popup_requisitos()"/>
+	<mx:Button id="btn_antecedentes_educacionales" x="529" y="543" width="215"
+			   label="Ver Antecedentes Educacionales" click="popup_educacionales()"/>
+	<mx:Button id="btn_antecedentes_laborales" x="269.5" y="543" width="215"
+			   label="Ver Antecedentes Laborales" click="popup_laborales()"/>
+		<mx:DateField x="526" y="65" width="160" editable="true" id="lbl_fecha_nac" labelFunction="formatea_fecha" change="comprueba_edad()" keyUp="lbl_fecha_nac_keyUpHandler(event)"  firstDayOfWeek="1" monthNames="['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre']" dayNames="['D', 'L', 'M', 'M', 'J', 'V', 'S']" enabled="true" yearNavigationEnabled="true"/>
+		<mx:ComboBox x="526" y="117" id="cmb_sexo"></mx:ComboBox>
+		<mx:ComboBox x="526" y="143" id="cmb_estado_civil"></mx:ComboBox>
+		<mx:Button x="689" y="304" label="Añadir" id="btn_agregar_direccion" click="popup_agregar_direccion()"/>
+		<mx:Button x="245" y="489" label="Añadir" id="btn_agregar_telefonico" click="popup_agregar_fono()"/>
+		<mx:Button x="651" y="489" label="Añadir" id="btn_agregar_electronico" click="popup_agregar_electronico()"/>
+		<mx:Button x="620" y="576" label="Modificar Registro" id="btn_guardar_registro" click="btn_guardar_click()"/>
+		<mx:Label x="10" y="159" text="Direcciones" textDecoration="underline" fontWeight="bold"/>
+		<mx:Label x="10" y="331" text="Información de Contacto" textDecoration="underline" fontWeight="bold"/>
+		
+		<mx:DataGrid x="10" y="187" width="725" height="99" id="dg_direcciones" editable="false">
+			<mx:columns>
+				<mx:DataGridColumn width="40" id="dir_envio_id" dataField="campo_trece" visible="false"/>
+				<mx:DataGridColumn width="40" id="dir_id" headerText="Id" dataField="campo_uno"/>
+				<mx:DataGridColumn width="175" id="dir_calle" headerText="Calle" dataField="campo_dos"/>
+				<mx:DataGridColumn width="45" id="dir_numero" headerText="Nº" dataField="campo_tres"/>
+				<mx:DataGridColumn width="60" id="dir_depto" headerText="Depto" dataField="campo_cuatro"/>
+				<mx:DataGridColumn width="110" id="dir_referencia" headerText="Ref." dataField="campo_catorce"/>
+				<mx:DataGridColumn width="90" id="dir_id_comuna" dataField="campo_cinco" visible="false"/>
+				<mx:DataGridColumn width="90" id="dir_comuna" headerText="Comuna" dataField="campo_seis"/>
+				<mx:DataGridColumn width="90" id="dir_region" headerText="Región" dataField="campo_siete"/>
+				<mx:DataGridColumn width="90" id="dir_pais" headerText="País" dataField="campo_ocho"/>
+				<mx:DataGridColumn width="50" id="dir_cod_zip" headerText="Zip" dataField="campo_doce"/>
+				<mx:DataGridColumn width="90" id="dir_id_tipo" dataField="campo_nueve" visible="false"/>
+				<mx:DataGridColumn width="75" id="dir_tipo" headerText="Tipo" dataField="campo_diez"/>
+				<mx:DataGridColumn width="60" id="dir_enviar" headerText="Enviar" dataField="campo_once"/>
+				<mx:DataGridColumn width="60" id="dir_activa" headerText="Act" dataField="campo_quince"/>
+			</mx:columns>
+		</mx:DataGrid>
+		<mx:DataGrid x="415" y="379" width="300" height="102" id="dg_electronicos">
+			<mx:columns>
+				<mx:DataGridColumn width="200" id="ant_ele_idn" dataField="campo_uno" visible="false"/>
+				<mx:DataGridColumn width="200" id="ant_ele_nombre" headerText="Descripción" dataField="campo_dos"/>
+				<mx:DataGridColumn width="100" id="ant_ele_tipo" headerText="Tipo" dataField="campo_tres"/>
+				<mx:DataGridColumn width="100" id="ant_ele_activo" headerText="Act" dataField="campo_cuatro"/>
+			</mx:columns>
+		</mx:DataGrid>
+		<mx:DataGrid x="10" y="379" width="300" height="102" id="dg_telefonos">
+			<mx:columns>
+				<mx:DataGridColumn width="50" id="fon_idn" dataField="campo_uno" visible="false"/>
+				<mx:DataGridColumn width="50" id="fon_cod_area" headerText="Cód." dataField="campo_dos"/>
+				<mx:DataGridColumn width="125" id="fon_numero" headerText="Número" dataField="campo_tres"/>
+				<mx:DataGridColumn width="75" id="fon_tipo_fono" headerText="Tipo" dataField="campo_cuatro"/>
+				<mx:DataGridColumn width="75" id="fon_activo" headerText="Act" dataField="campo_cinco"/>
+			</mx:columns>
+		</mx:DataGrid>
+		<mx:Label x="415" y="361" text="Contacto Electrónico" textDecoration="underline"/>
+		<mx:Label x="10" y="361" text="Contacto Telefónico" width="117" textDecoration="underline"/>
+		
+		
+
+		<mx:Label x="426" y="115" text="Sexo" id="txt_sexo"/>
+		
+		<mx:HRule x="10" y="351" width="738"/>
+		<mx:HRule x="8" y="533" width="738"/>
+		<mx:HRule x="10" y="177" width="738"/>
+		<mx:Button x="493" y="304" label="Establecer dirección envío" width="186" id="btn_direccion_envio" click="btn_direccion_envio_click()"/>
+		<mx:Label x="426" y="65" text="Fecha Nac." id="text_fecha_nac"/>
+		<mx:Label x="426" y="91" text="Nacionalidad"/>
+		<mx:Label x="426" y="143" text="Estado Civil" id="text_est_civil"/>
+		<mx:Button x="403" y="304" label="Desactivar" id="btn_quitar_direccion" click="btn_quitar_direccion_click()"/>
+		<mx:Button x="10" y="489" label="Desactivar" id="btn_quitar_fono" click="btn_quitar_fono_click()"/>
+		<mx:Button x="415" y="489" label="Desactivar" id="btn_quitar_electronico" click="btn_quitar_electronico_click()"/>
+		<mx:ComboBox x="526" y="91" id="cmb_nacionalidad"></mx:ComboBox>
+	 
+	<mx:Script source="frm_registro_admision_modifica_registro_script.as" />
+	
+	<mx:RemoteObject id="ro_modifica_registro" destination="libreria.frm_registro_admision_modifica_registro" showBusyCursor="true" fault="error_fx(event)">
+		<mx:method name="busca_entidad" result="result_busca_entidades(event)"/>
+		<mx:method name="busca_datos_personales" result="result_busca_datos_personales(event)"/>
+		<mx:method name="busca_direcciones" result="result_busca_direcciones(event)"/>
+		<mx:method name="busca_requisitos" result="result_busca_requisitos(event)"/>
+		<mx:method name="busca_educacionales" result="result_busca_educacionales(event)"/>
+		<mx:method name="busca_laborales" result="result_busca_laborales(event)"/>
+		<mx:method name="busca_fonos" result="result_busca_fonos(event)"/>
+		<mx:method name="busca_electronicos" result="result_busca_electronicos(event)"/>
+		<mx:method name="modifica_entidad_persona" result="result_modifica_entidad(event)"/>
+		<mx:method name="modifica_entidad_empresa" result="result_modifica_entidad(event)"/> 
+		<mx:method name="agrega_direccion" result="result_agrega_direccion(event)"/> 
+		<mx:method name="agrega_requisito" result="result_agrega_requisito(event)"/> 
+		<mx:method name="agrega_educacional" result="result_agrega_educacional(event)"/>
+		<mx:method name="agrega_laboral" result="result_agrega_laboral(event)"/>
+		<mx:method name="quitar_requisito" result="result_quitar_requisito(event)"/> 
+		<mx:method name="quitar_educacional" result="result_quitar_educacional(event)"/>
+		<mx:method name="quitar_laboral" result="result_quitar_laboral(event)"/>
+		<mx:method name="establece_direccion_default" result="result_establece_direccion_default(event)"/> 
+	</mx:RemoteObject>	
+	
+	<mx:RemoteObject id="ro_ingreso_registro" destination="libreria.frm_registro_admision_ingreso_registro" showBusyCursor="true" fault="error_fx(event)">
+		<mx:method name="muestra_estado_civil" result="result_muestra_estado_civil(event)"/>
+		<mx:method name="muestra_nacionalidad" result="result_muestra_nacionalidad(event)"/> 
+	</mx:RemoteObject>
+	<mx:RemoteObject id="ro" destination="UploadFotoEntidad-ro" result="handleResult(event)"/>
+	<mx:RemoteObject id="ro_desencripta" destination="libreria.des_encripta" showBusyCursor="true">
+		<mx:method name="desencriptar_func_mod_fun_idn" result="result_desencriptar_func_mod_fun_idn(event)"/>
+	</mx:RemoteObject>
+	<mx:Button id="btn_ver_foto" x="660" y="35" label="Ver Foto" click="ver_foto()"/>
+
+</mx:Canvas>

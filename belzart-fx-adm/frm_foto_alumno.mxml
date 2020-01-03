@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" layout="absolute" height="667" width="793">
+	<mx:TitleWindow x="23" y="10" width="577" height="332" layout="absolute"  title="Fotografía Alumno" backgroundColor="#ffffff">
+	
+		<mx:Canvas x="10" y="10" width="536" height="263">
+			<mx:TextInput x="10" y="27" id="txt_busca" keyUp="lbl_busq_keypress(event)" keyDown="cambia(event)" visible="false"/>
+			
+			<mx:Button x="203" y="58" label="Buscar"  click="valida_rut(txt_busca.text);" id="btn_bucar" visible="false"/>
+	
+			<mx:TextInput x="10" y="25" id="txt_busca_matricula" keyUp="lbl_busq_keypress_2(event)" visible="false" />
+			<mx:Button x="203" y="25" label="Buscar" id="btn_bucar_matricula"  click="busca_datos_alumno_por_matricula();" visible="false"/>
+		<!--	<mx:Button x="259" y="330" label="Sacar foto" id="btn_sacar_foto" click="sacar_foto()"/>-->
+			<mx:TextInput x="76" y="80" id="txt_nombre" width="256" editable="false" borderStyle="none"/>
+			<mx:TextInput x="76" y="110" id="txt_Matricula" editable="false" borderStyle="none"/>
+			<mx:TextInput x="76" y="110" id="txt_alu_foto" editable="false" borderStyle="none" visible="false"/>
+			<mx:TextInput x="66" y="150" id="txt_alu_idn" editable="false" borderStyle="none" visible="false"/>
+			<mx:Label x="10" y="80" text="Nombre"/>
+			<mx:Label x="10" y="112" text="Matrícula"/>
+			<mx:VBox x="340" y="10" width="179" height="230" borderColor="#ffffff" backgroundColor="#ffffff">
+			        <!-- Image control to load the image. -->
+			        <mx:Image id="image1" complete="loadComplete(event)" width="172" height="222"  themeColor="#000000" alpha="1.0"/>
+			
+			        <!-- Button triggers the load. --> 
+			     <!--   <mx:Button id="myButton" label="Show" visible="true"/> -->         
+			
+			    </mx:VBox>
+			<mx:Button x="177" y="190" label="Fotografiar" click="sacar_foto()"/>
+			<mx:Button x="26" y="190" label="Nuevo" id="btn_nuevo" click="nuevo()"/>
+			<mx:RadioButton groupName="opcion" id="option1" label="Rut" x="203" y="20" click="opcion_rut()"/>
+			<mx:RadioButton groupName="opcion" id="option2" label="Matrícula" x="203" y="37" click="opcion_matricula()"/>
+		</mx:Canvas>
+	</mx:TitleWindow>
+	<mx:Script source="frm_foto_alumno_script.as" />
+	
+	<mx:RemoteObject id="ro_foto_alumno" destination="libreria.frm_foto_alumno" showBusyCursor="true" fault="Fault(event)">
+
+	<mx:method name="foto_alumno_busca_datos_alumno" result="result_foto_alumno_busca_datos_alumno(event)"/>
+	
+	<mx:method name="foto_alumno_busca_datos_alumno_por_matricula" result="result_foto_alumno_busca_datos_alumno_por_matricula(event)"/>
+	
+		</mx:RemoteObject>
+	
+		
+		
+</mx:Application>

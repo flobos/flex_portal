@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:TitleWindow xmlns:mx="http://www.adobe.com/2006/mxml" layout="absolute" width="464" height="210" title="Detalle Preguntas" initialize="inicio()">
+	<mx:DataGrid x="15.5" y="10" width="413" height="102" id="dg_detalle">
+		<mx:columns>
+			<mx:DataGridColumn headerText="Unidad" dataField="campo_uno"/>
+			<mx:DataGridColumn headerText="Tip. Pregunta" dataField="campo_dos"/>
+			<mx:DataGridColumn headerText="Cantidad" dataField="campo_tres"/>
+			<mx:DataGridColumn headerText="Puntaje" dataField="campo_cuatro"/>
+			<mx:DataGridColumn headerText="Clase" dataField="campo_cinco"/>
+		</mx:columns>
+	</mx:DataGrid>
+	<mx:Script source="frm_objetivas_asigna_preguntas_prueba_unidad_popup_script.as"/>
+		
+	<mx:RemoteObject id="ro_asigna_preguntas_prueba_unidad_popup" destination="libreria.frm_objetivas_asigna_preguntas_prueba_unidad" showBusyCursor="true" fault="error_fx(event)">
+		<mx:method name="muestra_detalle_prueba" result="result_muestra_detalle_prueba(event)"/>
+	</mx:RemoteObject>
+	<mx:Button x="353" y="138" label="Cerrar" id="btn_cerrar" click="btn_cerrar_click()" icon="@Embed(source='imagenes/edit_remove.png')"/>
+	
+</mx:TitleWindow>

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" layout="absolute" xmlns="*" viewSourceURL="srcview/index.html" height="100%"  backgroundColor="#E7E7E7" initialize="carga()"  width="100%" horizontalAlign="left" verticalAlign="top"> 
+<mx:DateFormatter id="dfconv" formatString="DD-MM-YYYY"/>
+<mx:Sequence id="initMenuMoveOn" target="{menu_principal}" >
+        <mx:Resize widthFrom="0" widthTo="180"  />
+        <mx:Resize heightFrom="42" heightTo="270" duration="400"  />    
+</mx:Sequence>
+<mx:Sequence id="initMenuMoveOff" target="{menu_principal}" >
+        <mx:Resize widthFrom="180" duration="50" widthTo="0" />
+        <mx:Resize heightFrom="270" duration="100" heightTo="42" />    
+    </mx:Sequence>
+
+<mx:TitleWindow id="pl_principal" title="Aula Virtual IPXFlex v.2.0" width="100%" height="90%" visible="true" fontSize="10" fontFamily="Verdana" fontWeight="bold" fontStyle="normal" backgroundColor="#E7E7E7" verticalAlign="bottom" x="0" y="0">
+	<mx:MenuBar x="0" y="0" width="100%" height="21" id="mb_principal" itemClick="mb_principal_change(event)" labelField="@label">
+	</mx:MenuBar>	
+	<mx:HBox backgroundColor="#CCCCCC" width="100%" height="100%" id="main_box">
+		<mx:Button visible="true" 
+        width="25" height="150" id="btnShowMenu" 
+        click="mouseAction(event)" labelPlacement="top" icon="@Embed(source='imagenes/mostrarmenu.jpg')" overIcon="@Embed(source='imagenes/mostrarmenu2.jpg')"/>
+        <mx:Panel id="menu_principal"  alpha=".8" backgroundColor="#6f6f6f" cornerRadius="7" borderStyle="solid" title="Menu de Asignatura" height="42" width="0" color="#E8E7E7">
+			<mx:Tree id="tree_menu" height="100%" color="#0b333c"  openDuration="0"   defaultLeafIcon="@Embed('imagenes/apunte.png')" itemClick="click_tree_menu(event)"  width="100%" labelField="@label"/>
+    	</mx:Panel>
+	
+		<mx:Form width="100%" height="100%" backgroundAlpha="0.0" left="20" top="10" bottom="10" right="10"  id="myVS">
+			<CustomModuleLoader id="mod" 
+            width="100%" height="100%" 
+            url="{this.moduloSeleccionado}"     />
+			
+	    </mx:Form>
+	</mx:HBox> 
+	<mx:ControlBar horizontalAlign="left" width="100%" height="62" visible="true">
+	  <mx:Canvas width="100%" height="52" visible="true">
+	  <mx:Button label="Matrículas" width="150" height="21" id="btn_matriculas" click="btn_matriculas_click()" x="403" y="4" />
+	  <mx:Label text="lbl_eje_aca_idn" id="lbl_eje_aca_idn" visible="false" x="585" y="2"/>
+	  <mx:Label text="lbl_idn" id="lbl_idn" visible="false" x="633" y="38"/>
+	  <mx:Label text="lbl_mat_idn" id="lbl_mat_idn" visible="true" x="76" y="14" width="150" fontWeight="bold"/>
+	  <mx:Label id="lbl_rut"  visible="false" x="54" y="10" text="lbl_rut" height="18" width="150" fontWeight="bold" />
+	  <mx:Label text="lbl_tip_prod_idn" id="lbl_tip_prod_idn" visible="false" height="20" x="582" y="20" />
+	  <mx:Label id="lbl_ramo" width="414" x="72" y="30" fontWeight="bold" height="18"  visible="true" />
+	  <mx:Label id="lbl_nombre" text="lbl_nombre" fontWeight="bold" width="350" height="18" x="76" y="-1" visible="true" />
+	  <mx:Label x="0" y="-2"  text="Nombre :" />
+	  <mx:Label x="0" y="10"  text="R.U.T. :"  visible="false"/>
+	  <mx:Label x="0" y="14"  text="Matrícula :" />
+	  <mx:Label x="0" y="30"  text="Ramo :" />
+	  <mx:Button x="752" y="30" width="150" height="25"  label="Cerrar Ventana Activa" id="btn_cerrar" click="btn_cerrar_click(event)"  visible="false"/>
+	  <mx:Label x="566" y="32"  text="Label" id="flag_deuda" visible="false" />
+	  <mx:Label x="280" y="0" id="lbl_tc_idn"/>
+	  </mx:Canvas>
+	  
+	
+	</mx:ControlBar>
+		
+</mx:TitleWindow>
+
+<mx:Script source="frm_alumnos_main_script.as"/> 
+	
+	<mx:RemoteObject id="ro_alumnos_main" destination="libreria_alm.frm_alumnos_main" showBusyCursor="true" fault="error_fx(event)">
+		<mx:method name="muestra_menus_aula_virtual" result="result_muestra_menus_aula_virtual(event)" />
+		<mx:method name="verifica_email_alumno" result="result_verifica_email_alumno(event)" />
+		<mx:method name="muestra_toma_cursos_principal" result="result_muestra_toma_cursos_principal(event)" />
+		<mx:method name="verifica_deuda_notas" result="result_verifica_deuda_notas(event)" />
+		<mx:method name="carga_documentos_producto" result="result_carga_documentos_producto(event)" />
+		<mx:method name="pretoma_valida_pretoma_abierta" result="result_pretoma_valida_pretoma_abierta(event)" />
+		
+	</mx:RemoteObject>
+
+
+</mx:Application>
+
+

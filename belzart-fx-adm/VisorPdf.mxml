@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" layout="absolute" xmlns="jel.com.components.*"
+	applicationComplete="initApp();"
+	backgroundImage="{FondoApp}" backgroundColor="0x000000">
+	
+	<mx:Panel title="Documentos en pdf" top="10" left="10" right="10" bottom="10">
+		<mx:HDividedBox id="divisor" liveDragging="false" width="100%" height="100%" horizontalAlign="center" horizontalGap="8">
+			<mx:Tree id="tree" width="20%" height="100%" dataProvider="{treeData}"
+			        labelField="@label" showRoot="false"
+			        change="onChangeTree(event);" color="#0B333C"/> 
+			<IFrame id="iFrame" width="80%" height="100%">
+				<mx:Text text="Cargando documento...&#xa;&#xa;Por favor, espere.&#xa;" visible="false" selectable="false" horizontalCenter="0" verticalCenter="0" width="200" height="80" color="#333333" textAlign="center" id="mensaje" fontSize="12" fontWeight="bold"/>
+			</IFrame>
+		</mx:HDividedBox>
+	</mx:Panel>
+	<mx:XMLList id="treeData">
+        <node label="Photoshop">
+        	<node label="Atajos de teclado para Photoshop CS3" path="frm_biblioteca_material_bibiloteca.mxml" />
+        </node>
+        <node label="Web">
+        	<node label="Introducción a XHTML" path="pdf/introduccion_xhtml.pdf" />
+        	<node label="Introducción a CSS" path="pdf/introduccion_css.pdf" />
+        	<node label="Introducción a JavaScript" path="pdf/introduccion_javascript.pdf" />
+        	<node label="Introducción a AJAX" path="pdf/introduccion_ajax.pdf" />
+        </node>
+    </mx:XMLList>
+    <mx:Script>
+    	<![CDATA[
+    		import mx.events.DividerEvent;
+    		import mx.events.ScrollEvent;
+    		import mx.events.MoveEvent;
+    		import mx.events.ResizeEvent;
+    		
+    		[Bindable]
+			[Embed(source="assets/Biblioteca.swf#Fondo")]
+			private var FondoApp:Class;
+    		
+    		private function initApp():void {
+    			iFrame.visible=true;
+    			divisor.addEventListener(DividerEvent.DIVIDER_PRESS, dividerPress);
+    			divisor.addEventListener(DividerEvent.DIVIDER_RELEASE, dividerRelease);
+    			addEventListener(ResizeEvent.RESIZE, updateListener);
+    			addEventListener(MoveEvent.MOVE, updateListener);
+    			addEventListener(ScrollEvent.SCROLL, updateListener);
+    		}
+    		
+    		private function dividerPress(evt:DividerEvent):void {
+    			iFrame.visible = false;
+    		}
+    		
+    		private function dividerRelease(evt:DividerEvent):void {
+    			iFrame.visible = true;
+    		}
+    		
+    		private function updateListener(evt:Event):void {
+    			callLater(iFrame.moveIFrame);
+    		}
+    		
+    		private function onChangeTree(event:Event):void {
+    			if (!mensaje.visible) mensaje.visible = true;
+    			iFrame.source = Tree(event.target).selectedItem.attribute('path').toString();
+    		}
+    		
+    	]]>
+    </mx:Script>
+    <mx:Style source="style.css"/>
+</mx:Application>

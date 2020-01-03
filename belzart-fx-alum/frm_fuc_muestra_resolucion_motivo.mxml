@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:TitleWindow xmlns:mx="http://www.adobe.com/2006/mxml" width="565" height="379" x="44" y="15" title="Detalle Resolución Motivo FUC" horizontalAlign="center" creationComplete="inicio()" >
+	
+ <mx:DateFormatter id="dfconv" formatString="DD-MM-YYYY"/>
+<mx:Canvas width="532" height="329" textDecoration="none">
+  
+  	<mx:Script source="frm_fuc_muestra_resolucion_motivo_script.as" />
+      <!--     <mx:HBox x="42" y="253" > -->
+      <!--     </mx:HBox> -->
+      <mx:Button x="225" y="288"  label="Cerrar" width="94" height="32" click="btn_cerrar_click()" id="btn_cerrar" />
+      <mx:Label x="0" y="5"  text="FUC número" width="86" color="#000000" height="22" />
+      <mx:TextInput x="108" y="3" width="97" color="#FF0000" height="20" fontFamily="Arial" fontSize="14" fontWeight="bold" text="" id="txt_fuc_numero" editable="false"  />
+      <mx:Label x="0" y="29"  text="Motivo" width="86" color="#000000" height="22" />
+      <mx:TextInput x="108" y="28" width="406" color="#000000" height="20" fontFamily="Arial" fontWeight="normal" text="" id="txt_motivo" editable="false"  />
+      <mx:Label x="0" y="53"  text="Fecha Resolución" width="100" color="#000000" height="22" />
+      <mx:TextInput x="108" y="54" width="147" color="#000000" height="20" fontFamily="Arial" fontWeight="normal" text="" id="txt_fecha_resolucion" editable="false"  />
+      <mx:Label x="0" y="181"  text="Detalle Resolución" width="106" color="#000000" height="20" />
+      <mx:TextArea x="106" y="181" width="408" height="97" borderStyle="inset" id="txt_resolucion" editable="false"  />
+      <mx:TextArea x="106" y="95" width="408" height="66" id="txt_consulta" text=""  />
+      <mx:Label x="0" y="95"  text="Consulta" />
+      </mx:Canvas>
+
+	<mx:RemoteObject id="ro" destination="libreria_alm.frm_fuc_muestra_motivos" showBusyCursor="true" fault="error_fx(event)">
+		<mx:method name="muestra_resolucion_motivo" result="result_muestra_resolucion_motivo(event)" />
+   	</mx:RemoteObject>
+
+</mx:TitleWindow>

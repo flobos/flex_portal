@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" layout="absolute" minWidth="955" minHeight="600" initialize="inicio()">
+	<mx:DateFormatter id="dfconv" formatString="YYYY-MM-DD"/>
+	<mx:TitleWindow x="193" y="92" width="459" height="350" layout="absolute"
+					title="Informes de Matrículas">
+		<mx:Button id="btn_guardar" x="296" y="188" label="Guardar Proceso" click="guardar_proceso()"
+				   enabled="false" visible="false"/>
+		<mx:Label x="10" y="3" text="Seleccione:"/>
+		<mx:Label x="10" y="29" text="Fecha de Corte de Consulta"/>
+		<mx:Label x="10" y="85" text="Informes disponibles:"/>
+		<mx:DateField id="lbl_fecha_inicio" x="72" y="55" width="109" showToday="true" labelFunction="formatea_fecha" formatString="formatea_fecha" firstDayOfWeek="1" monthNames="['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre']" dayNames="['D', 'L', 'M', 'M', 'J', 'V', 'S']" enabled="true" yearNavigationEnabled="true"/>
+		<mx:Label x="10" y="57" text="Fecha"/>
+		<mx:Tree id="tr_informes" x="10" y="110" width="419"  labelField="@label" itemClick="click_tree_menu(event)" ></mx:Tree>
+		<mx:Label x="231" y="29" text="Seleccione año académico"/>
+		<mx:ComboBox id="cmb_periodos" x="231" y="55"></mx:ComboBox>
+	</mx:TitleWindow>
+	<mx:Script source="frm_informe_matriculas_script.as"/>
+	<mx:RemoteObject id="ro_informes_matriculas" destination="libreria.frm_informes_matriculas" showBusyCursor="true" fault="error_fx(event)">
+		<mx:method name="busca_periodos" result="result_busca_periodos(event)"/>
+		<mx:method name="busca_informes" result="result_busca_informes(event)"/>
+		<mx:method name="guarda_proceso" result="result_guarda_proceso(event)"/>
+	</mx:RemoteObject>
+</mx:Application>

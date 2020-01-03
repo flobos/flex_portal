@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:TitleWindow xmlns:mx="http://www.adobe.com/2006/mxml" layout="absolute" width="628" height="479" title="Busca Preguntas" initialize="inicio()" horizontalAlign="left" verticalAlign="top">
+	<mx:ComboBox id="cmb_buscar_por" x="98" y="3" width="139" />
+		<mx:Label x="10" y="5" text="BUSCAR POR" color="#000000" fontWeight="bold"/>
+		<mx:TextInput y="46" width="467" id="txt_criterio" maxChars="100" x="10" keyDown="txt_criterio_keyDown(event)"/>
+		<mx:Label x="10" y="29" text="CRITERIO:" color="#000000" fontWeight="bold"/>
+		<mx:HRule x="10" y="74" width="591"/>
+		<mx:Label x="10" y="77" text="Preguntas:" themeColor="#232527" fontWeight="bold" textDecoration="underline"/>
+		<mx:Label x="286" y="105" id="lbl_codigo_alumno" visible="false"/>
+		<mx:Button id="btn_cerrar" x="338" y="407" label="Seleccionar y Cerrar" height="26" width="163" click="btn_seleccionar()" icon="@Embed(source='imagenes/apunte.png')"/>
+		<mx:Label x="10" y="206" text="Respuestas:" themeColor="#232527" fontWeight="bold" textDecoration="underline"/>
+		<mx:Label x="415" y="301" text="Puede realizar modificaciones" themeColor="#232527" fontWeight="bold"  id="lbl_mod_res" color="#F70808" visible="false" />
+		<mx:Button x="498" y="46" label="Buscar" id="btn_buscar_titulo" icon="@Embed(source='imagenes/icon_search.png')" width="100" click="btn_buscar_click()" />
+		<mx:Button x="10" y="407" label="Modificar Pregunta" height="26" width="163" icon="@Embed(source='imagenes/apunte.png')" click="btn_modificar_click()"/>
+		<mx:Button x="509" y="407" label="Cancelar" height="26" id="btn_cancelar" click="btn_cancelar_click()" icon="@Embed(source='imagenes/edit_remove.png')"/>
+		<mx:VBox  x="10" y="240" height="146" width="588">
+			<mx:Repeater id="rp_alternativas">
+				<mx:HBox>
+					<mx:Label id="lbl_alternativa" width="70"  text="{rp_alternativas.currentItem.campo_uno}"  />
+					<mx:Label width="471" id="txt_respuesta" text="{rp_alternativas.currentItem.campo_dos}"  fontSize="10" />
+					<mx:RadioButton id="opt_correcta" enabled="false"/>
+				</mx:HBox>
+			</mx:Repeater>
+		</mx:VBox>
+		<mx:Script source="frm_objetivas_ingreso_preguntas_popup_busca_pregunta_script.as"/>
+
+		<mx:RemoteObject id="ro_ingreso_preguntas_popup" destination="libreria.frm_objetivas_ingreso_preguntas" showBusyCursor="true" fault="error_fx(event)">
+			<mx:method name="busca_pregunta" result="result_busca_pregunta(event)"/>
+			<mx:method name="busca_respuesta" result="result_busca_respuesta(event)"/>
+			<mx:method name="muestra_tipo_pregunta" result="result_muestra_tipo_pregunta(event)"/>
+		</mx:RemoteObject>
+		
+		<mx:Label x="10" y="221" text="Cod." fontWeight="bold" textDecoration="underline"/>
+		<mx:Label x="88" y="221" text="Respuesta" fontWeight="bold" textDecoration="underline"/>
+		<mx:Label x="547" y="221" text="Correcta" textAlign="right" fontWeight="bold" textDecoration="underline"/>
+		<mx:ComboBox y="3" id="cmb_tip_pregunta" right="10"></mx:ComboBox>
+		<mx:Label text="Tipo Pregunta" fontWeight="bold" horizontalCenter="79" y="5"/>
+		<mx:DataGrid x="10" y="96" height="102" width="467" id="dg_preguntas" editable="false" change="busca_respuestas()">
+			<mx:columns>
+				<mx:DataGridColumn headerText="Cod." dataField="campo_uno" width="30"/>
+				<mx:DataGridColumn headerText="Pregunta" dataField="campo_dos" width="300"/>
+				<mx:DataGridColumn headerText="pauta" dataField="campo_cinco" visible="false" resizable="false"/>
+				<mx:DataGridColumn headerText="tip_preg_idn" dataField="campo_tres" visible="false" resizable="false"/>
+				<mx:DataGridColumn headerText="Tipo" dataField="campo_cuatro" width="70"/>
+				<mx:DataGridColumn headerText="preg_mod_cam_idn" dataField="campo_seis" visible="false" resizable="false"/>
+				<mx:DataGridColumn headerText="imagen_adjunta" dataField="campo_siete" visible="false" resizable="false"/>
+			</mx:columns>
+		</mx:DataGrid>
+		<mx:Image x="485" y="102" width="113" height="96" id="img_pregunta" click="mostrar_imagen(event)"/>
+		
+
+		
+		
+			
+</mx:TitleWindow>

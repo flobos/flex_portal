@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" layout="absolute">
+<mx:TitleWindow y="20" width="802" height="772" layout="absolute" id="tit_preguntas" horizontalCenter="0" creationComplete="inicio()" title="Master Registro de Entidades">
+		<mx:TextInput x="81" y="10" maxChars="12" id="lbl_buscar_registro" keyUp="lbl_buscar_registro_presskey(event)" />
+		<mx:Button x="233" y="10" label="Buscar" id="btn_buscar_registro" click="buscar_registro()"/>
+		<mx:Label x="10" y="12" text="Buscar RUT" width="74"/>
+		<mx:Label x="10" y="38" text="Otra búsqueda" width="100"/>
+		<mx:Canvas x="10" y="64" width="762" height="656" id="cnv_pantalla" borderStyle="inset">
+		</mx:Canvas>
+		<mx:Button x="654" y="10" label="Limpiar Pantalla" id="btn_limpiar_pantalla" click="btn_limpiar_pantalla_click()"/>
+		<mx:TextInput x="108" y="36" id="lbl_otra_busqueda"/>
+		<mx:Button x="457" y="36" label="Buscar" click="btn_buscar_otro_click()" id="btn_buscar_otro"/>
+		<mx:ComboBox x="289" y="36" id="cmb_buscar_por"></mx:ComboBox>
+		
+</mx:TitleWindow>
+	<mx:Script source="frm_registro_admision_master_registro_script.as" />
+	
+	<mx:RemoteObject id="ro_modifica_registro" destination="libreria.frm_registro_admision_modifica_registro" showBusyCursor="true" fault="error_fx(event)">
+		<mx:method name="busca_entidades" result="result_busca_entidades(event)"/>
+		<mx:method name="busca_entidades_nombre" result="result_busca_entidades_nombre(event)"/>
+	</mx:RemoteObject>	
+
+</mx:Application>
+

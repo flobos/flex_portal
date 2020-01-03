@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" layout="absolute" height="100%" width="100%">
+
+	<mx:TitleWindow xmlns:mx="http://www.adobe.com/2006/mxml" layout="absolute" width="692" height="758" initialize="inicio()" title="Mostrar Pruebas Rendidas" fontWeight="bold" horizontalCenter="12" top="10">
+	<mx:Label x="20.5" y="13" text="Matricula"/>
+	<mx:TextInput x="97.5" y="10" id="lbl_matricula" maxChars="12"/>
+	<mx:Button x="284.5" y="10" label="Buscar" id="btn_buscar_mat" click="btn_buscar_mat_click()"/>
+	<mx:Text x="20.5" y="103" text="Carrera&#xa;"/>
+	<mx:HRule x="20.5" y="84" width="630" height="15"/>
+	<mx:HRule x="20.5" y="187" width="630" height="9"/>
+	<mx:HRule x="21.5" y="612" width="630" height="9"/>
+	<mx:Text x="20.5" y="132" text="Ramos&#xa;"/>
+	<mx:ComboBox x="97.5" y="129" id="cmb_ramo" change="cmb_ramo_change()"></mx:ComboBox>
+	<mx:Label x="20.5" y="161" text="Prueba"/>
+	<mx:ComboBox x="97.5" y="158" id="cmb_prueba" change="cmb_prueba_change()"></mx:ComboBox>
+	<mx:Label x="97.5" y="101" id="txt_carrera" width="553"/>
+	<mx:Canvas x="20.5" y="204" width="630" height="387" borderStyle="solid" cornerRadius="10">
+		<mx:VBox  x="0" y="3" height="379" width="626" borderStyle="solid">	
+			<mx:Repeater id="rp_preguntas">			
+				<mx:TextArea id="lbl_pregunta" width="607"	toolTip="{rp_preguntas.currentItem.campo_uno}" 		text="{rp_preguntas.currentItem.campo_uno}" height="67" enabled="true" editable="false" backgroundColor="#D5DCDE"/>
+				<mx:HBox width="598" id="col_respuesta" backgroundDisabledColor="#D5DCDE">
+					<mx:Label 					width="10" 	/>
+					<mx:CheckBox enabled="false" id="rbg_seleccion" width="19" selected="false"/>
+					<mx:Label id="lbl_respuesta" width="526" 	toolTip="{rp_preguntas.currentItem.campo_dos}" 		text="{rp_preguntas.currentItem.campo_dos}" enabled="true"/>
+					<mx:Label id="lbl_res_idn" width="0" visible="false"	toolTip="{rp_preguntas.currentItem.campo_tres}" 		text="{rp_preguntas.currentItem.campo_tres}"/>
+					<mx:Label id="lbl_res_correcta" width="0" visible="false" 	toolTip="{rp_preguntas.currentItem.campo_cuatro}" 		text="{rp_preguntas.currentItem.campo_cuatro}"/>
+					<mx:Label id="lbl_res_res_idn" width="0" visible="false" toolTip="{rp_preguntas.currentItem.campo_cinco}" 		text="{rp_preguntas.currentItem.campo_cinco}"/>		
+				</mx:HBox>
+			</mx:Repeater>
+		</mx:VBox>	
+	</mx:Canvas>
+	<mx:Label x="21.5" y="599" text="Resumen de la prueba" fontSize="12"/>
+	<mx:Label x="21.5" y="658" text="Respuestas correctas"/>
+	<mx:Label x="21.5" y="630" text="Respuestas totales"/>
+	<mx:Label x="21.5" y="685" text="Porcentaje de aprobación"/>
+	<mx:Label x="436.5" y="641" text="NOTA" fontSize="25"/>
+	<mx:TextInput x="211.5" y="651" width="47" editable="false" id="lbl_correctas"/>
+	<mx:TextInput x="211.5" y="624" width="47" editable="false" id="lbl_totales"/>
+	<mx:TextInput x="211.5" y="678" width="47" editable="false" id="lbl_porc_aprob"/>
+	<mx:TextInput height="51" width="83" fontSize="22" editable="false" id="lbl_nota" textAlign="center" x="547.5" y="629"/>
+	<mx:TextInput x="508.5" y="165" width="18" backgroundColor="#D5DCDE" editable="false" enabled="false" height="15"/>
+	<mx:CheckBox x="509.5" y="146" selected="true" enabled="false" width="18"/>
+	<mx:Label x="528.5" y="146" text="Alternativa alumno" fontSize="9"/>
+	<mx:Label x="529.5" y="165" text="Alternativa correcta" fontSize="9"/>
+	<mx:Label x="20.5" y="39" text="Alumno:"/>
+	<mx:Label x="20.5" y="65" text="RUT:"/>
+	<mx:Label x="97" y="39" width="525.5" id="txt_alumno"/>
+	<mx:Label x="97" y="65" width="156.5" id="txt_rut"/>
+	<mx:Button x="522.5" y="686" label="Descargar Prueba"/>
+	
+	
+	</mx:TitleWindow>
+	<mx:Script source="frm_objetivas_muestra_pruebas_rendidas_script.as"/>
+	
+	<mx:RemoteObject id="ro_muestra_pruebas_rendidas" destination="libreria.frm_objetivas_muestra_pruebas_rendidas" showBusyCursor="true" fault="error_fx(event)">
+		<mx:method name="muestra_carrera" result="result_muestra_carrera(event)"/>
+		<mx:method name="muestra_ramos" result="result_muestra_ramos(event)"/>
+		<mx:method name="muestra_pruebas_ramos" result="result_muestra_pruebas_ramos(event)"/>
+		<mx:method name="muestra_preguntas_prueba" result="result_muestra_preguntas_prueba(event)"/>
+		<mx:method name="muestra_nota" result="result_muestra_nota(event)"/>
+	</mx:RemoteObject>	
+
+</mx:Application>

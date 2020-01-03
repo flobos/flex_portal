@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:TitleWindow x="10" y="15" width="572" initialize="inicio()" height="438" layout="absolute" xmlns:mx="http://www.adobe.com/2006/mxml" title="Asignación de Requisitos de Entidad">
+	
+	<mx:Script>
+		<![CDATA[
+			protected function dg_disponibles_keyUpHandler(event:KeyboardEvent):void
+			{
+				// TODO Auto-generated method stub
+				if (event.charCode == 13)
+				{
+					this.ns_cantidad.setFocus();
+				}
+				if (event.charCode == Keyboard.ESCAPE && this.dg_asignados.dataProvider.length > 0)
+				{
+					this.btn_guardar.setFocus();
+				}
+			}
+			
+			protected function ns_cantidad_keyUpHandler(event:KeyboardEvent):void
+			{
+				// TODO Auto-generated method stub
+				if (event.charCode == 13)
+				{
+					this.ns_duracion.setFocus();
+				}
+			}
+			
+			protected function ns_duracion_keyUpHandler(event:KeyboardEvent):void
+			{
+				// TODO Auto-generated method stub
+				if (event.charCode == 13)
+				{
+					this.cmb_prioridad.setFocus();
+				}
+			}
+			
+			protected function cmb_prioridad_keyUpHandler(event:KeyboardEvent):void
+			{
+				// TODO Auto-generated method stub
+				if (event.charCode == 13)
+				{
+					this.btn_agregar.setFocus();
+				}
+			}
+			
+			protected function btn_agregar_keyUpHandler(event:KeyboardEvent):void
+			{
+				// TODO Auto-generated method stub
+				if (event.charCode == 13)
+				{
+					btn_agregar_click();
+					this.dg_disponibles.setFocus();
+				}
+			}
+			
+			protected function btn_guardar_keyUpHandler(event:KeyboardEvent):void
+			{
+				// TODO Auto-generated method stub
+				if (event.charCode == 13)
+				{
+					btn_guardar_click();
+				}
+			}
+			
+		]]>
+	</mx:Script>
+	
+	<mx:Label x="10" y="10" text="Requisitos Asignados"/>
+		<mx:Label x="10" y="171" text="Requisitos Disponibles"/>
+		<mx:DataGrid id="dg_asignados" x="11" y="36" width="532" height="116">
+			<mx:columns>
+				<mx:DataGridColumn dataField="campo_uno" headerText="" visible="false"/>
+				<mx:DataGridColumn dataField="campo_dos" headerText="ID" visible="false"/>
+				<mx:DataGridColumn dataField="campo_tres" headerText="Nombre" width="250"/>
+				<mx:DataGridColumn dataField="campo_cuatro" headerText="Fecha Ingreso" width="100"/>
+				<mx:DataGridColumn dataField="campo_cinco" headerText="Duración" width="100"/>
+				<mx:DataGridColumn dataField="campo_seis" headerText="Cantidad" width="60"/>
+				<mx:DataGridColumn dataField="campo_siete" headerText="ID_prioridad" visible="false"/>
+				<mx:DataGridColumn dataField="campo_ocho" headerText="Prioridad" width="70" />
+			</mx:columns>
+		</mx:DataGrid>
+		<mx:DataGrid id="dg_disponibles" x="10" y="197" width="326" keyUp="dg_disponibles_keyUpHandler(event)">
+			<mx:columns>
+				<mx:DataGridColumn dataField="data" headerText="ID"  width="50"/>
+				<mx:DataGridColumn dataField="label" headerText="Nombre" width="300"/>
+			</mx:columns>
+		</mx:DataGrid>
+		<mx:Button id="btn_guardar" x="420" y="364" label="Guardar Cambios"
+				   click="btn_guardar_click()" keyUp="btn_guardar_keyUpHandler(event)"/>
+		<mx:Button id="btn_agregar" x="470" y="334" label="Agregar" click="btn_agregar_click()" keyUp="btn_agregar_keyUpHandler(event)"/>
+		<mx:Label x="344" y="200" text="Cantidad"/>
+		<mx:Label x="344" y="226" text="Duración"/>
+		<mx:NumericStepper id="ns_cantidad" x="407" y="198" minimum="1" value="1" keyUp="ns_cantidad_keyUpHandler(event)"/>
+		<mx:NumericStepper id="ns_duracion" x="407" y="224" maximum="12" keyUp="ns_duracion_keyUpHandler(event)"/>
+		<mx:Label x="473" y="226" text="meses"/>
+		<mx:Label x="389" y="252" color="#FF0D13" fontSize="8"
+				  text="&quot;0&quot; indica duración indefinida."/>
+		<mx:Button x="481" y="160" label="Quitar" click="btn_quitar_click()"/>
+		<mx:Button x="10" y="364" label="Cancelar" click="btn_cancelar_click()"/>
+	<mx:Script source="frm_registro_admision_ingreso_registro_popup_requisitos_script.as" />
+	<mx:RemoteObject id="ro_ingreso_registro" destination="libreria.frm_registro_admision_ingreso_registro" showBusyCursor="true" fault="error_fx(event)">
+		<mx:method name="muestra_requisitos" result="result_muestra_requisitos(event)"/>
+		<mx:method name="muestra_prioridad" result="result_muestra_prioridad(event)"/>
+	</mx:RemoteObject>	
+	<mx:ComboBox id="cmb_prioridad" x="344" y="293" width="139" keyUp="cmb_prioridad_keyUpHandler(event)"></mx:ComboBox>
+	<mx:Label x="344" y="276" text="Prioridad"/>
+</mx:TitleWindow>
+

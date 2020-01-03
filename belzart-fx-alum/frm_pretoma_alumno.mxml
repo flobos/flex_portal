@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Module xmlns:mx="http://www.adobe.com/2006/mxml" width="987" height="743" backgroundColor="#E7E7E7">
+
+ <mx:DateFormatter id="dfconv" formatString="DD-MM-YYYY"/>
+<mx:TitleWindow  id="tw_pretomas"  width="740" height="539" title="Pretoma ramos alumno" creationComplete="tw_creationComplete()" enabled="false">
+    <mx:VBox height="342" width="698">
+    
+    <mx:TextArea id="ta_noticia"  text="Estimado(a) Alumno(a): Informo que tiene activa la toma de ramos la cual debe realizar con plazo máximo Miércoles 24 de Abril. Para ello debe seleccionar los ramos que le corresponde rendir y posterior a ello validar. Es importante que imprima y/o guarde el comprobante de la realización de dicho proceso." width="690" height="77" fontWeight="bold" color="#123992" fontSize="11"/>
+    	
+	<mx:HBox>
+	  <mx:Label id="lbl_1" text="Proceso de pretoma Nº:" color="#000066" fontWeight="bold" />
+	  <mx:Label id="lbl_codigo_pretoma" color="#FF0000" fontWeight="bold" />
+	  <mx:Label id="lbl_mensaje" color="#000066" fontWeight="bold"  />
+	</mx:HBox>
+	 <mx:HRule width="687" />
+	<mx:Canvas width="679" height="32">
+	  <mx:Label x="31" y="14"  text="RAMO" width="128" height="16" color="#000000" fontWeight="bold" textAlign="center" />
+	  <mx:Label x="483" y="14"  text="SITUACION" width="128" height="16" color="#000000" fontWeight="bold" />
+	</mx:Canvas>
+    <mx:HRule width="687" />
+     	<mx:VBox>
+		 <mx:Repeater id="rpt_pretomas" >
+	 	  <mx:Grid id="Grid_pretoma">
+			<mx:GridRow>
+            	<mx:GridItem width="451" height="32">		   
+					 <mx:CheckBox id="cb_pretomas" label="{rpt_pretomas.currentItem.campo_dos}"  selected="{f_devuelve_obligatorio(rpt_pretomas.currentItem.campo_cuatro, false)}" toolTip="Seleccione los ramos que desea pretomar"/>
+
+				</mx:GridItem>
+				<mx:GridItem>
+					 <mx:Label x="57" y="2"  text="{rpt_pretomas.currentItem.campo_cinco}" width="220" /> 
+					 <mx:Label id="lbl_situacion" visible="false" text="{rpt_pretomas.currentItem.campo_cuatro}" width="0" />
+					 <mx:Label id="lbl_codigo_producto_pretoma" visible="false" text="{rpt_pretomas.currentItem.campo_uno}" width="0" /> 					  					 
+				</mx:GridItem>
+            </mx:GridRow>
+
+		  </mx:Grid> 
+           
+		  </mx:Repeater>
+	    </mx:VBox>
+     	<mx:HBox>
+   	      <mx:Button label="VALIDAR" id="btn_validar" click="btn_validar_click()" width="83" />
+   	      
+     	</mx:HBox>
+     	<mx:Label text="NOTA: Antes de validar seleccione todos los ramos que desea tomar. " color="#535E95" fontWeight="bold" />
+    </mx:VBox>
+  </mx:TitleWindow>
+  <mx:Script source="frm_pretoma_alumno_script.as"/>
+  <mx:RemoteObject id ="ro_pretoma" destination="libreria_alm.frm_pretoma_alumno" showBusyCursor="true" fault="error_fx(event)">
+	<mx:method name="pretoma_muestra"  result="result_pretoma_muestra(event)" />
+	<mx:method name="pretoma_valida_pretoma_abierta"  result="result_pretoma_valida_pretoma_abierta(event)" />
+  </mx:RemoteObject>
+  
+ 
+</mx:Module>

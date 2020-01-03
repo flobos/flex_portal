@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:TitleWindow xmlns:mx="http://www.adobe.com/2006/mxml"
+				width="338" height="282" layout="absolute" title="Buscar Inscripciones por RUT" creationComplete="inicio()">
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<mx:Label x="10" y="10" text="R.U.T.:"/>
+	<mx:Label id="lbl_rut" x="63" y="10"/>
+	<mx:DataGrid id="dg_inscripciones" x="10" y="36" width="285">
+		<mx:columns>
+			<mx:DataGridColumn dataField="campo_uno" headerText="Inscripción" width="80"/>
+			<mx:DataGridColumn dataField="campo_dos" headerText="Detalle" width="80"/>
+			<mx:DataGridColumn dataField="campo_tres" headerText="Fecha Ingreso"/>
+		</mx:columns>
+	</mx:DataGrid>
+	<mx:Button id="btn_cancelar" x="10" y="197" label="Cancelar" click="btn_cancelar_click()"/>
+	<mx:Button x="204" y="197" label="Seleccionar" click="btn_seleccionar_click()"/>
+	
+	<mx:Script source="frm_registro_admision_ver_inscripcion_popup_busca_rut_script.as"/>
+	
+	<mx:RemoteObject id="ro_ver_inscripcion" destination="libreria.frm_registro_admision_ver_inscripcion" showBusyCursor="true" fault="error_fx(event)">
+		<mx:method name="busca_inscripciones" result="result_busca_inscripciones(event)"/>
+	</mx:RemoteObject>
+</mx:TitleWindow>

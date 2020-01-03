@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" layout="absolute"> 
+<mx:DateFormatter id="dfconv" formatString="DD-MM-YYYY"/>
+	<mx:TitleWindow width="1073" height="657" layout="absolute" title="Ingreso Inscripción" initialize="inicio()" horizontalCenter="0" y="20">
+		<mx:Button x="117" y="585" label="Nueva Inscripcion" visible="false"/>
+		<mx:Button id="btn_guardar" x="12" y="585" width="83" label="Guardar"
+				   click="btn_guardar_click()"/>
+		<mx:TextInput x="10" y="307" width="27" id="lbl_id_carrera" visible="false"/>
+		<mx:Panel id="pl_productos" title="Productos Asociados" height="606" width="790"
+				  paddingTop="10" paddingLeft="10" paddingRight="10" paddingBottom="10" x="253" y="1" enabled="false">
+			<mx:HBox>
+				<mx:Button label="Añadir Producto" click="agregar_producto()" height="24"/>
+				<mx:Button label="Eliminar Producto" click="removeTab()" height="24"/>
+			</mx:HBox>
+		  	<mx:TabNavigator id="tn_productos"  width="750" height="100%"/>
+		
+		  </mx:Panel>
+		<mx:Panel x="10" y="1" width="235" height="249" layout="absolute" title="Entidades" id="pnl_entidades">
+		
+		<mx:Label x="30" y="0" text="Identificador" fontWeight="bold" textDecoration="underline"/>
+		<mx:Label x="159" y="0" text="Detalle" fontWeight="bold" textDecoration="underline"/>
+		<mx:Button x="48" y="183" label="Agregar Entidad" id="btn_agrega_entidad" click="popup_agrega_entidad()"/>
+		<mx:Canvas x="5.5" y="26" width="204" height="149" borderStyle="solid" cornerRadius="10">
+			<mx:VBox  x="0" y="10" height="127" width="194">
+				<mx:Repeater id="rp_entidades">
+					<mx:HBox width="193" horizontalScrollPolicy="off">
+						<mx:Button id="btn_elimina_selec" width="15" height="15" icon="@Embed(source='imagenes/delete.gif')"  click="btn_elimina_selec_click(event)"/>
+						<mx:Label id="lbl_id_entidad" width="0"	toolTip="{rp_entidades.currentItem.campo_uno}" 		text="{rp_entidades.currentItem.campo_uno}" visible="false"/>
+						<mx:Label id="lbl_cod_pais" width="0"	toolTip="{rp_entidades.currentItem.campo_dos}"  visible="false"	text="{rp_entidades.currentItem.campo_dos}"/>
+						<mx:Label id="lbl_nombre"	width="120"	toolTip="{rp_entidades.currentItem.campo_tres}"	 	text="{rp_entidades.currentItem.campo_tres}" />
+						<mx:Button label=""  	width="22" 	toolTip="Ver Detalle" icon="@Embed(source='imagenes/apunte.png')" id="btn_detalle" click="btn_detalle_click(event)"/>
+						<mx:Label id="lbl_tipo"  visible="false"	width="0"	toolTip="{rp_entidades.currentItem.campo_cuatro}"	text="{rp_entidades.currentItem.campo_cuatro}"/>
+						<mx:Label id="lbl_toma_cursos" visible="false" toolTip="{rp_entidades.currentItem.campo_cinco}" text="{rp_entidades.currentItem.campo_cinco}" width="0"/>
+						<mx:Label id="lbl_id_direccion" toolTip="{rp_entidades.currentItem.campo_seis}" text="{rp_entidades.currentItem.campo_seis}" width="0" visible="false" />
+						<mx:Label id="lbl_direccion" toolTip="{rp_entidades.currentItem.campo_siete}" text="{rp_entidades.currentItem.campo_siete}" width="0" visible="false" />
+						<mx:Label id="lbl_pago" toolTip="{rp_entidades.currentItem.campo_ocho}" text="{rp_entidades.currentItem.campo_ocho}" width="0" visible="false"/>
+						<mx:Label id="lbl_id_dir_pago" toolTip="{rp_entidades.currentItem.campo_nueve}" text="{rp_entidades.currentItem.campo_nueve}" visible="false" width="0"/>
+						<mx:Label id="lbl_dir_pago" toolTip="{rp_entidades.currentItem.campo_diez}" text="{rp_entidades.currentItem.campo_diez}" visible="false" width="0"/>
+					</mx:HBox>
+				</mx:Repeater>
+			</mx:VBox>
+		</mx:Canvas>
+		</mx:Panel>
+		<mx:Panel x="10" y="267" width="235" height="310" layout="absolute" title="Resumen Pagos" id="pl_resumen_pagos" enabled="false" visible="false">
+			<mx:Label x="59" y="10" text="Producto Actual" fontWeight="bold"/>
+			<mx:Label x="48.5" y="136" text="Todos los Productos" fontWeight="bold"/>
+			<mx:Label x="10" y="36" text="Total a Pagar"/>
+			<mx:Label x="10" y="62" text="Total Asignado"/>
+			<mx:Label x="10" y="88" text="Por Asignar"/>
+			<mx:TextInput x="98" y="34" width="107" editable="false" id="lbl_pago_malla" text="0"/>
+			<mx:TextInput x="98" y="86" width="107" editable="false" id="lbl_asignar_malla" text="0"/>
+			<mx:Label x="10" y="164" text="Total a Pagar"/>
+			<mx:Label x="10" y="190" text="Total Asignado"/>
+			<mx:Label x="10" y="216" text="Por Asignar"/>
+			<mx:TextInput x="98" y="162" width="107" editable="false" id="lbl_pago_total" text="0"/>
+			<mx:TextInput x="98" y="214" width="107" editable="false" id="lbl_asignar_total" text="0"/>
+			<mx:TextInput x="98" y="188" width="107" editable="false" id="lbl_asignado_total" text="0"/>
+			<mx:TextInput x="98" y="60" width="107" editable="false" id="lbl_asignado_malla" text="0"/>
+			<mx:HRule x="10" y="126" width="195"/>
+		</mx:Panel>
+		<mx:DateField id="lbl_fecha_ingreso" x="32" y="310" width="174" dayNames="['D', 'L', 'M', 'M', 'J', 'V', 'S']"
+					  enabled="true" firstDayOfWeek="1" showToday="true" 
+					  monthNames="['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre']"
+					  yearNavigationEnabled="true" formatString="DD-MM-YYYY"/>
+		<mx:Label x="32" y="284" text="Seleccione la fecha de ingreso"/>
+		<mx:Button id="btn_informes" x="103" y="585" label="Ver Informes"
+				   click="btn_informes_click()" enabled="false"/>
+	</mx:TitleWindow>
+		<mx:Script source="frm_registro_admision_ingreso_inscripcion_script.as"/>
+		
+	<mx:RemoteObject id="ro_ingreso_inscripcion" destination="libreria.frm_registro_admision_ingreso_inscripcion" showBusyCursor="true" fault="error_fx(event)">
+		<mx:method name="ingreso_inscripcion" result="result_ingreso_inscripcion(event)"/>
+		<mx:method name="ingreso_detalle_alumno" result="result_ingreso_detalle_alumno(event)"/>
+		<mx:method name="ingreso_detalle_pagador" result="result_ingreso_detalle_pagador(event)"/>
+		<mx:method name="ingreso_parametro_jornada" result="result_ingreso_parametro_jornada(event)"/>
+		<mx:method name="ingreso_deuda_pagador" result="result_ingreso_deuda_pagador(event)"/>
+		<mx:method name="ingreso_detalle_operaciones" result="result_ingreso_detalle_operaciones(event)"/>
+		<mx:method name="obtiene_modalidad_campus" result="result_obtiene_modalidad_campus(event)"/>
+	</mx:RemoteObject>
+		
+</mx:Application>

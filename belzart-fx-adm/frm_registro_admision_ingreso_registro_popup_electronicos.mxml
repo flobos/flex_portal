@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:TitleWindow xmlns:mx="http://www.adobe.com/2006/mxml" layout="absolute" width="524" height="199" title="Ingreso Registro - Agregar Contacto Electrónico" initialize="inicio()" horizontalAlign="left" verticalAlign="top" fontWeight="bold">
+	
+	<mx:Script>
+		<![CDATA[
+			protected function lbl_detalle_keyUpHandler(event:KeyboardEvent):void
+			{
+				// TODO Auto-generated method stub
+				if (event.charCode == 13)
+				{
+					this.btn_guardar.setFocus();
+				}
+			}
+			
+			protected function btn_guardar_keyUpHandler(event:KeyboardEvent):void
+			{
+				// TODO Auto-generated method stub
+				if (event.charCode == 13)
+				{
+					this.btn_guardar_click();
+				}
+			}
+			
+			protected function cmb_tipo_contacto_keyUpHandler(event:KeyboardEvent):void
+			{
+				// TODO Auto-generated method stub
+				if (event.charCode == 13)
+				{
+					this.cmb_tipo_contacto_change();
+				}
+			}
+			
+		]]>
+	</mx:Script>
+	
+	<mx:Label x="10" y="39" text="Tipo de Contacto" fontWeight="normal"/>
+	<mx:TextInput x="183" y="65" maxChars="50" id="lbl_detalle" keyUp="lbl_detalle_keyUpHandler(event)" width="311" textInput="{if (event.text.length > 1) event.preventDefault()}" enabled="false"/>
+	<mx:ComboBox x="183" y="35.5" id="cmb_tipo_contacto" width="140" close="cmb_tipo_contacto_change()" keyUp="cmb_tipo_contacto_keyUpHandler(event)"></mx:ComboBox>
+	<mx:Label x="10" y="9.5" text="Nuevo Contacto Electrónico" fontWeight="bold" textDecoration="underline"/>
+	<mx:Label x="10" y="68.5" text="Detalle" fontWeight="normal"/>
+	<mx:Button x="337" y="127" label="Guardar y Seleccionar" click="btn_guardar_click()" id="btn_guardar" keyUp="btn_guardar_keyUpHandler(event)"/>
+	<mx:Button x="10" y="127" label="Cancelar" id="btn_cancelar" click="btn_cancelar_click()"/>
+<mx:EmailValidator 
+			id="emailValidator" 
+			requiredFieldError="Complete el email" 
+
+			property="text" 
+			invalidCharError="Caracteres inválidos" 
+			invalidDomainError= "El dominio no es válido" 
+			missingAtSignError="Necesita una @ si es que es un email" 
+			missingPeriodInDomainError="Necesita un nombre de dominio" 
+		    tooManyAtSignsError="Su dirección tiene demasiados @"
+			/>
+<mx:Script source="frm_registro_admision_ingreso_registro_popup_electronicos_script.as" />
+	
+	<mx:RemoteObject id="ro_ingreso_registro" destination="libreria.frm_registro_admision_ingreso_registro" showBusyCursor="true" fault="error_fx(event)">
+		<mx:method name="muestra_tipo_contacto" result="result_muestra_tipo_contacto(event)"/>
+		<mx:method name="agrega_contacto" result="result_agrega_contacto(event)"/>
+	</mx:RemoteObject>	
+	
+	
+</mx:TitleWindow>
+ 

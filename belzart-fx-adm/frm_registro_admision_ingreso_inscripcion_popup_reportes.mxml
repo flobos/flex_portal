@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:TitleWindow xmlns:mx="http://www.adobe.com/2006/mxml"
+				width="692" height="320" layout="absolute" title="Informes Disponibles" creationComplete="inicio()">
+
+	<mx:Label x="10" y="10" text="Seleccione un pagador para ver los informes disponibles"/>
+	<mx:DataGrid x="10" y="36" width="640" height="157" id="dg_pagadores" click="dg_pagadores_clickHandler(event)">
+		<mx:columns>
+			<mx:DataGridColumn dataField="campo_nueve" headerText="Pagador"/>
+			<mx:DataGridColumn dataField="campo_diez" headerText="Alumno"/>
+			<mx:DataGridColumn dataField="campo_once" headerText="Producto"/>
+		</mx:columns>
+	</mx:DataGrid>
+	<mx:Button x="553" y="248" label="Ver Informe" click="btn_ver_informe_click()"/>
+	<mx:ComboBox id="cmb_reportes" x="141" y="215" width="509"></mx:ComboBox>
+	<mx:Label x="10" y="217" text="Informes disponibles"/>
+	<mx:Button x="10" y="248" label="Salir" click="btn_cancelar_click()"/>
+	<mx:Script source="frm_registro_admision_ingreso_inscripcion_popup_reportes_script.as"/>
+	
+	<mx:RemoteObject id="ro_ingreso_inscripcion" destination="libreria.frm_registro_admision_ingreso_inscripcion" showBusyCursor="true" fault="error_fx(event)">
+		<mx:method name="muestra_reportes" result="result_muestra_reportes(event)"/>
+	</mx:RemoteObject>
+</mx:TitleWindow>

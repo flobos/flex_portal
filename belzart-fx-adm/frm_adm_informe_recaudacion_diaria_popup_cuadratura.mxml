@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml"  initialize="inicio()">
+<mx:Script source="frm_adm_informe_recaudacion_diaria_popup_cuadratura_script.as"/>
+</mx:Application>

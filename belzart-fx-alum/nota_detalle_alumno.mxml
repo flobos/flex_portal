@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+  <mx:TitleWindow x="0" y="0" xmlns:mx="http://www.adobe.com/2006/mxml" width="512" height="455" creationComplete="carga()" title="IPXFlex - Alumno Detalle Nota" >
+<mx:DateFormatter id="dfconv" formatString="DD-MM-YYYY"/>
+<mx:Canvas height="394" width="482">
+	  
+<mx:Canvas x="31" y="36"  width="431" height="310" horizontalScrollPolicy="on">
+<mx:VBox width="412" height="291" x="9" y="0">
+  <mx:Repeater   id="rp_correccion"   >
+  <mx:VBox width="396" height="245" x="8" y="6">
+	<mx:Canvas width="379" height="224">
+	  <mx:Label x="14" y="13"  text="N°Pregunta" width="105" height="17" color="#0000FF" />
+	  <mx:Label x="138" y="13"  text="{rp_correccion.currentItem.campo_uno}" width="60" id="lbl_pregunta" />
+	  <mx:Label x="14" y="40"  text="Puntaje Pregunta" width="105" color="#0000FF" />
+	  <mx:Label x="138" y="40"  text="{rp_correccion.currentItem.campo_dos}" width="75" id="lbl_puntaje" />
+	  <mx:Label x="14" y="71"  text="Puntaje Alcanzado" width="105" color="#0000FF" />
+	  <mx:Label x="139" y="70"  text="{rp_correccion.currentItem.campo_tres}" width="89" id="lbl_puntaje_total" />
+	  <mx:Label x="15" y="97"  text="Observacion" width="105" color="#0000FF" />
+	  <mx:TextArea x="14" y="124"  text="{rp_correccion.currentItem.campo_cuatro}" width="341" height="89" id="lbl_observacion" maxChars="5000" />
+	</mx:Canvas>
+  </mx:VBox>
+      </mx:Repeater>
+  </mx:VBox>
+</mx:Canvas>	  
+<mx:Label x="108" y="14" width="51" height="20" id="lbl_promedio_t" color="#000000" visible="false" />
+	  <mx:Label x="40" y="14" width="68" height="20" text="Promedio" visible="false" />
+	  <mx:Label x="363" y="7" id="lbl_not_idn" />
+	  <mx:Button x="398" y="368"  label="Salir" id="btn_salir" click="salir()" />
+	</mx:Canvas>
+	 <mx:Script source="nota_detalle_alumno_script.as" />
+	<mx:RemoteObject id="ro_notas" destination="libreria_alm.frm_notas" showBusyCursor="true" fault="error_fx(event)">						 					
+		
+		<mx:method name="ro_obtiene_correccion_pruebas" result="result_ro_obtiene_correccion_pruebas(event)" />
+		
+		
+	</mx:RemoteObject> 
+	
+	
+	
+ </mx:TitleWindow>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:TitleWindow xmlns:mx="http://www.adobe.com/2006/mxml" xmlns:subida="*" layout="absolute" width="642" height="521" title="Modifica Preguntas" initialize="inicio()" horizontalAlign="left" verticalAlign="top">
+<subida:ImageUpload id="archivo_subida" creationComplete="archivo_subida.init(progressBar, txt_imagen);" />		
+		<mx:HRule x="10" y="36" width="591"/>
+		<mx:Label x="10" y="39" text="Pregunta:" themeColor="#232527" fontWeight="bold" textDecoration="underline"/>
+		<mx:Label x="286" y="105" id="lbl_codigo_alumno" visible="false"/>
+		<mx:Button id="btn_guardar" x="389" y="423" label="Guardar" height="26" width="116" click="btn_guardar_click()" icon="@Embed(source='imagenes/apunte.png')"/>
+		<mx:Label x="10" y="235" text="Respuestas:" themeColor="#232527" fontWeight="bold" />
+		<mx:Label x="415" y="301" text="Puede realizar modificaciones" themeColor="#232527" fontWeight="bold"  id="lbl_mod_res" color="#F70808" visible="false" />
+		<mx:Button x="513" y="423" label="Cancelar" height="26" id="btn_cancelar" click="btn_cancelar_click()" icon="@Embed(source='imagenes/edit_remove.png')"/>
+		<mx:VBox  x="10" y="269" height="146" width="588">
+			<mx:Repeater id="rp_alternativas">
+				<mx:HBox>
+					<mx:Label id="lbl_alternativa" width="70"  text="{rp_alternativas.currentItem.campo_uno}"  />
+					<mx:TextInput width="471" id="txt_respuesta" editable="true" text="{rp_alternativas.currentItem.campo_dos}"  fontSize="10" borderColor="#FFFFFF" borderStyle="none"/>
+					<mx:RadioButton id="opt_correcta" enabled="true"/>
+				</mx:HBox>
+			</mx:Repeater>
+		</mx:VBox>
+		<mx:Script source="frm_objetivas_ingreso_preguntas_popup_modifica_pregunta_script.as"/>
+
+		<mx:RemoteObject id="ro_modifica_preguntas" destination="libreria.frm_objetivas_ingreso_preguntas" showBusyCursor="true" fault="error_fx(event)">
+			<mx:method name="modifica_pregunta" result = "modifica_respuesta()"/>
+		</mx:RemoteObject>
+		<mx:ProgressBar id="progressBar" mode="manual"  x="436" y="164" label="seleccione imagen JPG" color="#000000" themeColor="#000099" height="30" width="163" />
+		<mx:Label id="txt_imagen" x="0" y="0" text="" visible="false"/>
+		<mx:Label x="10" y="250" text="Cod." fontWeight="bold" textDecoration="underline"/>
+		<mx:Label x="88" y="250" text="Respuesta" fontWeight="bold" textDecoration="underline"/>
+		<mx:Label x="547" y="250" text="Correcta" textAlign="right" fontWeight="bold" textDecoration="underline"/>
+		<mx:Label text="Código:" fontWeight="bold" horizontalCenter="-271" y="10"/>
+		<mx:Label  horizontalCenter="212" y="9" width="141" id="txt_tipo" visible="false"/>
+		<mx:TextArea x="61" y="195" width="397" id="txt_pauta" editable="true" height="32"/>
+		<mx:Label x="10" y="196" text="Pauta:" themeColor="#232527" fontWeight="bold" visible="true"/>
+		<mx:TextArea x="13" y="65" width="415" height="122" id="txt_pregunta" editable="true" maxChars="5000"/>
+		<mx:Label  horizontalCenter="-169" y="10" width="141" id="txt_codigo"/>
+		<mx:CheckBox x="10" y="427" label="Modificar en todas las Ejecuciones Académicas" id="chk_mod_eje_aca"/>
+		<mx:Image x="436" y="65" width="162" height="98" id="img_pregunta" click="mostrar_imagen(event)"/>
+		<mx:Button x="436" y="37" label="Cambiar Imagen" icon="@Embed(source='imagenes/apunte.png')" id="btn_cambiar_imagen" click="click_btn_examinar()" fontSize="10" width="165"/>
+		<mx:CheckBox x="491" y="195" label="Quitar Imagen" id="quitar_imagen"/>
+</mx:TitleWindow>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml"
+				creationComplete="inicio()" layout="absolute">
+	<mx:TitleWindow x="152" y="37" width="543" height="493" layout="absolute"
+					title="Certificados de Alumnos">
+		<mx:ComboBox id="cmb_certificados" x="115" y="375" width="354" change="carga_informe()"
+					 enabled="false"></mx:ComboBox>
+		<mx:Label x="37" y="51" text="Matrícula"/>
+		<mx:Label x="67" y="79" text="Rut"/>
+		<mx:TextInput id="txt_matric" x="99" y="49"/>
+		<mx:TextInput id="txt_rut" keyUp="txt_rut_presskey(event)" x="99" y="77"/>
+		<mx:Button id="btn_busca_matricula" x="317" y="49" width="121" label="Buscar Matricula" click="buscar_matricula()"/>
+		<mx:Button id="btn_busca_rut" x="317" y="77" label="Buscar Rut" click="buscar_rut()"/>
+		<mx:Label x="37" y="377" text="Certificados"/>
+		<mx:Label x="37" y="10" fontWeight="bold" text="BUSCAR ALUMNO"/>
+		<mx:Label x="37" y="340" fontWeight="bold" text="EMISIÓN DE CERTIFICADOS"/>
+		<mx:Canvas x="37" y="131" width="456" height="188">
+			<mx:Label x="26" y="78" text="Nombre Completo:" textAlign="left"/>
+			<mx:Label x="26" y="108" width="110" text="Matrícula:" textAlign="left"/>
+			<mx:Label x="26" y="138" width="110" text="Carrera:" textAlign="left"/>
+			<mx:TextInput id="txt_nombre_comp" x="145" y="76" width="301" editable="false"/>
+			<mx:TextInput id="txt_matricula" x="144" y="106" width="122" editable="false"/>
+			<mx:TextInput id="txt_carrera" x="144" y="136" width="302" editable="false"/>
+			<mx:TextInput id="txt_rut_alu" x="144" y="46" width="122" editable="false"/>
+			<mx:Label x="26" y="48" width="110" text="Rut:" textAlign="left"/>
+			<mx:Label x="10" y="10" fontWeight="bold" text="DATOS ACADÉMICOS"/>
+		</mx:Canvas>
+		<mx:Button id="btn_nueva_busqueda" x="407" y="421" label="Nuevo" click="btn_nueva_busqueda_click()"/>
+	</mx:TitleWindow>
+	<mx:Script source="frm_certificados_alumnos_script.as"/>
+	
+	<mx:RemoteObject id="ro_certificados_alumnos" destination="libreria.frm_certificados_alumnos" showBusyCursor="true" fault="error_fx(event)">
+		<mx:method name="busca_matriculas_por_matriculas" result= "result_busca_matriculas_por_matriculas(event)"/>
+		<mx:method name="busca_matriculas_por_rut" result = "result_busca_matriculas_por_rut(event)"/>
+		<mx:method name="rellena_combo" result = "result_rellena_combo(event)"/>
+		</mx:RemoteObject>	
+	
+		
+	
+	</mx:Application>
+

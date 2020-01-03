@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:TitleWindow xmlns:mx="http://www.adobe.com/2006/mxml" xmlns="*"   layout="absolute" width="100%" title="Tutoría Virtual - Alumno" fontWeight="bold" height="100%" creationComplete="init()" x="0" y="0" horizontalAlign="center" verticalAlign="middle">
+<mx:Canvas id="cvn_videoconferencia" x="4" y="4" width="100%" height="100%" backgroundColor="#e6e6e6">
+	<mx:List width="290" height="71" x="611" y="477" id="List_usuarios"/>
+	<mx:TextArea width="355" height="124" id="txt_cuarto" wordWrap="true" x="10" y="333" editable="false" enabled="true"/>
+	<mx:TextInput id="txt_mensaje"  width="552" x="10" y="480" keyUp="txt_msg_keypress(event)" height="52"/>
+	<mx:Button label="Enviar" id="btn_enviar" enabled="false" click="Click_btn_enviar();" x="500" y="540"/>
+	<mx:TextInput id="txt_hora"  width="243" x="80" y="573" visible="false"/>
+	<mx:Button label="Conectar" id="btn_conectar" click="Click_btn_conectar();" x="212" y="271" width="108" height="20" visible="false"/>
+	<mx:TextArea width="355" height="56" id="txt_monitor" wordWrap="true" x="10" y="496" editable="false" enabled="true" visible="false"/>
+	<mx:Label x="10" y="481" text="Monitor" fontWeight="bold" id="lbl_monitor" visible="false"/>
+	<mx:Label x="12" y="316" text="Sala" fontWeight="bold" id="lbl_sala"/>
+	<mx:Label x="611" y="461" text="Usuarios Conectados:" fontWeight="bold" id="lbl_usuarios"/>
+	<mx:Label x="358" y="573" text="Hora" visible="false"/>
+	<mx:Label x="10" y="465" text="Enviar mensaje:" id="lbl_mensaje"/>
+	<mx:TitleWindow id="videoHBox" x="10" y="15" width="355" height="284" borderColor="#000000" title="Tutor" fontWeight="normal" textDecoration="none" backgroundColor="#000000"  doubleClick="fullScreen(event)">
+	</mx:TitleWindow>
+	<mx:TitleWindow id="videoHBox_escritorio" x="390" y="15" width="511" height="433" borderColor="#000000" title="Escritorio" fontWeight="normal" backgroundColor="#000000">
+	</mx:TitleWindow>
+	<mx:Button x="296" y="306" label="Ampliar" id="btn_fullscreen" click="fullScreenTutor()" visible="true"/>
+	<mx:Button x="830" y="456" label="Ampliar" click="fullScreenEscritorio()" id="btn_fullscreen_esc" visible="true"/>
+	<mx:Button x="839" y="556" label="Cerrar" id="btn_cerrar" click="btn_cancelar_click()"/>
+	
+</mx:Canvas>
+	<mx:Script source="frm_video_conferencia_alumno_script.as"/>
+
+</mx:TitleWindow>
+
+	
+
+

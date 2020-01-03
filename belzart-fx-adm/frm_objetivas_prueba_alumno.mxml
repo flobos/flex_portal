@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" layout="absolute" initialize="inicio()" height="730" width="863">
+	<mx:TitleWindow width="735" height="674" layout="absolute" top="10" left="10" id="tw_prueba_alumno">
+		<mx:Label x="624.5" y="69" text="Preguntas" fontWeight="bold"/>
+		<mx:Label id="counter" fontSize="12"  width="90" height="19" x="598.5" y="23" fontWeight="bold" textAlign="right" color="#FF5A00"/>
+		<mx:Label x="470.5" y="25" text="Tiempo Transcurrido" fontWeight="bold"/>
+		<mx:Label x="30" y="23" text="Tiempo Rendición" fontWeight="bold"/>
+		<mx:Label x="142" y="23" width="90" id="lbl_tiempo_total" textAlign="right"/>
+		<mx:TextArea x="30" y="95" width="386" height="236" borderThickness="1" editable="false" id="txt_pregunta">
+		</mx:TextArea>
+		<mx:Label x="30" y="71" text="Pregunta N°" fontWeight="bold" fontSize="12" id="lbl_pregunta_n"/>
+		<mx:Label x="124" y="72" id="lbl_num_pregunta" width="46" textAlign="center" color="#FF5A00" fontWeight="bold"/>
+		<mx:HRule x="30" y="61" width="658.5"/>
+		<mx:HRule x="30" y="358" width="658.5"/>
+		<mx:VSlider x="655.5" y="82" height="247" id="slider_preguntas" allowTrackClick="true" change="slider_preguntas_on_change()" liveDragging="true" width="22.5"/>
+		<mx:VBox  x="30" y="396" height="159" width="641">
+			<mx:Repeater id="rp_alternativas">
+				<mx:HBox>
+					<mx:Label id="lbl_alternativa" width="10" text="{rp_alternativas.currentItem.campo_uno}" />
+					<mx:Label width="544" id="txt_respuesta" text="{rp_alternativas.currentItem.campo_tres}" toolTip="{rp_alternativas.currentItem.campo_tres}"/>
+					<mx:TextInput width="0" click="txt_respuesta_input_click()" id="txt_respuesta_input" text="{rp_alternativas.currentItem.campo_tres}" visible="false"/>
+					<mx:Label id="lbl_correcta" width="0"  visible="false" text="{rp_alternativas.currentItem.campo_cinco}"/>
+					<mx:Label id="lbl_eje_aca_res_idn" width="0" visible="false" text="{rp_alternativas.currentItem.campo_dos}"/>
+					<mx:Label id="lbl_tip_preg_idn" width="0" visible="false" text="{rp_alternativas.currentItem.campo_seis}"/>
+					<mx:Label id="lbl_eje_aca_res_arch_adjunto" width="0" visible="false" text="{rp_alternativas.currentItem.campo_cuatro}"/>
+					<mx:RadioButton id="opt_correcta"/>
+				</mx:HBox>
+			</mx:Repeater>
+		</mx:VBox>
+		<mx:Label x="93" y="377" text="Alternativas" fontWeight="bold" textDecoration="underline"/>
+		<mx:Label x="617" y="377" text="Correcta" textAlign="right" fontWeight="bold" textDecoration="underline" id="lbl_titulo_correcta"/>
+		<mx:Button x="460.5" y="563" label="Responder" icon="@Embed(source='imagenes/tick.png')" click="btn_responder_click()" id="btn_responder"/>
+		<mx:Image x="470.5" y="95" width="160" height="150" source="imagenes/sin_imagen.png" id="img" scaleContent="true" autoLoad="true"/>
+		<mx:Button x="583.5" y="307" label="-&gt;" id="btn_siguiente" click="btn_siguiente_click()"/>
+		<mx:Button x="460.5" y="307" label="&lt;-" id="btn_anterior" click="btn_anterior_click()"/>
+		<mx:Label x="512.5" y="317" text="Preguntas" fontWeight="bold"/>
+		<mx:Label x="510.5" y="301" text="Navegador" fontWeight="bold"/>
+		<mx:Label x="448.5" y="254" text="Click sobre la imagen para ampliar" fontWeight="bold"/>
+		<mx:VRule x="438" y="61" height="299"/>
+		<mx:Button x="570" y="563" label="Cerrar" width="101" icon="@Embed(source='imagenes/edit_remove.png')" id="btn_cerrar"/>
+	
+	</mx:TitleWindow>
+	
+	<mx:Script source="frm_objetivas_prueba_alumno_script.as"/> 
+	<mx:DateFormatter id="dateFormatter" formatString="JJ:NN:SS" />
+
+	
+	<mx:RemoteObject id="ro_prueba" destination="libreria.frm_objetivas_prueba_alumno" showBusyCursor="true">
+		<mx:method name="muestra_prueba_alumno" result="result_muestra_prueba_alumno(event)"/>
+		<mx:method name="muestra_detalle_prueba_alumno" result="result_muestra_detalle_prueba_alumno(event)"/>
+		
+	</mx:RemoteObject>
+		
+		
+</mx:Application>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:HBox xmlns:mx="http://www.adobe.com/2006/mxml" 
+    verticalGap="0" borderStyle="none" horizontalAlign="left">
+	<mx:Image id="image" width="40" height="40" source="imagenes/tutor1.jpg"/>
+	<mx:Text id="texto" text="{data.campo_tres.charAt(data.campo_tres.length-13)}{data.campo_tres.charAt(data.campo_tres.length-12)}/{data.campo_tres.charAt(data.campo_tres.length-16)}{data.campo_tres.charAt(data.campo_tres.length-15)}/{data.campo_tres.charAt(data.campo_tres.length-21)}{data.campo_tres.charAt(data.campo_tres.length-20)}{data.campo_tres.charAt(data.campo_tres.length-19)}{data.campo_tres.charAt(data.campo_tres.length-18)}-{data.campo_cuatro}" width="402" textAlign="left" height="40"  fontWeight="bold" />
+
+</mx:HBox>

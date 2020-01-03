@@ -1,0 +1,16 @@
+<mx:VBox xmlns:mx="http://www.adobe.com/2006/mxml"  
+    backgroundColor="yellow">
+<!-- itemRenderers\events\myComponents\CityStateEditor.mxml -->
+
+    <mx:TextInput id="setCity"  width="130" text="{data.State}"/>
+                            
+    <mx:ComboBox id="pickState" selectedItem="{data.State}">
+        <mx:dataProvider>
+            <mx:String>jhsdhaskhdkashd</mx:String>
+            
+        </mx:dataProvider>
+    </mx:ComboBox>
+</mx:VBox>
+
+
+

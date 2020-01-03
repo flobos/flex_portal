@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:TitleWindow xmlns:mx="http://www.adobe.com/2006/mxml" width="734" height="332" x="15" y="15" title="Aula Virtual - Consultas - Cursos del Alumno" horizontalAlign="left" creationComplete="valida_datos()" >
+	
+ <mx:DateFormatter id="dfconv" formatString="DD-MM-YYYY"/>
+<mx:Canvas width="698" height="268" textDecoration="none">
+    <!--     <mx:HBox x="42" y="253" > -->
+    <mx:DataGrid id="dg_cursos" width="327" height="109" x="2" y="55" editable="false" click="dg_cursos_cellPress()"
+	  resizableColumns="false"
+	  allowMultipleSelection="true">
+            <mx:columns>
+                <mx:Array>
+                    <!--<mx:DataGridColumn dataField="active" headerText="Seleccione" textAlign="center" itemRenderer="CheckitemRenderer" width="80"/>-->
+                    <mx:DataGridColumn dataField="data"  headerText="Cód. Motivo"/>
+				    <mx:DataGridColumn dataField="label"  headerText="Cursos No Seleccionados"/>
+               </mx:Array>
+          </mx:columns>
+        </mx:DataGrid>
+      <!--     </mx:HBox> -->
+      <mx:Button x="354" y="210"  label="Cerrar" width="94" height="32" click="btn_cerrar_click()" id="btn_cerrar" />
+      <mx:Label x="3" y="37"  text="Listado de Cursos" width="286" color="#000099" fontWeight="bold" />
+      <mx:Label x="5" y="5"  text="Cursos activos de la matrícula Nº" width="189" color="#000000" height="18" />
+      <mx:Label x="193" y="5" id="lbl_matricula" width="103" color="#535E95" fontFamily="Arial" fontWeight="bold" fontSize="14" height="18" text="lbl_matricula" />
+      <mx:TextArea x="3" y="167" text="NOTA: Haga click en el Curso por el cual desea realizar la Consulta Académica." editable="false" enabled="true" wordWrap="true"  borderColor="#FFFFFF" width="286" height="33"  />
+	  <mx:DataGrid id="dg_cursos_selec" x="346" y="55" height="109" width="327" click="dg_cursos_selec_cellPress()" >
+	    <mx:columns>
+	      <mx:Array>
+	        <mx:DataGridColumn headerText="Column 1" dataField="data" visible="false"/>
+	        <mx:DataGridColumn headerText="Cursos Seleccionados" dataField="label"/>
+	        </mx:Array>
+	      </mx:columns>
+	    </mx:DataGrid>
+	  <mx:Button x="232" y="210"  label="Terminar" width="94" height="32" click="btn_terminar_click()" id="btn_terminar" />
+	  <mx:TextArea x="344" y="167" text="NOTA: Haga click en el Curso que desea borrar de la selección." editable="false" enabled="true" wordWrap="true"  borderColor="#FFFFFF" width="286" height="33"  />
+  </mx:Canvas>
+  
+  	<mx:Script source="frm_fuc_muestra_toma_cursos_script.as" />
+	<mx:RemoteObject id="ro" destination="libreria_alm.frm_fuc_ingreso" showBusyCursor="true" fault="error_fx(event)">
+		<mx:method name="ro_fuc_muestra_toma_cursos" result="result_ro_fuc_muestra_toma_cursos(event)" />
+		<!--<mx:method name="cambia_vista_motivo" result="result_cambia_vista_motivo(event)" />-->
+	</mx:RemoteObject>
+
+</mx:TitleWindow>

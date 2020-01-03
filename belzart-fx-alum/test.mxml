@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" 
+    rollOut="mouseAction(event)" rollOver="mouseAction(event)" layout="absolute" creationComplete="init()"
+    width="400" height="300"
+    backgroundGradientColors="[#ffffff, #ffffff]" >
+    <mx:Script>
+        <![CDATA[
+            import mx.effects.easing.Elastic;
+            import flash.utils.Timer;
+            
+            private var menuTimer:Timer;
+            private var fastMenuTimer:Timer;
+            private var menuVisible:Boolean;
+            [Bindable]
+            private var showMenuButton:Boolean;
+            
+            [Bindable]
+            public var btnMenuIcon:Class;
+            
+            private function init():void{
+                initMenuMoveOn.play();
+                menuTimer = new Timer(2000, 0);
+                menuTimer.addEventListener(TimerEvent.TIMER, onMenuTimeOut);
+                fastMenuTimer = new Timer(500, 0);
+                fastMenuTimer.addEventListener(TimerEvent.TIMER, onFastMenuTimeOut);
+                
+               
+            }
+            private function showContent(event:Event):void{
+                initContentMoveOn.play()
+            }
+            private function hideContent(event:Event):void{
+                initContentMoveOff.play()
+            }
+            private function onMenuTimeOut(event:TimerEvent):void{
+                trace('menuTimeOut'+event);
+                menuTimer.stop();
+                hideMenu();
+            }
+            private function onFastMenuTimeOut(event:TimerEvent):void{
+                //trace(event);
+                fastMenuTimer.stop();
+                hideMenu();
+            }
+            private function setMenuVisible(status:Boolean):void{
+                menuVisible=status;
+                if(status){
+                    showMenuButton=false;
+                }else{
+                    showMenuButton=true;
+                }
+            }
+            private function showMenu():void{
+                if(!menuVisible){
+                    initMenuMoveOn.play();
+                    menuTimer.start();
+                }
+                trace('[moveOnisPlaying]'+initMenuMoveOn.isPlaying);
+            }
+            private function hideMenu(event:MouseEvent=null):void{
+                if(menuVisible){
+                    if(event!=null){
+                        trace(event.currentTarget);
+                        trace('[initMenuMoveOff]'+initMenuMoveOff.isPlaying);
+                        trace('[moveOnisPlaying]'+initMenuMoveOn.isPlaying);
+                        if(!initMenuMoveOff.isPlaying || initMenuMoveOn.isPlaying){
+                            initMenuMoveOff.play();    
+                            //epvMenu.removeEventListener(MouseEvent.ROLL_OVER,
+                        }
+                    }else{
+                        //timer timed out
+                        initMenuMoveOff.play();    
+                    }
+                }
+                //trace('[moveOffisPlaying]'+initMenuMoveOff.isPlaying);
+            }
+            private function mouseAction(event:MouseEvent=null):void{
+                //trace(event.target);
+                //trace(event);
+                if(event.target == 'animatedMenu0'){
+                    switch(event.type){
+                        case 'rollOut':
+                            trace('rollOutEpv0');
+                            break;
+                        case 'rollOver':
+                            menuTimer.start();
+                            trace('rollOverEpv0');
+                            break;
+                        case 'mouseMove':
+                            //trace('mouseMove');
+                            break;
+                    }
+                }else{
+                    switch(event.type){
+                        case 'rollOut':
+                            if(!menuTimer.running){
+                                fastMenuTimer.start();    
+                            }                        
+                            trace('rollOutElse');
+                            break;
+                        case 'rollOver':
+                            showMenu();
+                            trace('rollOverElse');
+                            break;
+                        case 'mouseMove':
+                            menuTimer.stop();
+                            //trace('mouseMove');
+                            break;
+                    }
+                }
+                
+            }
+            private function timerAction(action:String,target:String=null):void{
+                //trace(event);
+                switch(action){
+                    case 'rollOut':
+                        menuTimer.start();
+                        break;
+                    case 'rollOver':
+                        trace('rollOver');
+                        break;
+                    case 'mouseMove':
+                        //trace('mouseMove');
+                        break;
+                }
+            }
+            private function showStatus():void{
+                trace('[moveOnisPlaying]'+initMenuMoveOn.isPlaying);
+                trace('[moveOffisPlaying]'+initMenuMoveOff.isPlaying);
+            }
+        ]]>
+    </mx:Script>
+    
+    <mx:Sequence id="initMenuMoveOn" target="{epvMenu}" effectEnd="setMenuVisible(true)">
+        <mx:Resize widthFrom="0" widthTo="220" easingFunction="Elastic.easeOut" />
+        <mx:Resize heightFrom="42.5" heightTo="212.5" duration="900" easingFunction="Elastic.easeOut" />    
+    </mx:Sequence>
+    
+    <mx:Sequence id="initMenuMoveOff" target="{epvMenu}" effectEnd="setMenuVisible(false)">
+        <mx:Resize widthFrom="220" duration="250" widthTo="0" />
+        <mx:Resize heightFrom="212.5" duration="500" heightTo="42.5" />    
+    </mx:Sequence>
+
+    <mx:Sequence id="initContentMoveOn">
+        <mx:Resize widthFrom="0" widthTo="{myVS.width}" heightFrom="0" heightTo="50" />
+        <mx:Resize heightFrom="50" heightTo="{myVS.height}" duration="1200" easingFunction="Elastic.easeOut"/>    
+    </mx:Sequence>
+    
+    <mx:Sequence id="initContentMoveOff">
+        <mx:Resize heightFrom="{myVS.height}" heightTo="50" duration="400"/>    
+        <mx:Resize widthFrom="{myVS.width}" widthTo="0" heightFrom="50" heightTo="0" />
+    </mx:Sequence>
+        
+    <mx:ViewStack id="myVS" left="20" top="10" bottom="10" right="10">
+        <mx:Canvas label="Form" width="100%" height="100%"
+            horizontalScrollPolicy="off" verticalScrollPolicy="off"
+            borderStyle="solid" cornerRadius="13"
+            showEffect="{initContentMoveOn}" 
+            hideEffect="{initContentMoveOff}">
+            <mx:HBox width="100%" height="100%" horizontalAlign="right">
+                <mx:Form width="75%">
+                    <mx:FormHeading label="This is my Form"/>
+                    <mx:FormItem label="someField">
+                        <mx:Label />
+                    </mx:FormItem>
+                </mx:Form>
+            </mx:HBox>
+            
+        </mx:Canvas>
+        <mx:Canvas label="Edit Something" width="100%" height="100%"
+            horizontalScrollPolicy="off" verticalScrollPolicy="off"
+            borderStyle="solid" cornerRadius="13"
+            showEffect="{initContentMoveOn}" 
+            hideEffect="{initContentMoveOff}">
+            
+            <mx:HBox width="100%" height="100%" horizontalAlign="right">
+                <mx:Form width="75%">
+                    <mx:FormHeading label="This is my Form Full of details"/>
+                    <mx:FormItem label="someField">
+                        <mx:TextInput />
+                    </mx:FormItem>
+                </mx:Form>
+            </mx:HBox>
+        </mx:Canvas>
+    </mx:ViewStack>
+    
+    <mx:Button x="-16" y="10" visible="{showMenuButton}" 
+        width="43" height="49" id="btnShowMenu" icon="{btnMenuIcon}"
+        rollOver="mouseAction(event)" />
+        
+    <mx:Canvas id="epvMenu" horizontalScrollPolicy="off" verticalScrollPolicy="off"
+                    mouseMove="mouseAction(event)" alpha=".8"
+                    rollOut="mouseAction(event)"
+                    width="0" height="42.5" backgroundColor="#DFDFDD" 
+                    cornerRadius="7" borderStyle="solid" x="11" y="12">
+        
+        <mx:VBox left="10" top="10" right="10" bottom="10">
+            <mx:Button styleName="MenuButtons" width="100%" label="change viewstack 1" click="{myVS.selectedIndex=0}"/>
+            <mx:Button styleName="MenuButtons" width="100%" label="change viewstack 2" click="{myVS.selectedIndex=1}"/>
+        </mx:VBox>
+    </mx:Canvas>
+    
+</mx:Application>

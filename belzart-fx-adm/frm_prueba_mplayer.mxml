@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" layout="absolute">
+	<mx:TitleWindow x="293" y="72" width="359" height="308" layout="absolute" title="IPX MediaPlayer" initialize="inicio()">
+		<mx:VideoDisplay x="10" y="10" width="241.5" height="169" id="vd_video" autoPlay="false"/>
+		<mx:Button x="259.5" y="10" label="Play" id="btn_play" click="btn_play_click()" width="65.5"/>
+		<mx:Button x="259.5" y="40" label="Stop" id="btn_stop" click="btn_stop_click()" width="65.5"/>
+		<mx:Button x="259.5" y="70" label="Pausa" id="btn_pausa" click="btn_pausa_click();" width="65.5"/>
+		<mx:Label x="10" y="215" text="URL:"/>
+		<mx:TextInput x="50" y="213" width="245" id="lbl_url" editable="false"/>
+		<mx:HSlider x="72" y="187" width="119.75" minimum="0" maximum="1" id="hs_volumen" change="ajustar_volumen();" liveDragging="true"/>
+		<mx:Label x="10" y="187" text="Volumen"/>
+		<mx:Text x="230" y="187" width="99" id="txt_tiempo" text="{this.vd_video.playheadTime}" />
+		<mx:Label x="10" y="241" text="Buffer:"/>
+		<mx:Label x="61" y="240" id="txt_buffer" text="{'Cargando '+Math.round(vd_video.bytesLoaded/1024).toString() + ' Kb de '+ Math.round(this.vd_video.bytesTotal/1024).toString()+ ' Kb Totales'}"/>
+
+	</mx:TitleWindow>
+	<mx:Script source="frm_prueba_mplayer_script.as"/>
+</mx:Application>

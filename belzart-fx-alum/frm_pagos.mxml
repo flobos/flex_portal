@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Module xmlns:mx="http://www.adobe.com/2006/mxml" width="100%" height="100%" creationComplete="frm_pagos_load()" backgroundColor="#CCCCCC" ><mx:DateFormatter id="dfconv" formatString="DD-MM-YYYY"/>
+<mx:TitleWindow title="Aula Virtual - Pagos" x="55" y="50" width="645" height="284" horizontalAlign="left">
+  <mx:Canvas width="610" height="229">
+    <mx:DataGrid id="dt_pagos" width="600" height="170" x="5" y="5">
+      <mx:columns>
+        <mx:Array>
+          <mx:DataGridColumn headerText="Nº Cuota" dataField="campo_uno" width="70" textAlign="center"/>
+          <mx:DataGridColumn headerText="Fecha Venc." dataField="campo_dos" width="90" textAlign="center" />
+    	   <mx:DataGridColumn headerText="Valor Cuota" dataField="campo_tres" width="90" textAlign="center"/>
+          <mx:DataGridColumn headerText="Valor Cancel." dataField="campo_cuatro" width="90" textAlign="center" />
+		  <mx:DataGridColumn headerText="Estado" dataField="campo_cinco" width="90" textAlign="center" />
+
+      </mx:Array>
+      </mx:columns>
+    </mx:DataGrid>
+    <mx:Button x="451" y="197" label="Ir a Pago En Línea" width="149" click="btn_pagos_click(event)" visible="false"/>
+  </mx:Canvas>
+</mx:TitleWindow>
+
+  <mx:Script source="frm_pagos_script.as" />
+
+	<mx:RemoteObject id ="ro_pagos" destination="libreria_alm.frm_pagos"	 showBusyCursor="true" fault="error_fx(event)">
+			<mx:method name="pagos_muestra"  result="result_pagos_muestra(event)"  />
+	</mx:RemoteObject>
+</mx:Module>

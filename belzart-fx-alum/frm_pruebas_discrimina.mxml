@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Module xmlns:mx="http://www.adobe.com/2006/mxml" backgroundColor="#CCCCCC" width="100%" height="100%">
+ <mx:DateFormatter id="dfconv" formatString="DD-MM-YYYY"/>
+<mx:TitleWindow width="380" height="253" title="Rendicion de prueba"  creationComplete="carga()">
+    <mx:VBox width="351" height="156">
+	<mx:HBox>
+		<mx:Label width="136" text="Elija Proceso "/> 
+		<mx:ComboBox id="cmb_proceso_evaluativo" width="168" change="change_cmb_proceso_evaluativo()"/>
+	</mx:HBox>
+	<mx:HBox>
+	<mx:Label text="Elija tipo Prueba          " /> 
+	<mx:ComboBox id="cmd_tipo_pruebas" width="168" change="change_cmd_tipo_pruebas()"/>
+	</mx:HBox>
+	<mx:HRule width="339" />
+	<mx:HBox id="hb_disponibilidad" visible="false">
+	  <mx:Label text="Fecha Disponibilidad en la web:" fontWeight="bold"  /> 
+	  <mx:Label id="lbl_disponibilidad" fontWeight="bold" color="#0033FF"  /> 
+	</mx:HBox>
+	<mx:HBox id="hb_fecha_entrega" visible="false">
+	  <mx:Label text="Fecha max. entrega" fontWeight="bold"  /> 
+	  <mx:Label id="lbl_entrega" fontWeight="bold" color="#0033FF"  /> 
+	</mx:HBox>
+
+	<mx:HBox id="hb_modalidad" visible="false">
+	  <mx:Label text="Modalidad:" fontWeight="bold" /> 
+	  <mx:Label id="lbl_modalidad" fontWeight="bold" color="#0033FF"  /> 
+	  <mx:Label id="lbl_codigo_mod" fontWeight="bold" color="#0033FF"  /> 
+	</mx:HBox>
+
+		<mx:HBox id="hb_ponderacion" visible="false">
+			<mx:Label text="Ponderación:" fontWeight="bold"  />  
+			<mx:Label id="lbl_ponderacion" fontWeight="bold" color="#0033FF"  />
+		</mx:HBox>
+	
+	
+	
+	
+    
+	
+	</mx:VBox>
+    <mx:Button label="Rendir Prueba" height="32" width="118" id="btn_rendir" click="click_btn_rendir()" />
+  </mx:TitleWindow>
+  
+  <mx:DateFormatter id="df_fechas" formatString="DD/MM/YYYY"/>
+  <mx:Script  source="frm_pruebas_discrimina_script.as"/>
+  
+<mx:RemoteObject id="ro_pruebas" destination="libreria_alm.frm_pruebas_discrimina" showBusyCursor="true" fault="error_fx(event)">
+<mx:method name="muestra_tipo_prueba" result="result_muestra_tipo_prueba(event)" />
+<mx:method name="muestra_info_prueba" result="result_muestra_info_prueba(event)" />
+<mx:method name="muestra_proceso_evaluativo" result="result_muestra_proceso_evaluativo(event)" />
+</mx:RemoteObject>
+
+</mx:Module>

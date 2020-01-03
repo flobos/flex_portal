@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:TitleWindow xmlns:mx="http://www.adobe.com/2006/mxml" x="107" y="77" width="449" height="375" layout="absolute" title="Agregar Funcionario" initialize="inicio()">
+	<mx:Label x="10" y="33" text="R.U.T. Funcionario"/>
+	<mx:TextInput x="125" y="31" width="190" id="lbl_funcionario"/>
+	<mx:Button x="323" y="31" label="Buscar" id="btn_buscar_funcionario" icon="@Embed(source='imagenes/icon_search.png')" click="btn_buscar_click()"/>
+	<mx:DataGrid x="10" y="125" width="395" height="130" id="dg_funcionarios">
+		<mx:columns>
+			<mx:DataGridColumn headerText="Código" dataField="campo_uno" width="60"/>
+			<mx:DataGridColumn headerText="RUT" dataField="campo_dos" width="90"/>
+			<mx:DataGridColumn headerText="Nombre" dataField="campo_tres"/>
+			<mx:DataGridColumn headerText="Función" dataField="campo_cuatro" width="70"/>
+		</mx:columns>
+	</mx:DataGrid>
+	<mx:Script source="frm_fuc_gestion_asignaciones_popup_agrega_funcionario_script.as" />
+	<mx:RemoteObject id="ro_ingreso_conferencia" destination="libreria.frm_conferencias_ingreso_conferencia" showBusyCursor="true" fault="error_fx(event)">
+		<mx:method name="buscar_modalidad_campus" result="result_buscar_modalidad_campus(event)"/>
+		<mx:method name="busca_funcionarios" result="result_busca_funcionarios(event)"/>
+		<mx:method name="busca_funcionarios_funcion" result="result_busca_funcionarios(event)"/>
+		<mx:method name="busca_funcionarios_por_apellido" result="result_busca_funcionarios(event)"/>
+		<mx:method name="busca_funcionarios_por_apellido_funcion" result="result_busca_funcionarios(event)"/>
+	</mx:RemoteObject>	
+	<mx:Button x="10" y="303" label="Cancelar" click="btn_cancelar_click()"/>
+	<mx:Button x="317" y="303" label="Seleccionar" click="btn_seleccionar_click()"/>
+	<mx:Label x="10" y="59" text="Apellido Paterno"/>
+	<mx:Label x="10" y="7" text="Buscar por:" fontWeight="bold"/>
+	<mx:TextInput x="125" y="56" id="lbl_apellido_paterno" change="lbl_apellido_change()"/>
+	<mx:CheckBox x="10" y="283" label="Asociar a todos los motivos" selected="false" id="chk_asociar_todos" click="chk_click()"/>
+	<mx:ComboBox x="125" y="81" id="cmb_funcion" change="cmb_funcion_change()"></mx:ComboBox>
+	<mx:Label x="10" y="84" text="Función"/>
+	<mx:RemoteObject id="ro_fuc_gestion_asignaciones" destination="libreria.frm_fuc_gestion_asignaciones" showBusyCursor="true" fault="error_fx(event)">
+		<mx:method name="buscar_funciones" result="result_buscar_funciones(event)"/>
+	</mx:RemoteObject>	
+	<mx:CheckBox x="10" y="263" label="Asociar a motivos seleccioandos" id="chk_asociar_seleccionados" click="chk_selec_click()" selected="false"/>
+</mx:TitleWindow>

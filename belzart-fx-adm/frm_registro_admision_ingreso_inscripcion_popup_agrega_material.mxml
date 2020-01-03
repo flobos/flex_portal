@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:TitleWindow xmlns:mx="http://www.adobe.com/2006/mxml" layout="absolute" width="542" height="300" initialize="inicio()" title="Materiales de Apoyo" fontWeight="bold">
+	<mx:TextInput x="66" y="10" width="446" id="lbl_nombre" change="buscar_materiales()"/>
+	<mx:Label x="10" y="13" text="Nombre"/>
+	<mx:DataGrid x="10" y="50" width="502" height="159" id="dg_materiales">
+		<mx:columns>
+			<mx:DataGridColumn headerText="Código" dataField="data" width="150"/>
+			<mx:DataGridColumn headerText="Nombre" dataField="label"/>
+		</mx:columns>
+	</mx:DataGrid>
+	<mx:Button x="447" y="228" label="Agregar" id="btn_agregar" click="btn_agregar_click()"/>
+	<mx:Button x="370" y="228" label="Cancelar" id="btn_cancelar" click="btn_cancelar_click()"/>
+	<mx:Script source="frm_registro_admision_ingreso_inscripcion_popup_agrega_material_script.as"/>
+	<mx:RemoteObject id="ro_ingreso_inscripcion" destination="libreria.frm_registro_admision_ingreso_inscripcion" showBusyCursor="true" fault="error_fx(event)">
+		<mx:method name="busca_materiales" result="result_busca_materiales(event)"/>
+	</mx:RemoteObject>
+</mx:TitleWindow>

@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" layout="absolute" height="100%" width="100%">
+	<mx:TitleWindow width="616" height="753" layout="absolute" id="tit_preguntas" horizontalCenter="0" title="Asignacion Ramo -&gt; Preguntas" initialize="inicio()" top="10">
+	<mx:Label x="29.5" y="16" text="Unidad" fontWeight="bold"/>
+	<mx:ComboBox y="14" id="cmb_unidad" right="354.5"></mx:ComboBox>
+	<mx:Label x="363.5" y="16" text="Clase" fontWeight="bold"/>
+	<mx:ComboBox y="14" id="cmb_clase" right="29.5"></mx:ComboBox>
+	<mx:HRule x="29.5" y="169" width="537" />
+	<mx:Button x="383.5" y="661" label="Nuevo" id="btn_nuevo"  click="limpiar()" width="85" icon="@Embed(source='imagenes/nuevo.png')"/>
+	<mx:Button x="476.5" y="661" label="Guardar" id="btn_guardar"  click="btn_guardar_click()" icon="@Embed(source='imagenes/guardar.png')"/>
+	<mx:ComboBox id="cmb_buscar_por" x="406.5" y="191" width="160" />
+	<mx:Label x="275.5" y="193" text="Buscar Pregunta Por" color="#000000" fontWeight="bold"/>
+	<mx:TextInput y="234" width="432" id="txt_criterio" maxChars="100" x="29.5" keyDown="txt_criterio_keyDown(event)"/>
+	<mx:Label x="29.5" y="217" text="CRITERIO:" color="#000000" fontWeight="bold"/>
+	<mx:Label x="29.5" y="270" text="Preguntas" themeColor="#232527" fontWeight="bold" textDecoration="normal"/>
+	<mx:Label x="29.5" y="486" text="Preguntas Asignadas" themeColor="#232527" fontWeight="bold" textDecoration="normal"/>
+	
+	<mx:Button x="466.5" y="234" label="Buscar" id="btn_buscar" icon="@Embed(source='imagenes/icon_search.png')" width="100"   click="btn_buscar_click()"/>
+	<mx:Canvas x="29.5" y="304" width="537" height="124" borderStyle="solid" cornerRadius="10">
+		<mx:VBox  x="0" y="3" height="80%" width="516">
+			<mx:Repeater id="rp_preguntas">
+				<mx:HBox>
+					<mx:Label 					width="10" 	/>
+					<mx:Label id="lbl_cod" 		width="45" 	text="{rp_preguntas.currentItem.campo_uno}" />
+					<mx:CheckBox id="chk_ok"/>
+					<mx:Button label=""  		width="22" 	toolTip="Ver Alternativas" icon="@Embed(source='imagenes/apunte.png')" id="btn_alternativas" click="btn_alternativas_click(event)"/>
+					<mx:Label id="lbl_pregunta" width="285"	toolTip="{rp_preguntas.currentItem.campo_dos}" 		text="{rp_preguntas.currentItem.campo_dos}"/>
+					<mx:Label id="lbl_tip_preg"	width="0"														text="{rp_preguntas.currentItem.campo_tres}" visible="false"/>
+					<mx:Label id="lbl_tipo" 	width="70"	toolTip="{rp_preguntas.currentItem.campo_cuatro}"	text="{rp_preguntas.currentItem.campo_cuatro}"/>
+					<mx:Label id="lbl_preg_mod_cam_idn"	width="0" text="{rp_preguntas.currentItem.campo_seis}" visible="false"/>
+				</mx:HBox>
+			</mx:Repeater>
+		</mx:VBox>
+	</mx:Canvas>
+	<mx:Button x="479.5" y="435" label="Agregar" icon="@Embed(source='imagenes/edit_add.png')" click="btn_agregar_click()" id="btn_agregar"/>
+	<mx:Canvas x="29.5" y="526" width="537" height="124" borderStyle="solid" cornerRadius="10">
+		<mx:VBox  x="0" y="3" height="80%" width="517">
+			<mx:Repeater id="rp_preguntas_seleccionadas">
+				<mx:HBox>
+					<mx:Label width="10"/>
+					<mx:Button id="btn_elimina_selec" width="15" height="15" icon="@Embed(source='imagenes/delete.gif')" click="btn_elimina_selec_click(event)"/>
+					<mx:Label id="lbl_cod_sel" 		width="45" 	text="{rp_preguntas_seleccionadas.currentItem.campo_uno}" />
+					<mx:Label id="lbl_pregunta_sel" width="298"	toolTip="{rp_preguntas_seleccionadas.currentItem.campo_dos}" 		text="{rp_preguntas_seleccionadas.currentItem.campo_dos}"/>
+					<mx:Label id="lbl_tipo_sel" 	width="70"	toolTip="{rp_preguntas_seleccionadas.currentItem.campo_tres}"	text="{rp_preguntas_seleccionadas.currentItem.campo_tres}"/>
+					<mx:Label id="lbl_preg_mod_cam_idn_sel" visible="false"	width="0"	text="{rp_preguntas_seleccionadas.currentItem.campo_cuatro}"/>
+				</mx:HBox>
+			</mx:Repeater>
+		</mx:VBox>
+	</mx:Canvas>
+	<mx:Label x="44.5" y="287" text="Código" fontWeight="bold" textDecoration="underline"/>
+	<mx:Label x="97.5" y="287" text="Opciones" fontWeight="bold" textDecoration="underline"/>
+	<mx:Label x="159.5" y="287" text="Preguntas" fontWeight="bold" textDecoration="underline"/>
+	<mx:Label x="443.5" y="287" text="Tip. Pregunta" fontWeight="bold" textDecoration="underline"/>
+	<mx:Label x="71.5" y="511" text="Código" fontWeight="bold" textDecoration="underline"/>
+	<mx:Label x="128.5" y="511" text="Preguntas" fontWeight="bold" textDecoration="underline"/>
+	<mx:Label x="425.5" y="511" text="Tip. Pregunta" fontWeight="bold" textDecoration="underline"/>
+	<mx:Label x="29.5" y="193" text="Tipo Pregunta" fontWeight="bold"/>
+	<mx:ComboBox y="191" id="cmb_tip_pregunta" x="121.5" width="146"></mx:ComboBox>
+	<mx:CheckBox x="29.5" y="435" label="Seleccionar Todo" id="chk_todos" selected="false" enabled="true" click="chk_todos_click()"/>
+	<mx:HRule x="29.5" y="471" width="537"/>
+	<mx:Canvas x="29.5" y="40" width="537" height="124" borderStyle="solid" cornerRadius="10">
+		<mx:VBox  x="0" y="3" height="80%" width="516">
+			<mx:Repeater id="rp_ramos">
+				<mx:HBox>
+					<mx:Label 					  width="10" 	/>
+					<mx:CheckBox id="chk_ramo_ok" label="{rp_ramos.currentItem.data}" width="65"/>
+					<mx:Label id="lbl_ramo" width="419"	toolTip="{rp_ramos.currentItem.label}" 		text="{rp_ramos.currentItem.label}"/>
+				</mx:HBox>
+			</mx:Repeater>
+		</mx:VBox>
+	</mx:Canvas>
+	
+	
+
+	</mx:TitleWindow>
+
+	<mx:Script source="frm_objetivas_asigna_preguntas_script.as"/>
+	
+	<mx:RemoteObject id="ro_asigna_preguntas" destination="libreria.frm_objetivas_asigna_preguntas_ramo" showBusyCursor="true" fault="error_fx(event)">
+		<mx:method name="muestra_ramos" result="result_muestra_ramos(event)"/>
+		<mx:method name="muestra_unidades" result="result_muestra_unidades(event)"/>
+		<mx:method name="muestra_clases" result="result_muestra_clases(event)"/>
+		<mx:method name="busca_pregunta" result="result_busca_pregunta(event)"/>
+		<mx:method name="preguntas_x_tipo" result="result_busca_pregunta(event)"/>
+		<mx:method name="asigna_pregunta" result="limpiar()"/>
+		<mx:method name="desencriptar_func_mod_fun_idn" result="result_desencriptar_func_mod_fun_idn(event)" />
+
+	</mx:RemoteObject>
+	
+	<mx:RemoteObject id="ro_ingreso_preguntas" destination="libreria.frm_objetivas_ingreso_preguntas" showBusyCursor="true" fault="error_fx(event)">
+		<mx:method name="muestra_tipo_pregunta" result="result_muestra_tipo_pregunta(event)"/>
+	</mx:RemoteObject>
+	
+	<!--<mx:RemoteObject id="echoRO" destination="libreria.EchoService" showBusyCursor="true" fault="error_fx(event)">
+		<mx:method name="return_funcion_modalidad" result="result_return_funcion_modalidad(event)"/>
+	</mx:RemoteObject>-->
+	
+	<mx:RemoteObject id="ro_desencripta" destination="libreria.des_encripta" showBusyCursor="true">
+		<mx:method name="desencriptar_func_mod_fun_idn" result="result_desencriptar_func_mod_fun_idn(event)"/>
+	</mx:RemoteObject>
+	
+</mx:Application>

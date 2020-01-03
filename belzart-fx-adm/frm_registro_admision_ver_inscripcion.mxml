@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" layout="absolute"> 
+<mx:DateFormatter id="dfconv" formatString="DD-MM-YYYY"/>
+	<mx:TitleWindow width="979" height="657" layout="absolute" title="Ver Inscripción" initialize="inicio()" horizontalCenter="0" y="20">
+		<mx:Button x="117" y="585" label="Nueva Inscripcion" visible="false"/>
+		<mx:TextInput x="10" y="307" width="27" id="lbl_id_carrera" visible="false"/>
+		<mx:Panel id="pl_productos" title="Productos Asociados" height="606" width="790"
+				  paddingTop="10" paddingLeft="10" paddingRight="10" paddingBottom="10" x="150" y="1" enabled="true">
+			<mx:HBox>
+			</mx:HBox>
+		  	<mx:TabNavigator id="tn_productos"  width="750" height="100%"/>
+		
+		  </mx:Panel>
+		<mx:Panel x="10" y="267" width="235" height="310" layout="absolute" title="Resumen Pagos" id="pl_resumen_pagos" enabled="false" visible="false">
+			<mx:Label x="59" y="10" text="Producto Actual" fontWeight="bold"/>
+			<mx:Label x="48.5" y="136" text="Todos los Productos" fontWeight="bold"/>
+			<mx:Label x="10" y="36" text="Total a Pagar"/>
+			<mx:Label x="10" y="62" text="Total Asignado"/>
+			<mx:Label x="10" y="88" text="Por Asignar"/>
+			<mx:TextInput x="98" y="34" width="107" editable="false" id="lbl_pago_malla" text="0"/>
+			<mx:TextInput x="98" y="86" width="107" editable="false" id="lbl_asignar_malla" text="0"/>
+			<mx:Label x="10" y="164" text="Total a Pagar"/>
+			<mx:Label x="10" y="190" text="Total Asignado"/>
+			<mx:Label x="10" y="216" text="Por Asignar"/>
+			<mx:TextInput x="98" y="162" width="107" editable="false" id="lbl_pago_total" text="0"/>
+			<mx:TextInput x="98" y="214" width="107" editable="false" id="lbl_asignar_total" text="0"/>
+			<mx:TextInput x="98" y="188" width="107" editable="false" id="lbl_asignado_total" text="0"/>
+			<mx:TextInput x="98" y="60" width="107" editable="false" id="lbl_asignado_malla" text="0"/>
+			<mx:HRule x="10" y="126" width="195"/>
+		</mx:Panel>
+		<mx:DateField id="lbl_fecha_ingreso" x="11" y="251" width="131" dayNames="['D', 'L', 'M', 'M', 'J', 'V', 'S']"
+					  enabled="false" firstDayOfWeek="1" showToday="false" 
+					  monthNames="['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre']"
+					  yearNavigationEnabled="true" formatString="DD-MM-YYYY"/>
+		<mx:Label x="10" y="225" text="Fecha de ingreso"/>
+		<mx:Button id="btn_informes" x="10" y="585" label="Ver Informes"
+				   click="btn_informes_click()" enabled="false"/>
+		<mx:Button id="btn_buscar_inscripcion" x="77" y="36" label="Buscar"
+				   click="buscar_inscripcion()"/>
+		<mx:Label x="10" y="10" text="N° Inscripción"/>
+		<mx:TextInput id="lbl_inscripcion" x="98" y="8" width="44"/>
+		<mx:Label x="10" y="70" text="Buscar por R.U.T."/>
+		<mx:TextInput id="lbl_buscar_rut" x="10" y="86" width="132" keyUp="lbl_buscar_rut_presskey(event)"/>
+		<mx:Button id="btn_buscar_rut" x="77" y="116" label="Buscar" click="btn_buscar_rut_click()"/>
+		<mx:Button x="10" y="555" label="Nueva Consulta" click="nueva_consulta()"/>
+	</mx:TitleWindow>
+		<mx:Script source="frm_registro_admision_ver_inscripcion_script.as"/>
+		
+	<mx:RemoteObject id="ro_ver_inscripcion" destination="libreria.frm_registro_admision_ver_inscripcion" showBusyCursor="true" fault="error_fx(event)">
+		<mx:method name="busca_inscripcion" result="result_busca_inscripcion(event)"/>
+		<mx:method name="obtiene_modalidad_campus" result="result_obtiene_modalidad_campus(event)"/>
+	</mx:RemoteObject>
+		
+</mx:Application>

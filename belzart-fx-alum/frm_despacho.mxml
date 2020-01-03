@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Module xmlns:mx="http://www.adobe.com/2006/mxml" width="100%" height="100%" creationComplete="frm_despacho_load()" backgroundColor="#CCCCCC" ><mx:DateFormatter id="dfconv" formatString="DD-MM-YYYY"/>
+<mx:TitleWindow title="Aula Virtual - Despacho" x="55" y="50" width="668" height="250" horizontalAlign="left" verticalAlign="top">
+  <mx:Canvas width="638" height="197">
+    <mx:DataGrid id="dt_despacho" width="626" height="170" x="5" y="5">
+      <mx:columns>
+        <mx:Array>
+         <mx:DataGridColumn headerText="Nombre Material" dataField="campo_seis"  textAlign="center" />
+         <mx:DataGridColumn headerText="Material despachado" dataField="campo_uno"  textAlign="center"/>
+         <mx:DataGridColumn headerText="Fecha Desp." dataField="campo_dos"  textAlign="center" />
+    	  <mx:DataGridColumn headerText="Fecha estimada recep." dataField="campo_tres"  textAlign="center"/> 
+         <mx:DataGridColumn headerText="Nº Boleta" dataField="campo_cuatro"  textAlign="center" />
+		  <mx:DataGridColumn headerText="Via de despacho" dataField="campo_cinco"  textAlign="center" />
+		  
+		
+        </mx:Array>
+      </mx:columns>
+    </mx:DataGrid>
+  </mx:Canvas>
+  </mx:TitleWindow>
+  
+  <mx:Script source="frm_despacho_script.as" />
+
+
+
+
+<mx:RemoteObject id="ro_despacho" destination="libreria_alm.frm_despacho" showBusyCursor="true" fault="error_fx(event)">
+		<mx:method name="despacho_muestra" result="result_despacho_muestra(event)"  />
+</mx:RemoteObject>
+	
+</mx:Module>
+
+

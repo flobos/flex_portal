@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Module xmlns:mx="http://www.adobe.com/2006/mxml" height="100%" width="100%" backgroundColor="#CCCCCC" creationComplete="tw_encuesta_creationComplete()" >
+  <mx:TitleWindow id="tw_encuesta" width="706" height="260" title="Encuesta" >
+  
+    <mx:VBox>
+      <mx:Label text="Seleccione encuesta a responder." color="#000066" fontWeight="bold" />
+             <mx:DataGrid id="dg_encuestas" width="675">
+                 <mx:columns>
+                     <mx:Array>
+                         <mx:DataGridColumn headerText="" dataField="data" width="0" />
+		                 <mx:DataGridColumn headerText="Encuestas" dataField="label" width="450" />
+                     </mx:Array>
+                 </mx:columns>
+             </mx:DataGrid>
+	  <mx:Button label="Responder" id="btn_responder" click="btn_responder_click()" />
+	</mx:VBox>
+    
+  </mx:TitleWindow>
+  
+  <mx:Script source="frm_encuesta_contesta_script.as"/>
+  
+  <mx:RemoteObject id="ro_encuesta_alumno" destination="libreria_alm.frm_encuesta_contesta" showBusyCursor="true" fault="error_fx(event)">
+		<mx:method name="encuesta_muestra_alumno" result="result_encuesta_muestra_alumno(event)" />
+  </mx:RemoteObject>
+	  	  
+</mx:Module>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

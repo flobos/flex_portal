@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Module xmlns:mx="http://www.adobe.com/2006/mxml" backgroundColor="#CCCCCC" width="100%" height="100%">
+   <mx:DateFormatter id="dfconv" formatString="DD-MM-YYYY"/>
+
+  <mx:TitleWindow x="150" y="135" xmlns:mx="http://www.adobe.com/2006/mxml" width="437" height="444" creationComplete="carga()" title="Comprobante envio" >
+<mx:Canvas width="402" height="375" id="Canvas_print" backgroundColor="#FFFFFF">
+      <mx:Label x="14" y="25"  text="Tipo Prueba:" width="103" fontStyle="normal" fontFamily="Verdana" fontWeight="bold" />
+      <mx:Label x="14" y="49"  text="Ramo:" width="103" fontFamily="Verdana" fontWeight="bold" />
+      <mx:Label x="14" y="119"  text="Encargado:" width="103" fontFamily="Verdana" fontWeight="bold" />
+      <mx:Label x="14" y="139"  text="Código Envio N°" width="103" fontFamily="Verdana" fontWeight="bold" />
+      <mx:Label x="118" y="139" id="lbl_trabajo" width="103" fontFamily="Verdana" fontWeight="bold" />
+      <mx:Label x="14" y="72"  text="Carrera:" width="103" fontFamily="Verdana" fontWeight="bold" />
+      <mx:Label x="14" y="95"  text="Nombre Archivo:" width="103" fontWeight="bold" fontFamily="Verdana" />
+      <mx:Canvas x="13" y="0"  width="380" height="25" backgroundColor="#FF0000">
+      </mx:Canvas>
+      <mx:Image x="338" y="25"  source="@Embed('imagenes/tutores/ser+.png')" width="55" height="196" />
+      <mx:Label x="119" y="25" width="205" height="18" id="lbl_tipo_prueba_n" />
+      <mx:Label x="119" y="119" width="205" height="18" id="lbl_encargado" />
+      <mx:Label x="119" y="95" id="lbl_archivo" width="205" height="18" />
+      <mx:Label x="119" y="72" width="205" height="18" id="lbl_carrera" />
+      <mx:Label x="119" y="49" width="205" height="18" id="lbl_ramo" />
+      <mx:DataGrid id="dt_integrantes" x="14" y="157" height="139" width="324" fontSize="8" resizableColumns="true" >
+        <mx:columns>
+          <mx:Array>
+            <mx:DataGridColumn headerText="matricula" dataField="label" width="90" />
+            <mx:DataGridColumn headerText="nombre" dataField="data" width="200" />
+          </mx:Array>
+        </mx:columns>
+      </mx:DataGrid>
+      <mx:Button x="89" y="321"  label="Imprimir" click="doPrint()" />
+      <mx:Button x="186" y="321"  label="Cerrar" id="btn_cerrar" click="salir()" width="77" />
+    </mx:Canvas>
+    <mx:Script source="frm_comprobante_web_script.as" />
+	
+
+  </mx:TitleWindow>
+	<mx:RemoteObject id="ro_grupos" destination="libreria_alm.frm_comprobante_web" showBusyCursor="true" fault="error_fx(event)">
+		<mx:method name="ro_llena_grilla_comprobante" result="devuelve_consulta_grilla_comprobante(event)" />
+	</mx:RemoteObject>
+</mx:Module>				

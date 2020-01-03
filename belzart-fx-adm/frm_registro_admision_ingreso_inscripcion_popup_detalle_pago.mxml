@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:TitleWindow xmlns:mx="http://www.adobe.com/2006/mxml" layout="absolute" width="408" height="154" initialize="inicio()" title="Detalle del Pago" fontWeight="bold">
+	<mx:Label x="10" y="13" text="Financiamiento"/>
+	<mx:Label x="10" y="42" text="Medio de Cobro"/>
+	<mx:Button x="306" y="69" label="Aceptar" click="btn_aceptar_click()"/>
+	<mx:Script source="frm_registro_admision_ingreso_inscripcion_popup_detalle_pago_script.as"/>
+	<mx:ComboBox x="125" y="9" width="244" id="cmb_medio_financiamiento"></mx:ComboBox>
+	<mx:ComboBox x="125" y="38" width="244" id="cmb_medio_cobro"></mx:ComboBox>
+</mx:TitleWindow>

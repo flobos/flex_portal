@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<mx:TitleWindow xmlns:mx="http://www.adobe.com/2006/mxml" height="513" creationComplete="carga()" width="763" title="Pauta Prueba"><mx:DateFormatter id="dfconv" formatString="DD-MM-YYYY"/>
+<mx:VBox width="716" height="443">
+  <mx:Label text="Pauta de Correcion (Respuesta correcta esta marcada con una X )" color="#000099" fontWeight="bold"  />
+ <mx:Repeater id="rpt_preguntas" >
+	 	  <mx:Grid id="Grid_pretoma">
+			<mx:GridRow>
+            	<mx:GridItem >
+				
+				<mx:VBox width="100%" height="100%">
+					<mx:Label id="lbl_codigo" text="{rpt_preguntas.currentItem.data}" fontWeight="bold" visible="false" />   
+					<mx:TextArea id="lbl_pregunta" text="{rpt_preguntas.currentItem.data} - {rpt_preguntas.currentItem.label}?" fontWeight="bold" width="667" borderStyle="none" editable="false" height="76"/>
+				 	<mx:Repeater id="rpt_respuestas" >
+					<mx:VBox>
+					<mx:HBox>
+					<mx:Label  id="correcta" text="{rpt_respuestas.currentItem.campo_tres}" fontWeight="bold" />
+					<mx:TextArea id="lbl_codigo_res" text="{rpt_respuestas.currentItem.campo_uno} - {rpt_respuestas.currentItem.campo_dos}" width="642" borderStyle="none"  editable="false"/>
+					</mx:HBox>
+					</mx:VBox>
+
+					</mx:Repeater>
+				</mx:VBox>
+			</mx:GridItem>
+	        </mx:GridRow>
+		  </mx:Grid> 
+      </mx:Repeater>
+	  <mx:Button id="btn_cerrar" label="Cerrar" click="click_btn_cerrar()" width="81" height="30"/>
+</mx:VBox>	  
+<mx:RemoteObject id="ro_respuestas" destination="libreria_alm.frm_notas" showBusyCursor="true" fault="error_fx(event)">
+	<mx:method name="muestra_preguntas_objetivas" result="result_muestra_preguntas_objetivas(event)" />
+	<mx:method name="muestra_preguntas_respuestas" result="result_muestra_preguntas_respuestas(event)" />
+</mx:RemoteObject>
+
+
+
+<mx:Script source="frm_notas_pop_correccion_objetivas_script.as"/>
+  
+
+</mx:TitleWindow>
+

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+		<mx:HBox x="0" y="0" width="100%" height="41" creationComplete="inicio()" xmlns:mx="http://www.adobe.com/2006/mxml"  >
+			
+			<mx:Script>
+				<![CDATA[
+					protected function rb_codigo_changeHandler(event:Event):void
+					{
+						var i:int = 0;
+						// TODO Auto-generated method stub
+						for (i = 0; i < this.rpt_respuestas.dataProvider.length; i ++)
+						{
+						
+							if (rb_codigo[i].selected == true)
+							{
+								this.respuesta = rpt_respuestas.dataProvider[i].campo_uno;
+							}
+								
+						}
+						
+					}
+				]]>
+			</mx:Script>
+			
+			<mx:TextArea id="txt_pregunta" width="393" height="40" borderStyle="solid"
+						 editable="false" fontWeight="bold"/>
+			
+			<mx:HBox width="100%" id="hb_alternativas" height="40" borderStyle="none">
+			<mx:Repeater id="rpt_respuestas" >
+				
+					<mx:HBox width="33" height="38" borderStyle="solid" id="hb_respuestas">
+						<mx:RadioButton id="rb_codigo" visible="true" width="50"
+										label="{rpt_respuestas.currentItem.campo_dos}" click="rb_codigo_changeHandler(event)"
+										color="#FFFFFF"
+										groupName="{rpt_respuestas.currentItem.campo_cinco}"
+										labelPlacement="right" textAlign="center"
+										toolTip="{rpt_respuestas.currentItem.campo_tres}"/>
+					</mx:HBox>
+				
+			</mx:Repeater>
+			</mx:HBox>
+			<mx:Script source="frm_encuestas_item_pregunta_script.as"/>
+			
+			<mx:RemoteObject id="ro_encuestas" destination="libreria_alm.frm_ver_encuesta" showBusyCursor="true" fault="error_fx(event)">
+				<mx:method name="cargar_pregunta" result="result_cargar_pregunta(event)" />
+				<mx:method name="busca_respuestas" result="result_busca_respuestas(event)" />
+			</mx:RemoteObject>
+
+		</mx:HBox>

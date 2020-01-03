@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Module xmlns:mx="http://www.adobe.com/2006/mxml" width="100%" height="100%" creationComplete="inicio()" backgroundColor="#CCCCCC" >
+ <mx:DateFormatter id="dfconv" formatString="DD-MM-YYYY"/>
+<mx:TitleWindow width="579" height="370" x="5" y="15" title="Aula Virtual - Consultas Online" horizontalAlign="left">
+    <mx:Canvas width="549" height="321">
+	
+      <mx:DataGrid id="dg_fuc" width="527" height="280" x="5" y="10" editable="false" click="change_dg_fuc(event)"
+	  resizableColumns="false"
+	  allowMultipleSelection="true">
+            <mx:columns>
+                <mx:Array>
+                    <mx:DataGridColumn dataField="campo_uno"  headerText="Cód. Motivo" width="150" />
+				    <mx:DataGridColumn dataField="campo_dos"  headerText="Fecha" width="150"/>
+					<mx:DataGridColumn dataField="campo_tres"  headerText="Matrícula" width="150"/>
+					<mx:DataGridColumn dataField="campo_cuatro"  headerText="Estado" width="77"/>
+		        </mx:Array>
+          </mx:columns>
+        </mx:DataGrid>  
+        
+        
+	  <mx:Label x="5" y="298"  text="Haga click en una Consulta del listado, para ver el detalle del mismo." width="412" color="#535E95" height="19" />
+	  <mx:Button x="5" y="267"  label="Ingresar Nuevo F.U.C." width="142" height="36" id="btn_ingresar_fuc" click="nuevo_fuc()" visible="false" />
+	  <mx:Label x="427" y="285"  text="lbl_num_fuc" id="lbl_num_fuc" visible="false" />
+      <mx:Label x="417" y="288"  text="lbl_num_motivo" id="lbl_num_motivo" visible="false" />
+		
+    </mx:Canvas>
+ </mx:TitleWindow>	
+ 
+	<mx:Script source="frm_fuc_muestra_script.as" />
+	
+	<mx:RemoteObject id="ro" destination="libreria_alm.frm_fuc_muestra" showBusyCursor="true" fault="error_fx(event)">
+        <mx:method name="muestra_fuc_web" result="result_muestra_fuc_web(event)" />
+   	</mx:RemoteObject>
+</mx:Module>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:TitleWindow xmlns:mx="http://www.adobe.com/2006/mxml" width="722" height="266" x="5" y="5" title="Aula Virtual - Motivos Consulta" horizontalAlign="left" creationComplete="inicio()" >
+	
+ <mx:DateFormatter id="dfconv" formatString="DD-MM-YYYY"/>
+<mx:Canvas width="689" height="218" textDecoration="none">
+  
+ 	<mx:HRule x="5" y="13" width="668" height="23" />
+      <!--     <mx:HBox x="42" y="253" > -->
+      <mx:DataGrid id="dg_motivos" width="668" height="109" x="5" y="55" editable="false" click="getCellData()"
+	  resizableColumns="false"
+	  allowMultipleSelection="true">
+            <mx:columns>
+                <mx:Array>
+                    <!--<mx:DataGridColumn dataField="active" headerText="Seleccione" textAlign="center" itemRenderer="CheckitemRenderer" width="80"/>-->
+                    <mx:DataGridColumn dataField="campo_uno"  headerText="Cód. Motivo" width="0" visible="false"/>
+				    <mx:DataGridColumn dataField="campo_dos"  headerText="Motivo" width="270"/>
+					<mx:DataGridColumn dataField="campo_tres"  headerText="Estado" width="90"/>
+					<mx:DataGridColumn dataField="campo_cuatro"  headerText="Fecha Estado" width="130"/>
+					<mx:DataGridColumn dataField="campo_cinco"  headerText="Vista" width="50"/>
+					<mx:DataGridColumn dataField="campo_seis"  headerText="Fecha Vista" width="130"/>
+                </mx:Array>
+          </mx:columns>
+        </mx:DataGrid>
+      <!--     </mx:HBox> -->
+      <mx:Button x="579" y="176"  label="Salir" width="94" height="32" click="btn_cerrar_click()" id="btn_cerrar" />
+      <mx:Label x="5" y="34"  text="Listado de Motivos" width="286" fontWeight="bold" />
+      <mx:Label x="5" y="5"  text="Listado de Motivos FUC Nº:" width="171" color="#000000" height="18" />
+      <mx:Label x="176" y="5" id="lbl_fuc_numero" width="103" color="#FF0000" fontFamily="Arial" fontWeight="bold" fontSize="14" height="18" text="" />
+	  <mx:Label x="5" y="166"  text="NOTA: Haga click en algún Motivo del listado, para ver el detalle del mismo." width="436" color="#535E95" height="20" visible="true"/>
+  </mx:Canvas>
+  
+  	<mx:Script source="frm_fuc_muestra_motivos_script.as" />
+	
+	<mx:RemoteObject id="ro" destination="libreria_alm.frm_fuc_muestra_motivos" showBusyCursor="true" fault="error_fx(event)">
+		<mx:method name="muestra_motivos_fuc" result="result_muestra_motivos_fuc(event)" />
+		<mx:method name="cambia_vista_motivo" result="result_cambia_vista_motivo(event)" />
+	</mx:RemoteObject>
+
+</mx:TitleWindow>

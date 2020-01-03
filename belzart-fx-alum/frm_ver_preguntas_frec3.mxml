@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Module xmlns:mx="http://www.adobe.com/2006/mxml" width="100%" height="100%" backgroundColor="#CCCCCC">
+ <mx:DateFormatter id="dfconv" formatString="DD-MM-YYYY"/>
+<mx:TitleWindow width="608" height="444" title="IPXFlex " creationComplete="inicio()" >
+    <mx:Canvas width="575" height="393" verticalScrollPolicy="off">
+      <mx:Text text="" x="332" y="210" id="txt_verifica" visible="true" width="89" />
+      <mx:Label color="#000066" id="lbl_codigo" x="74" y="204" width="88" height="18" text="" />
+           <mx:ComboBox x="12" y="22" width="440" height="22" id="cmb_tema" change="selecciona_tema()" toolTip="Seleccione Tema" >
+           </mx:ComboBox>
+           <mx:Label x="12" y="7"  text="Seleccione Tema:" />
+           <mx:Button x="491" y="15"  label="Entrar" id="btn_entrar" click="clic_boton_entrar()" width="72" height="38" />
+           <mx:DataGrid id="dg_preguntas" width="554" x="12" y="60" height="100" click="getCellData_pregunta_asocia(true)">
+             <mx:columns>
+               <mx:Array>
+                 <mx:DataGridColumn headerText="Cod." dataField="data"  width="46" />
+                 <mx:DataGridColumn headerText="Preguntas" dataField="label" width="281" />
+               </mx:Array>
+             </mx:columns>
+        </mx:DataGrid>
+           <mx:TextArea x="485" y="138" text="0" id="txt_tema" width="70" height="30" visible="false"  />
+	   <mx:TextArea x="350" y="138" height="30" text="" id="txt_codigo_tip_prod" visible="false"  />
+           <mx:TextArea x="400" y="138" width="65" height="30" text="" id="txt_codigo_modalidad" visible="false"  />
+           <mx:DataGrid id="dg_respuestas" width="554"  x="12" y="185" height="80" click="getCellData_respuestas(true)">
+             <mx:columns>
+               <mx:Array>
+                 <mx:DataGridColumn headerText="Cod." dataField="data"  width="45" />
+                 <mx:DataGridColumn headerText="Seleccione la Respuestas" dataField="label" width="281" />
+               </mx:Array>
+             </mx:columns>
+        </mx:DataGrid>
+           <mx:TextArea x="11" y="287" width="555" height="87" text="" id="txt_respuesta" editable="false" fontWeight="bold"  />
+           <mx:TextArea x="483" y="168" width="72" height="32" text="" id="txt_pregunta" visible="false"  />
+           <mx:Label x="11" y="42"  text="Seleccione la Pregunta:" />
+           <mx:Label x="12" y="268"  text="Detalle de la Respuesta:" fontWeight="bold" />
+  
+    </mx:Canvas>
+  </mx:TitleWindow>
+    <mx:Script source="frm_ver_preguntas_frec3_script.as"/>
+	
+	<mx:RemoteObject id="ro_pregunta_frec" destination="libreria.frm_adm_pregunta_frec_ingreso" showBusyCursor="true" fault="error_fx(event)">
+  <mx:method name="muestra_idn_tema" result="result_muestra_idn_tema(event)" />
+  <mx:method name="pregunta_muestra_tema" result="result_pregunta_muestra_tema(event)" />
+	</mx:RemoteObject>
+
+<mx:RemoteObject id="ro_asocia" destination="libreria.frm_adm_asocia_pregunta_respuesta" showBusyCursor="true" fault="error_fx(event)">
+<mx:method name="asocia_muestra_preguntas" result="result_asocia_muestra_preguntas(event)" />
+<mx:method name="asocia_muestra_respuestas" result="result_asocia_muestra_respuestas(event)" />
+</mx:RemoteObject>  
+	
+	
+</mx:Module>

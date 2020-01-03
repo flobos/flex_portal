@@ -1,0 +1,22 @@
+<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" xmlns:local="*">
+<mx:Script>
+<![CDATA[
+[Embed(source="assets/support_mapmarker_a.png")]
+public var iconA:Class;
+[Embed(source="assets/support_mapmarker_b.png")]
+public var iconB:Class;
+[Embed(source="assets/support_mapmarker_c.png")]
+public var iconC:Class;
+
+public var dp:Array = [
+	{ label: "icon A", icon: "iconA" },
+	{ label: "icon B", icon: "iconB" },
+	{ label: "icon C", icon: "iconC" }
+	];
+
+
+]]>
+</mx:Script>
+<local:IconComboBox id="cb" initialize="cb.dataProvider=dp" />
+</mx:Application>
+

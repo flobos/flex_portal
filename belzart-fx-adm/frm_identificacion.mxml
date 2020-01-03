@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+	<mx:TitleWindow xmlns:mx="http://www.adobe.com/2006/mxml" x="186.5" y="201" width="361" height="200" layout="absolute" title="Belzart FX - Seguridad" verticalAlign="middle" horizontalAlign="center" initialize="inicio()">
+		<mx:Canvas width="340" height="160" horizontalCenter="0.5" verticalCenter="0">
+			<mx:Label x="118" y="23" text="Usuario"/>
+			<mx:Label x="118" y="49" text="Contraseña"/>
+			<mx:TextInput x="193" y="23" width="135" id="txt_usuario" fontWeight="bold" cornerRadius="0" keyUp="txt_usuario_keypress(event)"/>
+			<mx:TextInput x="193" y="49" width="135" displayAsPassword="true" id="txt_clave" keyUp="txt_clave_keypress(event)" maxChars="12"/>
+			<mx:Button x="193" y="89" label="Ingresar" id="btn_ingreso" click="btn_ingreso_click()" keyUp="btn_ingreso_keypress(event)" width="135" icon="@Embed(source='imagenes/login.png')"/>
+			<mx:LinkButton x="188" y="130" label="¿Problemas para ingresar?" fontSize="8" click="mx.controls.Alert.show(&quot;Si tiene problemas para ingresar, contacte a asistencia@belzart.cl, o comuniquese con su ejecutivo.&quot;, &quot;Belzart FX&quot;)"/>
+			<mx:Label x="10" y="121" text="Learning´s Technology" fontSize="8" color="#000000"/>
+			<mx:SWFLoader x="10" y="23" source="imagenes/logo_belzart.png"/>
+		</mx:Canvas>
+	
+	<mx:Script source="frm_identificacion_script.as" />
+	
+	<mx:RemoteObject id="ro_frm_identificacion" destination="libreria.frm_identificacion" showBusyCursor="true" fault="error_fx(event)">
+		<mx:method name="autentifica_funcionario" result="result_verifica_usuario(event)"/>
+		<mx:method name="sub_entidad_identificacion" result="result_sub_entidad_identificacion(event)"/>
+	</mx:RemoteObject>		
+	
+	<mx:RemoteObject id="echoRO" destination="libreria.EchoService" showBusyCursor="true" fault="error_fx(event)">
+		<mx:method name="sub_entidad_identificacion" result="result_sub_entidad_identificacion(event)"/>
+	</mx:RemoteObject>			
+		
+	</mx:TitleWindow>

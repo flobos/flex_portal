@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" layout="absolute">
+	<mx:TitleWindow x="204" y="10" width="551" height="404" layout="absolute">
+		<mx:Label x="28" y="24" text="Tipo  de Evaluación" fontWeight="bold"/>
+		<mx:ComboBox x="162" y="22" width="339"></mx:ComboBox>
+		<mx:Label x="28" y="69" text="¿Desea realizar esta prueba junto a otros compañeros?" width="337" textAlign="left"/>
+		<mx:HRule x="10" y="50" width="511" height="11"/>
+		<mx:Button x="412" y="69" label="Si"/>
+		<mx:Button x="460" y="69" label="No"/>
+		<mx:Label x="28" y="116" text="R.U.T."/>
+		<mx:TextInput x="76" y="114" width="89"/>
+		<mx:VBox height="146" width="473" x="28" y="142">
+			<mx:Repeater id="rp_grupo">
+				<mx:HBox width="449">
+					<mx:Button id="btn_elimina_selec" width="15" height="15" icon="@Embed(source='imagenes/delete.gif')" />
+					<mx:Label id="lbl_rut" width="31" text="{rp_grupo.currentItem.campo_uno}" />
+					<mx:Label width="384" id="lbl_nombre" text="{rp_grupo.currentItem.campo_dos}"/>
+				</mx:HBox>
+			</mx:Repeater>
+		</mx:VBox>
+		<mx:Button x="416" y="114" label="Agregar" icon="@Embed(source='imagenes/edit_add.png')"/>
+		<mx:Button x="429" y="310" label="Aceptar" id="btn_aceptar"/>
+	</mx:TitleWindow>
+	
+</mx:Application>

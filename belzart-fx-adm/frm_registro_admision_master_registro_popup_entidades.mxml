@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+	<mx:TitleWindow xmlns:mx="http://www.adobe.com/2006/mxml" x="235" y="72" width="470" height="265" layout="absolute" title="Entidades Existentes" initialize="inicio()">
+
+		
+
+		<mx:DataGrid x="10" y="10" width="430" height="135" id="dg_entidades" change="dg_entidades_change(event)">
+			<mx:columns>
+				<mx:DataGridColumn headerText="ID" dataField="campo_tres"/>
+				<mx:DataGridColumn headerText="RUT" dataField="campo_cinco"/>
+				<mx:DataGridColumn headerText="Nombre" dataField="campo_dos"/>
+			</mx:columns>
+		</mx:DataGrid>
+		<mx:Button id="btn_cancelar" x="10" y="195" label="Cancelar" click="btn_cancelar_click()"/>
+		<mx:Button id="btn_modificar" x="362" y="153" label="Modificar" click="btn_modificar_entidad()"/>
+		<mx:Button id="btn_nuevo" x="279" y="195" label="Ingresar Nueva Entidad" click="btn_ingreso_entidad()"/>
+		
+		<mx:Script source="frm_registro_admision_master_registro_popup_entidades_script.as" />
+	</mx:TitleWindow>
+	

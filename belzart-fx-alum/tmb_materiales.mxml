@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<mx:VBox xmlns:mx="http://www.adobe.com/2006/mxml" horizontalAlign="center"
+    verticalGap="0" borderStyle="none">
+    <mx:Image id="image" width="48" height="48" source="{data.campo_cuatro}"/>
+	<mx:Label text="{data.campo_dos}" width="115" textAlign="center" height="30"/>
+	<mx:Label text="{data.campo_tres}" width="0" textAlign="center" height="0" visible="false"/>
+</mx:VBox>

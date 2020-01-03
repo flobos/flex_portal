@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:TitleWindow x="150" y="135" xmlns:mx="http://www.adobe.com/2006/mxml" width="662" height="457" creationComplete="tw_pretoma_verifica_creationComplete()" title="Verifique e imprima pretoma de ramos" ><mx:DateFormatter id="dfconv" formatString="DD-MM-YYYY"/>
+<mx:VBox  id="vb_pretomas" height="400" width="624" fontWeight="bold">
+  <mx:HBox>
+    <mx:Label text="Codigo proceso de pretoma: " />
+    <mx:Label id="lbl_codigo_pretoma_verifica" height="20" color="#0000FF" />
+  </mx:HBox>
+  <mx:DataGrid id="dg_pretoma_verifica" width="542" height="206">
+    <mx:columns>
+      <mx:Array>
+        <mx:DataGridColumn headerText="Codigo" dataField="data"  width="70"/>
+        <mx:DataGridColumn headerText="Ramo" dataField="label" width="250"/>
+      </mx:Array>
+    </mx:columns>
+  </mx:DataGrid>
+  <mx:HBox height="32" width="204">
+    <mx:Button label="Cerrar" width="81" height="27" id="btn_cerrar" click="btn_cerrar_click()" />
+    <mx:Button id="btn_imprime" height="27" label="Imprimir" width="86" click="btn_imprime_click()" enabled="false" />
+  </mx:HBox>
+  <mx:HBox height="32" width="535" horizontalAlign="right">
+ 	 <mx:Button label="ACEPTAR PRETOMA" id="btn_aceptar" click="btn_aceptar_click()" enabled="true" /> 
+  
+  </mx:HBox>
+  
+ 
+</mx:VBox>
+<mx:Script source="frm_pretoma_alumno_popup_pretomas_script.as" />
+
+<mx:RemoteObject id ="ro_pretoma_aceptadas" destination="libreria_alm.frm_pretoma_alumno" showBusyCursor="true" fault="error_fx(event)">
+	<mx:method name="cambia_estados_en_pretoma"  result="result_cambia_estados_en_pretoma(event)" />
+
+</mx:RemoteObject>
+
+	
+</mx:TitleWindow>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+	<mx:TitleWindow xmlns:mx="http://www.adobe.com/2006/mxml" x="128" y="110" width="387" height="293" layout="absolute" title="Ingreso de Correo Electronico">
+		<mx:Label x="10" y="10" text="Estimado(a) Alumno(a):"/>
+		<mx:TextArea x="10" y="36" text="Actualmente no tenemos registro de su dirección de correo electrónico.&#xa;Por favor ingrese una dirección de correo electrónico válida a fin de brindarle un mejor servicio." width="347" height="79" borderThickness="0" editable="false"/>
+		<mx:TextInput x="10" y="123" width="250" id="lbl_email_usuario" textInput="{if (event.text.length > 1) event.preventDefault()}"/>
+		<mx:TextInput x="10" y="189" width="250" id="lbl_email_usuario_verif" textInput="{if (event.text.length > 1) event.preventDefault()}"/>
+		<mx:Button x="268.8" y="221" label="Guardar" click="btn_guardar_click()" id="btn_guardar" icon="@Embed(source='imagenes/apunte.png')"/>
+		<mx:Button x="10" y="219" label="Cerrar" enabled="true" id="btn_cerrar" click="click_btn_cerrar()"/>
+		
+		<mx:EmailValidator 
+			id="emailValidator" 
+			requiredFieldError="Complete su email" 
+			source="{lbl_email_usuario}" 
+			property="text" 
+			invalidCharError="Caracteres inválidos" 
+			invalidDomainError= "El dominio no es válido" 
+			missingAtSignError="Necesita una @ en su email" 
+			missingPeriodInDomainError="Necesita un nombre de dominio" 
+		    tooManyAtSignsError="Su dirección tiene demasiados @"
+			/>
+		
+		<mx:Script source="frm_ingreso_email_script.as"/> 
+		
+		
+		<mx:RemoteObject id="ro_alumnos_main" destination="libreria_alm.frm_alumnos_main" showBusyCursor="true" fault="error_fx(event)">
+			<mx:method name="guardar_email" result="result_guardar_email(event)" />
+		</mx:RemoteObject>	
+		<mx:Label x="10" y="106" text="Ej: juanperez2011@gmail.com" fontSize="8"/>
+		<mx:Label x="10" y="165" text="Por favor ingrese la dirección nuevamente:"/>
+		
+	</mx:TitleWindow>

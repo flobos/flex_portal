@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+	<mx:TitleWindow xmlns:mx="http://www.adobe.com/2006/mxml" width="838" height="500" horizontalCenter="0" creationComplete="inicio()"
+					layout="absolute" verticalCenter="0">
+		
+		<mx:VBox x="10" y="56">
+			<mx:TextArea id="lbl_encabezado" x="10" y="50" width="786" height="69" text="" borderStyle="none"/>
+			<mx:VBox x="10" y="76" width="789" height="80%" id="cnv_categorias" verticalScrollPolicy="on">
+			</mx:VBox>
+			<mx:Button id="btn_enviar" x="655" y="8" label="Enviar" click="btn_enviar_click()"
+					   enabled="false"/>
+		</mx:VBox>
+		
+		<mx:Label id="lbl_matricula" x="10" y="10" text="Matrícula:"/>
+		
+	
+	<mx:Script source="frm_encuestas_ver_encuesta_script.as"/>
+	
+	<mx:RemoteObject id="ro_encuestas" destination="libreria_alm.frm_ver_encuesta" showBusyCursor="true" fault="error_fx(event)">
+		<mx:method name="cargar_categorias" result="result_cargar_categorias(event)" />
+		<mx:method name="guarda_respuestas" result="result_guarda_respuestas(event)" />
+	</mx:RemoteObject>
+	
+	</mx:TitleWindow>

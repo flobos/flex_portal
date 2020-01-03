@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Application xmlns:mx="http://www.macromedia.com/2003/mxml">
+<mx:Tile>
+        <mx:Repeater id="list" cellRenderer="repetidor_2">
+            <mx:VBox>
+               
+                <mx:Label text="{list.currentItem.name}"/>
+            </mx:VBox>
+        </mx:Repeater>
+    </mx:Tile>
+ <mx:Script source="repetidor.as"/>
+    
+	<mx:RemoteObject id="ro_foro_alumno" source="libreria.frm_foro_alumno" showBusyCursor="true">
+	<mx:method name="foro_muestra_respuestas" result="result_foro_muestra_respuestas(event)" fault="mx.core.Application.alert(event.fault.faultstring, 'Error')"/>
+	
+	</mx:RemoteObject>
+</mx:Application>

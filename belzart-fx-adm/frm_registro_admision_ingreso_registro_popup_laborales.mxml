@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:TitleWindow xmlns:mx="http://www.adobe.com/2006/mxml"
+				width="524" height="514" minWidth="955" minHeight="600" layout="absolute"
+				title="Ingreso Registro - Antecedentes Laborales" creationComplete="inicio()">
+	
+	<mx:Script>
+		<![CDATA[
+			
+			protected function lbl_cargo_keyUpHandler(event:KeyboardEvent):void
+			{
+				// TODO Auto-generated method stub
+				if (event.charCode == 13)
+				{
+					this.lbl_empresa.setFocus();
+				}
+				if (event.charCode == Keyboard.ESCAPE)
+				{
+					this.btn_guardar.setFocus();
+				}
+			}
+			
+			protected function lbl_empresa_keyUpHandler(event:KeyboardEvent):void
+			{
+				// TODO Auto-generated method stub
+				if (event.charCode == 13)
+				{
+					this.lbl_fecha_ingreso.setFocus();
+				}
+			}
+			
+			protected function lbl_fecha_ingreso_keyUpHandler(event:KeyboardEvent):void
+			{
+				if (lbl_fecha_ingreso.text.length == 8)
+				{
+					lbl_fecha_ingreso.text = lbl_fecha_ingreso.text.substr(0,2) + '-' + lbl_fecha_ingreso.text.substr(2,2) + '-' + lbl_fecha_ingreso.text.substr(4,4); 
+				}
+				// TODO Auto-generated method stub
+				if (event.charCode == 13)
+				{
+					this.lbl_fecha_fin.setFocus();
+				}
+			}
+			
+			protected function lbl_fecha_fin_keyUpHandler(event:KeyboardEvent):void
+			{
+				if (lbl_fecha_fin.text.length == 8)
+				{
+					lbl_fecha_fin.text = lbl_fecha_fin.text.substr(0,2) + '-' + lbl_fecha_fin.text.substr(2,2) + '-' + lbl_fecha_fin.text.substr(4,4); 
+				}
+				// TODO Auto-generated method stub
+				if (event.charCode == 13)
+				{	
+					
+					this.lbl_descripcion.setFocus();
+				}
+			}
+			
+			protected function lbl_descripcion_keyUpHandler(event:KeyboardEvent):void
+			{
+				// TODO Auto-generated method stub
+				if (event.charCode == 13)
+				{
+					this.btn_agregar.setFocus();
+				}
+			}
+			
+			protected function btn_agregar_keyUpHandler(event:KeyboardEvent):void
+			{
+				// TODO Auto-generated method stub
+				if (event.charCode == 13)
+				{
+					this.btn_agregar_click();
+				}
+			}
+			
+			protected function btn_guardar_keyUpHandler(event:KeyboardEvent):void
+			{
+				// TODO Auto-generated method stub
+				if (event.charCode == 13)
+				{
+					this.btn_guardar_click();
+				}
+			}
+			
+			
+		]]>
+	</mx:Script>
+	
+	<mx:DateFormatter id="dfconv" formatString="DD-MM-YYYY"/>
+	<mx:Label x="10" y="10" text="Antecedentes Laborales"/>
+	<mx:DataGrid id="dg_laborales" x="10" y="36" width="477" height="103">
+		<mx:columns>
+			<mx:DataGridColumn dataField="campo_uno" headerText="id" visible="false"/>
+			<mx:DataGridColumn dataField="campo_dos" headerText="id2" visible="false"/>
+			<mx:DataGridColumn dataField="campo_tres" headerText="Cargo"/>
+			<mx:DataGridColumn dataField="campo_cuatro" headerText="Empresa"/>
+			<mx:DataGridColumn dataField="campo_cinco" headerText="Inicio"/>
+			<mx:DataGridColumn dataField="campo_seis" headerText="Fin"/>
+			<mx:DataGridColumn dataField="campo_siete" headerText="Descripcion"/>
+		</mx:columns>
+	</mx:DataGrid>
+	<mx:Button x="425" y="147" label="Quitar" click="btn_quitar_click()"/>
+	<mx:HRule x="10" y="177" width="477"/>
+	<mx:HRule x="10" y="426" width="477"/>
+	<mx:Label x="10" y="184" text="Agregar Antecedente Laboral"/>
+	<mx:Label x="10" y="202" text="Cargo"/>
+	<mx:Label x="10" y="228" text="Empresa"/>
+	<mx:Label x="10" y="254" text="Fecha Ingreso (*)"/>
+	<mx:Label x="10" y="280" text="Fecha Fin (*)"/>
+	<mx:Label x="10" y="306" text="Descripción (*)"/>
+	<mx:TextArea id="lbl_descripcion" keyUp="lbl_descripcion_keyUpHandler(event)" x="118" y="305" width="369" height="83" maxChars="500"/>
+	<mx:TextInput id="lbl_cargo" keyUp="lbl_cargo_keyUpHandler(event)" x="118" y="200" width="301" change="mayusculas(lbl_cargo)"/>
+	<mx:TextInput id="lbl_empresa" keyUp="lbl_empresa_keyUpHandler(event)" x="118" y="226" width="301" change="mayusculas(lbl_empresa)"/>
+	<mx:DateField id="lbl_fecha_ingreso" keyUp="lbl_fecha_ingreso_keyUpHandler(event)" x="118" y="252" width="141" dayNames="['D', 'L', 'M', 'M', 'J', 'V', 'S']"
+				  enabled="true" firstDayOfWeek="1" showToday="true" editable="true" 
+				  monthNames="['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre']"
+				  formatString="DD-MM-YYYY"
+				  yearNavigationEnabled="true" labelFunction="formatea_fecha" />
+	<mx:DateField id="lbl_fecha_fin" keyUp="lbl_fecha_fin_keyUpHandler(event)" x="118" y="278" width="141"
+				  dayNames="['D', 'L', 'M', 'M', 'J', 'V', 'S']" enabled="true" firstDayOfWeek="1"
+				  formatString="DD-MM-YYYY" editable="true"
+				  monthNames="['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre']"
+				  showToday="true" yearNavigationEnabled="true"/>
+	<mx:Button id="btn_agregar" x="414" y="396" label="Agregar" click="btn_agregar_click()" keyUp="btn_agregar_keyUpHandler(event)"/>
+	<mx:Button x="10" y="436" label="Cancelar" click="btn_cancelar_click()"/>
+	<mx:Button id="btn_guardar" x="364" y="436" label="Guardar Cambios" click="btn_guardar_click()" keyUp="btn_guardar_keyUpHandler(event)"/>
+	<mx:Script source="frm_registro_admision_ingreso_registro_popup_laborales_script.as" />
+	
+	<mx:RemoteObject id="ro_ingreso_registro" destination="libreria.frm_registro_admision_ingreso_registro" showBusyCursor="true" fault="error_fx(event)">
+	</mx:RemoteObject>	
+	<mx:Label x="10" y="398" text="(*) Campo opcional"/>
+</mx:TitleWindow>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+ <mx:TitleWindow xmlns:mx="http://www.adobe.com/2006/mxml"  x="5" y="5" width="517" height="284" title="Noticia"     horizontalAlign="left" verticalAlign="top">
+  <mx:DateFormatter id="dfconv" formatString="DD-MM-YYYY"/>
+<mx:VBox width="477" height="182">
+     <mx:Label text="Estimado(a) Alumno(a): " fontStyle="normal" />
+	 <mx:Text text="Los resultados de los beneficiarios de las becas internas se publicaran en la página web www.ebelzart.cl, el día viernes 27 de mayo de  2011.&#xa;Además se informará a los beneficiados a través de un llamado telefónico y correo electrónico.  &#xa;&#xa;" width="467" />
+	 <mx:Text text="Srta. Paola Oyarce O.
+" width="467" height="15" />
+	 <mx:Text text="Trabajadora Social" width="467" height="17" />
+	 <mx:Text text="Coordinadora Asuntos Estudiantiles CED - IP IPLACEX" width="467" height="14" />
+   </mx:VBox>
+   <mx:Button label="Cerrar" width="80" height="33" click="btn_cerrar_click()" />
+   <mx:Script source="popup_noticia_ced_script.as" />
+   
+ </mx:TitleWindow>
+
+	
+    
+	

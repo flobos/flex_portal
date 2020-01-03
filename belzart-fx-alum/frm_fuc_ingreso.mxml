@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Module xmlns:mx="http://www.adobe.com/2006/mxml" width="100%" height="100%" creationComplete="inicio()" backgroundColor="#CCCCCC" >
+<mx:DateFormatter id="dfconv" formatString="DD-MM-YYYY"/>
+<mx:TitleWindow width="696" height="440" x="45" y="15" title="Aula Virtual - Formulario Único de Consulta - Ingreso" horizontalAlign="left"  verticalAlign="top">
+	
+  <mx:Canvas width="661" height="387" textDecoration="none">
+  
+  	<mx:Label x="5" y="23"  text="R.U.T." width="40" color="#000000" />
+ 	  <mx:TextInput x="120" y="23" width="104" height="20" maxChars="12" id="txt_rut" editable="false" text=""  fontSize="9"/>
+      <mx:Label x="244" y="23"  text="Matrícula" width="62" color="#000000" />
+      <mx:TextInput x="316" y="23" width="102" height="20" maxChars="12" id="txt_matricula" text="" editable="false"   fontSize="9"/>
+      <mx:Label x="431" y="23"  text="Promoción" width="67" color="#000000" height="18" />
+      <mx:TextInput x="508" y="23" width="146" height="20" maxChars="100" id="txt_promo" text="" editable="false"   fontSize="9"/>
+      <mx:Label x="5" y="65"  text="Act. Académica" width="100" height="18" color="#000000" />
+      <mx:TextInput x="120" y="65" width="158" height="20" maxChars="100" id="txt_act_academica" text="" editable="false"   fontSize="9"/>
+      <mx:Label x="5" y="44"  text="Nombre:" width="68" height="18" color="#000000" />
+      <mx:TextInput x="120" y="44" width="534" height="20" maxChars="12" id="txt_nombre_alumno" text="" editable="false"   fontSize="9"/>
+      <mx:TextInput x="281" y="65" width="373" height="20" maxChars="100" id="txt_malla" text="" editable="false"   fontSize="9"/>
+      <!--     <mx:HBox x="42" y="253" > -->
+      <mx:DataGrid id="dg_disponibles" width="320" height="94" x="5" y="151" editable="false" 
+	 	  
+	  resizableColumns="false"
+	  allowMultipleSelection="true"
+             
+            dragEnabled="true"
+            dragEnter="doDragEnter(event)"
+            dragExit="doDragExit(event)"
+            dragDrop="doDragDrop(event)"
+            dragOver="doDragOver(event)"
+            dragComplete="doDragComplete(event)" toolTip="Haga click para incluirlo en la lista de seleccionados." click="dg_disponibles_cellPress()">
+            <mx:columns>
+                <mx:Array>
+                    <!--<mx:DataGridColumn dataField="active" headerText="Seleccione" textAlign="center" itemRenderer="CheckitemRenderer" width="80"/>-->
+				    <mx:DataGridColumn dataField="label"  headerText="Motivos Disponibles"/>
+                </mx:Array>
+          </mx:columns>
+        </mx:DataGrid>
+  <!--     </mx:HBox> -->
+      <mx:Label x="4" y="252"  text="Consulta" color="#000000" />
+      <mx:Button x="387" y="345"  label="Enviar" width="266" height="32" id="btn_enviar" click="click_btn_enviar()" />
+      <mx:TextArea x="4" y="270"  width="649" height="65" id="txt_consulta" text="" maxChars="1500"  />
+      <mx:ComboBox x="5" y="100" width="227" height="20" id="cmb_criterios" change="cmb_criterios_change()" toolTip="Seleccione el Criterio correspondiente a su Consulta."  fontSize="9">
+      </mx:ComboBox>
+      <mx:Label x="298" y="100"  text="Seleccione un Criterio de Consulta" color="#535E95" fontWeight="bold" />
+      <mx:DataGrid id="dg_seleccionados" width="320" height="94" x="333" y="151" editable="false" 
+	  		resizableColumns="false"
+			allowMultipleSelection="true"
+            dragEnabled="false"
+            dragEnter="doDragEnter(event)"
+            dragExit="doDragExit(event)"
+            dragDrop="doDragDrop(event)"
+            dragOver="doDragOver(event)"
+            dragComplete="doDragComplete(event)" toolTip="Haga click sobre el Motivo de la lista que no desea incluir en su consulta." click="dg_seleccionados_cellPress()" >
+        <mx:columns>
+          <mx:Array>
+            <!--<mx:DataGridColumn dataField="active" headerText="Seleccione" textAlign="center" itemRenderer="CheckitemRenderer" width="80"/>-->
+				    <mx:DataGridColumn dataField="label"  headerText="Motivos Disponibles"/>
+          </mx:Array>
+        </mx:columns>
+      </mx:DataGrid>
+      <mx:Label x="5" y="2"  text="Nº Consulta" width="100" color="#000000" />
+      <mx:Label x="120" y="2" id="lbl_fuc_numero" width="104" color="#FF0000" fontFamily="Arial" fontWeight="bold" fontSize="14" height="18" text="" />
+      <mx:Label x="7" y="335"  text="lbl_modalidad_campus" id="lbl_modalidad_campus" width="113" height="20" visible="false"/>
+	  <mx:Label x="12" y="335"  text="lbl_institucion" id="lbl_institucion" width="120" height="18" visible="false"/>
+	  <mx:Label x="30" y="335"  text="lbl_mod_cam_criterio" id="lbl_mod_cam_criterio" width="120" height="18" visible="false"/>
+	  <mx:Label x="26" y="335"  text="lbl_division_politica" id="lbl_division_politica" width="120" height="18" visible="false"/>
+	  <mx:HRule x="5" y="77" width="649" height="27"  />
+	  <mx:HRule x="6" y="124" width="649" height="9"  />
+	  <mx:Label x="4" y="133"  text="Haga click sobre el (los) motivo(s) que desea agregar a la lista." width="328" height="18" fontSize="9" textAlign="left" color="#535E95" fontWeight="bold" />
+	  <mx:Label x="331" y="133"  text="Haga click sobre el motivo que desea eliminar de la lista." fontSize="9" fontWeight="bold" color="#535E95" />
+	  <mx:Label x="166" y="337"  text="lbl_num_fuc" id="lbl_num_fuc" visible="false" />
+	  <mx:Label x="166" y="335"  text="lbl_ejecutivo" id="lbl_ejecutivo" visible="false" />
+	  <mx:Label x="204" y="335"  text="lbl_rut_ejecutivo" id="lbl_rut_ejecutivo" visible="false" />
+	  
+    	<mx:DataGrid id="dg_hide" x="266" y="343"  visible="false" width="170" height="24">
+        <mx:columns>
+          <mx:Array>
+            <mx:DataGridColumn headerText="cri_con_idn" dataField="data" />
+            <mx:DataGridColumn headerText="tc_idn" dataField="label" />
+          </mx:Array>
+        </mx:columns>
+      </mx:DataGrid>
+    	<mx:Label x="162" y="335"  text="lbl_motivo" id="lbl_motivo" visible="false" />
+    	<mx:Label x="204" y="335"  text="lbl_mod_cam_mot_idn" id="lbl_mod_cam_mot_idn" visible="false" />
+  </mx:Canvas>
+</mx:TitleWindow>
+
+  	<mx:Script source="frm_fuc_ingreso_script.as" />
+
+	<mx:RemoteObject id="ro" destination="libreria_alm.frm_fuc_ingreso" showBusyCursor="true" fault="error_fx(event)">
+		<mx:method name="inserta_fuc_web" result="result_inserta_fuc_web(event)" />
+		
+		<mx:method name="alumno_muestra_fuc" result="result_alumno_muestra_fuc(event)" />
+		<mx:method name="busca_mod_cam_por_matricula" result="result_busca_mod_cam_por_matricula(event)" />
+		<mx:method name="muestra_criterios_consulta" result="result_muestra_criterios_consulta(event)" />
+		<mx:method name="busca_mod_cam_criterio" result="result_busca_mod_cam_criterio(event)" />		
+		<mx:method name="muestra_motivos_consulta" result="result_muestra_motivos_consulta(event)" />
+		<mx:method name="inserta_fuc"  />
+		<mx:method name="inserta_motivos_fuc"   result="result_inserta_fuc(event)" />
+   	</mx:RemoteObject>
+		  	
+</mx:Module>

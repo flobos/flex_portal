@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:TitleWindow xmlns:mx="http://www.adobe.com/2006/mxml"
+				xmlns:mh="mh.components.*"
+				width="678" height="518" fontFamily="Arial" layout="absolute" title="Boleta de Pago" creationComplete="titlewindow1_creationCompleteHandler(event)">
+	
+	<mx:Script>
+		<![CDATA[
+			import mx.collections.ArrayCollection;
+			import mx.events.FlexEvent;
+			import mx.managers.PopUpManager;
+			import org.alivepdf.colors.RGBColor;
+			import org.alivepdf.display.Display;
+			import org.alivepdf.fonts.FontFamily;
+			import org.alivepdf.fonts.Style;
+			import org.alivepdf.layout.Orientation;
+			import org.alivepdf.layout.Size;
+			import org.alivepdf.layout.Unit;
+			import org.alivepdf.pdf.PDF;
+			import org.alivepdf.saving.Method;
+			
+			public var detalle:ArrayCollection;
+			public var rut_alumno:String;
+			public var nombre_alumno:String;
+			public var curso_alumno:String;
+			public var fecha:String;
+			public var total:String;
+			public var num_boleta:String;
+			
+			
+			private var myPDF:PDF;
+			
+			private function generatePDF ( e:MouseEvent ):void
+			{
+				// we create the PDF
+				myPDF = new PDF(  Orientation.LANDSCAPE, Unit.MM, Size.LETTER );
+				// we set the zoom to 100%
+				myPDF.setDisplayMode ( Display.REAL ); 
+				
+				
+				// we add a page
+				myPDF.addPage();
+				myPDF.addImage(this.cnv_boleta);
+				
+				// to save the PDF your specificy the path to the create.php script
+				// alivepdf takes care of the rest, if you are using AIR and want to save the PDF locally just use Method.LOCAL
+				// and save the returned bytes on the disk through the FileStream class
+				myPDF.save( Method.REMOTE, "http://project.unthinkmedia.com/un/createPDF/create.php", "drawing.pdf" );
+				
+			}
+			
+			protected function titlewindow1_creationCompleteHandler(event:FlexEvent):void
+			{
+				// TODO Auto-generated method stub
+				this.lbl_fecha.text = this.fecha;
+				this.lbl_num_boleta.text = this.num_boleta;
+				this.lbl_total.text = this.total;
+				this.dg_detalle.dataProvider = this.detalle;
+				this.txt_curso.text = this.txt_curso.text + ' ' + this.curso_alumno;
+				this.txt_nombre.text = this.txt_nombre.text + ' ' + this.nombre_alumno;
+			}
+			
+			protected function button1_clickHandler(event:MouseEvent):void
+			{
+				// TODO Auto-generated method stub
+				PopUpManager.removePopUp(this);	
+			}
+			
+		]]>
+	</mx:Script>
+	
+	
+		<mx:Canvas x="1" y="0" width="652" height="420" id="cnv_boleta" backgroundColor="#ffffff">
+			<mx:DataGrid id="dg_detalle" x="23" y="189" width="619" height="179" color="#142A7B">
+				<mx:columns>
+					<mx:DataGridColumn dataField="data" headerText="DETALLE"/>
+					<mx:DataGridColumn dataField="label" headerText="VALOR" width="100"/>
+				</mx:columns>
+			</mx:DataGrid>
+			<mx:Label x="493" y="369" color="#142A7B" text="TOTAL"/>
+			<mx:TextInput id="lbl_total" x="541" y="367" width="101" editable="false"/>
+			<mx:TextInput x="127" y="11" width="513" alpha="1.0" backgroundAlpha="1.0"
+						  backgroundColor="#142A7B" borderColor="#2044A1" color="#FFFFFF"
+						  fontSize="14" fontWeight="bold"
+						  text="BOLETA DE VENTAS Y SERVICIOS NO AFECTOS O EXENTOS DE I.V.A."
+						  textAlign="center"/>
+			<mx:Label x="127" y="34" width="513" color="#142A7B" fontSize="12" fontWeight="bold"
+					  text="SOCIEDAD INSTITUTO PROFESIONAL LATINOAMERICANO DE COMERCIO EXTERIOR LTDA."
+					  textAlign="center"/>
+			<mx:Label x="127" y="63" color="#142A7B" fontWeight="bold" text="GIRO: EDUCACION"/>
+			<mx:Label x="127" y="77" color="#142A7B" fontWeight="bold" text="CASA MATRIZ:"/>
+			<mx:Label x="254" y="63" color="#142A7B" text="R.U.T.: 78.230.020-2"/>
+			<mx:Label x="211" y="77" color="#142A7B"
+					  text="DIECIOCHO 182 - FONO: (2) 4812580 - SANTIAGO"/>
+			<mx:Label id="txt_nombre" x="23" y="143" color="#142A7B" text="NOMBRE:"/>
+			<mx:Label id="txt_rut" x="23" y="162" color="#142A7B" text="RUT.:"/>
+			<mx:Label id="txt_curso" x="224" y="162" color="#142A7B" text="CURSO:"/>
+			<mx:Label x="443" y="134" height="21" color="#142A7B" text="FECHA:"/>
+			<mx:Label x="493" y="92" color="#142A7B" fontSize="19" fontWeight="bold" text="N°"/>
+			<mx:TextInput id="lbl_fecha" x="493" y="132" width="137" editable="false"/>
+			<mx:Text id="lbl_num_boleta" x="527" y="92" width="103" fontSize="19"/>
+			
+		</mx:Canvas>
+		<mx:Button id="generate_btn" x="542" y="428" label="Imprimir Boleta"
+				   click="generatePDF(event)"/>
+	<mx:Button x="10" y="428" label="Salir" click="button1_clickHandler(event)"/>
+		
+	
+	
+</mx:TitleWindow>

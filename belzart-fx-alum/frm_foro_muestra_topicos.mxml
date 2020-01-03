@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Module xmlns:mx="http://www.adobe.com/2006/mxml" creationComplete="carga_foros()" backgroundColor="#CCCCCC" width="100%" height="100%" >
+
+<mx:DateFormatter id="dfconv" formatString="DD-MM-YYYY"/>
+<mx:TitleWindow width="724" height="666" title="Aula Virtual - Foro Alumno"  backgroundColor="#FFFFFF" borderStyle="solid" id="tw_ventana" backgroundDisabledColor="#FFFFFF" >
+    <mx:Canvas width="695" height="614" label="otro" backgroundColor="#000000" backgroundAlpha="0" horizontalScrollPolicy="off" >
+    <mx:VBox width="678" height="392" x="7" y="208" id="respuestas" autoLayout="true" borderStyle="none" borderColor="#FFFFFF" color="#006666" visible="true">
+        <mx:Repeater id="cuerpo_respuestas"   >
+          <mx:VBox  width="631" height="172" backgroundColor="#669999" borderColor="#0033CC" borderStyle="solid">
+            <mx:TextArea width="620" text="{cuerpo_respuestas.currentItem.cuerpo}" height="105" backgroundColor="#66CCCC" borderStyle="solid" editable="false"/>
+            <mx:HRule width="615" />
+          </mx:VBox>
+        </mx:Repeater>
+      </mx:VBox>
+    <mx:Button x="625" y="6"  label="Salir" width="61" height="25" />
+	    <mx:Text x="26" y="33"  text="Topicos del Foro" width="200" height="27" fontSize="18" color="#000000" disabledColor="#000000" alpha="100" fontStyle="normal" fontWeight="bold" textDecoration="underline" id="titulo_1" />
+	    <mx:Button x="233" y="5"  label="Normas del foro" width="118" height="28" click="ver_normas()" />
+	    <mx:Button x="356" y="6"  label="Enviar opinión" id="Envia_opinion" width="110" height="27" visible="false" click="ejecuta_envio()" />
+	    <mx:TextArea x="13" y="70" width="673" height="140" horizontalScrollPolicy="off" text="" id="txt_contenido" visible="false" editable="false" borderColor="#FFFFFF" borderStyle="none" fontFamily="Courier New" fontSize="16" fontStyle="normal"  />
+        <mx:Label x="317" y="8"  text="" width="83" height="22" id="lbl_foro" visible="false" />
+        <mx:DataGrid id="topicos" x="13" y="47" width="665" height="151" click="getCellData()" visible="false" >
+          <mx:columns>
+            <mx:Array>
+              <mx:DataGridColumn headerText="Fecha" dataField="campo_tres" width="100"  itemRenderer="cambio_formato_fecha"/>
+              <mx:DataGridColumn headerText="Tópico" dataField="campo_cuatro"   textAlign="center"/>
+            </mx:Array>
+          </mx:columns>
+        </mx:DataGrid>
+        <mx:Button x="512" y="5"  label="Volver" width="106" click="volver()" id="btn_volver" visible="false" height="28" />
+        <mx:Button x="359" y="4"  label="Entrar al foro" width="168" height="32" id="btn_entrar" alpha="100" click="click_btn_entrar()" />
+         
+        
+        <mx:TileList id="tl_mensajes"
+        width="624"
+        height="501"
+        itemRenderer="tmb_foro"
+        x="27" y="78" change="change_tl_foro(event)" visible="true"/>
+        
+        
+        
+        <mx:Button x="533" y="39"  label="Actualizar" click="actualizar()" visible ="false" id="btn_actualiza"/>
+        <mx:TextArea x="527" y="47" width="43" height="23" text="" id="txt_muestra_activo" visible="false"  />
+        <mx:Text x="262" y="42"  text="Foro Cerrado (Sólo puede leer)" width="230" height="26" fontSize="12" color="#000000" disabledColor="#000000" alpha="100" fontStyle="normal" fontWeight="bold" id="titulo_2" visible="false" />
+    </mx:Canvas>
+ </mx:TitleWindow>
+  <mx:Script source="frm_foro_muestra_topicos_script.as"/>
+    
+	<mx:RemoteObject id="ro_foro_alumno" destination="libreria_alm.frm_foro_alumno" showBusyCursor="true" fault="error_fx(event)">
+	<mx:method name="foro_muestra_activos" result="result_foro_muestra_activos(event)" />
+	<mx:method name="foro_muestra_respuestas" result="result_foro_muestra_respuestas(event)" />
+	
+	</mx:RemoteObject>
+	
+</mx:Module>

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Module xmlns:mx="http://www.adobe.com/2006/mxml" creationComplete="carga_chat()"  width="100%" height="100%" backgroundColor="#CCCCCC">
+<mx:DateFormatter id="dfconv" formatString="DD-MM-YYYY"/>
+<mx:TitleWindow width="766" height="587" title="Aula Virtual - Foro Sincrónico" backgroundColor="#FFFFFF" borderStyle="solid" id="tw_ventana" backgroundDisabledColor="#FFFFFF" >
+    <mx:Canvas width="722" height="511" label="otro" backgroundColor="#000000" backgroundAlpha="0">
+		<mx:Canvas width="645" height="441" x="11" y="40" id="cv_chat" enabled="false">
+		  <mx:TextArea x="3" y="23" width="615" height="188" id="txt_profesor" visible="true" wordWrap="false" enabled="true" editable="true" horizontalScrollPolicy="off" verticalScrollPolicy="on" />
+		  <mx:DataGrid id="dg_alumnos" x="498" y="215" width="119" height="153" resizableColumns="false" allowMultipleSelection="false" >
+			<mx:columns>
+			  <mx:Array>
+				<mx:DataGridColumn headerText="idn" dataField="campo_uno" width="0" visible="false" />
+				<mx:DataGridColumn headerText="Usuarios" dataField="campo_dos"  width="90"/>
+				
+			  </mx:Array>
+			</mx:columns>
+		  </mx:DataGrid>
+		  <mx:TextArea x="3" y="376" height="41" width="474" id="txt_texto" maxChars="400" keyDown="verifica_enter(event)" horizontalScrollPolicy="off" verticalScrollPolicy="on"   />
+		  <mx:Text x="2" y="0"  text="Profesor / tutor" width="200" height="27" fontSize="18" color="#000000" disabledColor="#000000" alpha="100" fontStyle="normal" fontWeight="bold" textDecoration="underline" />
+		  <mx:Text x="178" y="4"  text="" width="414" height="20" fontSize="12" color="#000000" disabledColor="#000000" alpha="100" fontStyle="normal" fontWeight="bold" id="txt_nombre_tutor" />
+		  <mx:Button x="515" y="380"  label="Enviar" width="90" height="34" id="btn_envia" click="click_btn_envia()" />
+		  <mx:TextArea x="4" y="238" width="474" height="117" id="txt_conversacion_alumnos" verticalScrollPolicy="on" editable="false"  />
+		  <mx:Text x="2" y="211"  text="Alumnos:" width="105" height="27" fontSize="18" color="#000000" disabledColor="#000000" alpha="100" fontStyle="normal" fontWeight="bold" textDecoration="underline" />
+		  <mx:Text x="-1" y="355"  text="Escriba aquí su mensaje:" width="182" height="21" fontSize="12" color="#660000" disabledColor="#000000" alpha="100" fontStyle="normal" fontWeight="bold" />
+		  <mx:TextArea x="253" y="213" height="25" text="" id="txt_bloqueo" visible="false"  />
+		</mx:Canvas>
+		<mx:ComboBox x="9" y="11" width="463" height="25" id="cmb_chat" mouseOver="mensaje_muestra()" >
+	    </mx:ComboBox>
+		<mx:Button x="475" y="11"  label="Entrar" width="91" height="25" id="btn_entrar" click="click_btn_entrar()" alpha="100" />
+		
+		<mx:Label x="577" y="24" id="lbl_chat" visible="false" width="49" height="16" text="" />
+		<mx:Label x="636" y="235" id="lbl_chat_sube" visible="false" width="49" height="16" text="" />
+		
+		<mx:Label x="578" y="8" id="lbl_chat_activo" visible="false" width="49" height="16" text="" />
+		<mx:Label x="588" y="6" id="lbl_cod_alumno" visible="false" text="" />
+	    <mx:Button x="640" y="11"  label="Salir" click="salir_chat()" width="61" height="25" />
+	    <mx:Image x="665" y="44" source="azul.JPG" width="36" height="34" mouseDown="color_azul()"  />
+	    <mx:Image x="665" y="78"  source="rojo.JPG" width="36" height="34" mouseDown="color_rojo()" />
+	    <mx:Image x="665" y="114"  source="blanco.JPG" width="36" height="34" mouseDown="color_blanco()" />
+	    <mx:Image x="664" y="148"  source="verde.JPG" width="36" height="34" mouseDown="color_verde()" />
+        <mx:Text x="251" y="480"  text="Los mensajes se actualizan cada 10 segundos" width="278" height="18" fontSize="10" color="#000000" disabledColor="#000000" alpha="100" fontStyle="normal" fontWeight="bold" textDecoration="underline" />
+    </mx:Canvas>
+	
+ </mx:TitleWindow>
+  <mx:Script source="frm_chat_script.as"/>
+    
+<mx:RemoteObject id="ro_chat_alumno" destination="libreria_alm.frm_chat" showBusyCursor="true" fault="error_fx(event)">
+	<mx:method name="chat_muestra_todos_segun_fecha" result="result_chat_muestra_todos_segun_fecha(event)" />
+  	<mx:method name="chat_muestra_nombre_tutor" result="result_chat_muestra_nombre_tutor(event)" />
+  	
+	<mx:method name="chat_activa_usuario" result="result_chat_activa_usuario(event)" />
+   <mx:method name="chat_muestra_usuarios_activos" result="result_chat_muestra_usuarios_activos(event)" />
+  	<mx:method name="chat_inserta_conversacion" result="result_chat_inserta_conversacion(event)" />
+  	<mx:method name="chat_muestra_conversacion" result="result_chat_muestra_conversacion(event)" />
+  	<mx:method name="chat_desactiva_usuario" result="result_chat_desactiva_usuario(event)" />
+ 	<mx:method name="chat_verifica_bloqueo" result="result_chat_verifica_bloqueo(event)" />
+    <mx:method name="chat_actualiza_bloqueo" result="result_chat_actualiza_bloqueo(event)" />
+ 
+</mx:RemoteObject>
+
+<mx:RemoteObject id="ro_chat_tutor" destination="libreria_alm.frm_chat" showBusyCursor="true" fault="error_fx(event)">
+   	<mx:method name="chat_muestra_conversacion_tutor" result="result_chat_muestra_conversacion_tutor(event)" />
+</mx:RemoteObject>
+</mx:Module>

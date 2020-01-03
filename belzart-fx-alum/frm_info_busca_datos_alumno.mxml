@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" layout="absolute" height="1108" width="1600">
+	<mx:TitleWindow xmlns:mx="http://www.adobe.com/2006/mxml" layout="absolute" width="100%" height="100%" creationComplete="inicio()" title="Busca Info Alumno" horizontalCenter="0" verticalCenter="0">
+		<mx:DataGrid id="dg_alumnos" x="22" y="81" width="650" height="124" editable="true" itemClick="alumnos_click( event );" resizableColumns="false">
+			<mx:columns>
+				<mx:DataGridColumn id="alu_idn" headerText="alu_idn" dataField="campo_uno" width="100"/>
+				<mx:DataGridColumn id="alu_rut" headerText="RUT" dataField="campo_dos" width="100"/>
+				<mx:DataGridColumn id="alu_nombres" headerText="Nombres" dataField="campo_tres" width="200"/>
+				<mx:DataGridColumn id="alu_apellidos" headerText="Apellidos" dataField="campo_cuatro" width="200"/>
+			</mx:columns>
+		</mx:DataGrid>
+		<mx:TextInput x="200" y="27" width="247" id="lbl_bus_apellido" keyUp="key_pressed_ape()"/>
+		<mx:TextInput x="512" y="27" id="lbl_bus_rut"/>
+		<mx:Text x="121" y="29" text="Apellidos" height="20"/>
+		<mx:Text x="476" y="29" text="RUT"/>
+		<mx:Label x="22" y="30" text="Buscar por:" fontWeight="bold"/>
+		<mx:Label x="22" y="55" text="ALUMNOS ENCONTRADOS" fontWeight="bold"/>
+		<mx:Label x="24" y="489" text="CARRERAS ENCONTRADAS" fontWeight="bold"/>
+		<mx:Label x="39" y="625" text="INFORMACION DE PAGO" fontWeight="bold"/>
+		<mx:Label x="22" y="4" text="BUSCAR ALUMNO" fontWeight="bold"/>
+		<mx:DataGrid x="692" y="140" id="dg_cursos" resizableColumns="false" itemClick="cursos_click( event );" width="650" editable="true">
+			<mx:columns>
+				<mx:DataGridColumn headerText="eje_aca_idn" dataField="campo_uno" width="80"/>
+				<mx:DataGridColumn headerText="tc_idn" dataField="campo_dos" width="80"/>
+				<mx:DataGridColumn headerText="pro_cam_idn" dataField="campo_tres" width="90"/>
+				<mx:DataGridColumn headerText="Cursos Inscritos" dataField="campo_cuatro" width="250"/>
+				<mx:DataGridColumn headerText="Ejecuciones" dataField="campo_cinco" width="150"/>
+			</mx:columns>
+		</mx:DataGrid>
+		<mx:Label x="692" y="55" width="316" id="lbl_inst_educacion"/>
+		<mx:Label x="692" y="74" width="316" id="lbl_facultad" />
+		<mx:Label x="692" y="93" width="316" id="lbl_escuela" />
+		<mx:Label x="692" y="112" width="316" id="lbl_depto_educacional"/>
+		<mx:HRule x="680" y="27" width="672"/>
+		<mx:HRule x="680" y="487" width="672"/>
+		<mx:VRule x="1350" y="27" height="462"/>
+		<mx:VRule x="680" y="27" height="462"/>
+		<mx:Label x="690" y="29" text="INFORMACION ACADEMICA" fontWeight="bold"/>
+		<mx:Label x="34.5" y="219" text="DATOS PERSONALES" fontWeight="bold"/>
+		<mx:DataGrid x="692" y="344" width="650" id="dg_pruebas" resizableColumns="false" height="95" editable="true">
+			<mx:columns>
+				<mx:DataGridColumn headerText="eva_eje_idn" dataField="campo_uno" width="75"/>
+				<mx:DataGridColumn headerText="eva_eje_archivo_web" dataField="campo_dos" visible="false"/>
+				<mx:DataGridColumn headerText="trab_idn" dataField="campo_tres" width="75"/>
+				<mx:DataGridColumn headerText="Prueba" dataField="campo_cuatro" width="70"/>
+				<mx:DataGridColumn headerText="Situacion" dataField="campo_cinco" width="100"/>
+				<mx:DataGridColumn headerText="Modalidad" dataField="campo_seis" width="100"/>
+				<mx:DataGridColumn headerText="Nota" dataField="campo_siete" width="50"/>
+				<mx:DataGridColumn headerText="not_idn" dataField="campo_diez" width="60"/>
+				<mx:DataGridColumn headerText="Estado" dataField="campo_nueve" width="120"/>
+			</mx:columns>
+		</mx:DataGrid>
+		<mx:Button x="1213" y="457" label="Descargar Prueba" id="btn_descargar_prueba" click="btn_descargar_prueba_click()"/>
+		<mx:Label x="690" y="317" text="Promedio Final Curso"/>
+		<mx:Label x="822" y="317" id="lbl_promedio_final" enabled="true" width="35"/>
+		<mx:DataGrid x="24" y="517" height="83" width="650" id="dg_matriculas" itemClick="matriculas_click( event )" editable="true"> 
+			<mx:columns>
+				<mx:DataGridColumn headerText="mat_idn" dataField="data" width="100"/>
+				<mx:DataGridColumn headerText="Carrera" dataField="label" width="550"/>
+			</mx:columns>
+		</mx:DataGrid>
+		<mx:Label x="377" y="489" text="Matricula"/>
+		<mx:TextInput x="439" y="487" width="127" id="lbl_bus_matricula"/>
+		<mx:Button x="587" y="487" label="Buscar" id="btn_buscar_matricula" click="btn_buscar_matricula_click()"/>
+		<mx:Label x="1016" y="57" text="Toma de Curso"/>
+		<mx:Label x="1016" y="317" text="Trabajo"/>
+		<mx:TextInput x="1142" y="55" width="126" id="lbl_bus_toma_curso"/>
+		<mx:TextInput x="1142" y="315" width="126" id="lbl_bus_trabajo"/>
+		<mx:Button x="1277" y="55" label="Buscar" id="btn_buscar_toma_curso" click="btn_buscar_toma_curso_click()"/>
+		<mx:Label x="34" y="247" text="Nombre Completo:"/>
+		<mx:Label x="472" y="217" text="RUT:"/>
+		<mx:Label x="34" y="304" text="Dirección:"/>
+		<mx:Label x="34" y="332" text="Ciudad/Región:"/>
+		<mx:Label x="34" y="275" text="Fono:"/>
+		<mx:Label x="34" y="421" text="Fecha de Ingreso:"/>
+		<mx:Label x="34" y="392" text="e-mail:"/>
+		<mx:Label x="34" y="451" text="Clave Internet"/>
+		<mx:Label x="34" y="363" text="Pais:"/>
+		<mx:TextInput x="513" y="215" width="149" id="lbl_alu_rut" editable="false"/>
+		<mx:TextInput x="153" y="245" width="464" id="lbl_alu_nombre" editable="false"/>
+		<mx:TextInput x="153" y="273" width="149" id="lbl_alu_fono" editable="false"/>
+		<mx:TextInput x="153" y="302" width="464" id="lbl_alu_direccion" editable="false"/>
+		<mx:TextInput x="153" y="330" width="322" id="lbl_alu_ciudad_region" editable="false"/>
+		<mx:TextInput x="153" y="359" width="322" id="lbl_alu_pais" editable="false"/>
+		<mx:TextInput x="153" y="388" width="322" id="lbl_alu_email" editable="false"/>
+		<mx:TextInput x="153" y="417" width="322" id="lbl_alu_fecha_ingreso" editable="false"/>
+		<mx:TextInput x="153" y="447" width="149" id="lbl_alu_clave_internet" editable="false"/>
+		<mx:HRule x="24" y="210" width="648"/>
+		<mx:HRule x="24" y="477" width="648"/>
+		<mx:HRule x="24" y="617" width="648"/>
+		<mx:HRule x="24" y="758" width="648"/>
+		<mx:VRule x="24" y="212" height="267"/>
+		<mx:VRule x="670" y="210" height="269"/>
+		<mx:Button x="1277" y="315" label="Buscar" click="btn_buscar_trabajo_click()"/>
+		<mx:Button x="692" y="457" label="Eliminar Trabajo" click='Alert.show("Se eliminará el trabajo. ¿Desea continuar?", "Alerta", Alert.OK | Alert.CANCEL, this, btn_eliminar_trabajo_click, null, Alert.OK);' />
+		<mx:Label x="494" y="628" text="(dat_pag_idn)"/>
+		<mx:Label x="35" y="659" text="Valor Arancel"/>
+		<mx:TextInput x="344" y="626" width="142" id="lbl_dat_pag_idn"/>
+		<mx:TextInput x="129" y="657" width="105" id="lbl_valor_arancel" editable="false"/>
+		<mx:TextInput x="129" y="681" width="105" id="lbl_descuento" editable="false"/>
+		<mx:Label x="35" y="683" text="Descuento"/>
+		<mx:TextInput x="129" y="705" width="105" id="lbl_num_cuotas" editable="false"/>
+		<mx:Label x="35" y="707" text="Nº Cuotas"/>
+		<mx:TextInput x="344" y="657" width="108" id="lbl_medio_pago" editable="false"/>
+		<mx:Label x="248" y="657" text="Medio de Pago"/>
+		<mx:Label x="465" y="659" text="Concepto Pago"/>
+		<mx:Label x="465" y="683" text="Elemento Pago"/>
+		<mx:Label x="250" y="683" text="Lugar de Pago"/>
+		<mx:Label x="250" y="707" text="Tipo de Pago"/>
+		<mx:TextInput x="344" y="681" width="108" id="lbl_lugar_pago" editable="false"/>
+		<mx:TextInput x="344" y="705" width="108" id="lbl_tipo_pago" editable="false"/>
+		<mx:TextInput x="344" y="729" width="108" id="lbl_env_doc" editable="false"/>
+		<mx:Label x="250" y="729" text="Envío Doc."/>
+		<mx:Label x="35" y="731" text="Forma de Pago"/>
+		<mx:TextInput x="129" y="729" width="105" id="lbl_forma_pago" editable="false"/>
+		<mx:TextInput x="562" y="681" width="105" id="lbl_elemento_pago" editable="false"/>
+		<mx:TextInput x="562" y="657" width="105" id="lbl_concepto_pago" editable="false"/>
+		<mx:Button x="585" y="626" label="Buscar"/>
+		<mx:Label x="37" y="768" text="Detalle de Cuotas"/>
+		<mx:DataGrid x="26" y="794" width="650" id="dg_cuotas">
+			<mx:columns>
+				<mx:DataGridColumn headerText="pag_idn" dataField="campo_uno" width="100"/>
+				<mx:DataGridColumn headerText="Nº Cuota" dataField="campo_dos" width="80"/>
+				<mx:DataGridColumn headerText="Valor" dataField="campo_tres" width="120"/>
+				<mx:DataGridColumn headerText="Fecha Venc." dataField="campo_cuatro" width="90"/>
+				<mx:DataGridColumn headerText="Estado" dataField="campo_cinco" width="85"/>
+				<mx:DataGridColumn headerText="Cancelado" dataField="campo_seis" width="85"/>
+				<mx:DataGridColumn headerText="Fecha Pago" dataField="campo_siete" width="90"/>
+			</mx:columns>
+		</mx:DataGrid>
+		<mx:VRule x="24" y="617" height="143"/>
+		<mx:VRule x="672" y="617" height="143"/>
+	</mx:TitleWindow> 
+	
+	<mx:Script source="frm_info_busca_datos_alumno_script.as" />
+
+	<mx:RemoteObject id="ro_busca_datos_alumnos" destination="libreria.frm_info_busca_datos_alumno" showBusyCursor="true" fault="error_fx(event)">
+		<mx:method name="busca_alumno_por_apellido"  result = "result_busca_alumno_por_apellido(event)"/>
+		<mx:method name="buscar_matriculas"  result = "result_buscar_matriculas(event)"/>
+		<mx:method name="buscar_institucion"  result = "result_buscar_institucion(event)"/>
+		<mx:method name="buscar_cursos"  result = "result_buscar_cursos(event)"/>
+		<mx:method name="buscar_pruebas"  result = "result_buscar_pruebas(event)"/>
+		<mx:method name="buscar_info_matricula"  result = "result_buscar_info_matricula(event)"/>
+		<mx:method name="busca_alumno_por_matricula"  result = "result_busca_alumno_por_matricula(event)"/>
+		<mx:method name="busca_ficha_personal"  result = "result_busca_ficha_personal(event)"/>
+		<mx:method name="buscar_curso_por_toma"  result = "result_buscar_curso_por_toma(event)"/>
+		<mx:method name="buscar_matricula_por_toma"  result = "result_buscar_matricula_por_toma(event)"/>
+		<mx:method name="buscar_trabajo"  result = "result_buscar_trabajo(event)"/>
+		<mx:method name="buscar_curso_por_trabajo"  result = "result_buscar_curso_por_trabajo(event)"/>
+		<mx:method name="buscar_pago"  result = "result_buscar_pago(event)"/>
+		<mx:method name="buscar_cuotas_pago"  result = "result_buscar_cuotas_pago(event)"/>
+		<mx:method name="eliminar_trabajo"/>
+	</mx:RemoteObject>
+	
+</mx:Application> 

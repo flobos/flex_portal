@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" layout="absolute"  width="915" height="829" creationComplete="carga();">
+	<mx:TitleWindow width="679" height="479" layout="absolute" left="73" top="63">
+			<mx:VBox x="10" y="10" width="633" height="424">
+					<mx:Canvas width="617" height="411">
+							<mx:UIComponent  width="286" height="311" id="uicVid"/>
+							<mx:Button label="Saca Foto" id="btn_foto" click="btn_foto_click()" x="313" y="342"/>
+							<mx:UIComponent  width="289" height="311" id="uicBmp" x="313" y="0"/>
+							<mx:Button label="Enviar" id="btn_guarda" click="borra_foto()" x="494" y="342"/>
+							<mx:Button click="cerrar()" label="Cerrar" y="372" x="494"    />
+							<mx:TextInput x="11.5" y="319" id="txt_result" visible="false"/>
+							<mx:TextInput x="218" y="319" id="txt_conserva_alu_idn" visible="false"/>
+							<mx:TextInput x="396" y="319" id="txt_conserva_alu_foto" visible="false"/>
+					</mx:Canvas>
+		</mx:VBox>
+		
+    <mx:Label x="10" y="219" id="lb_codigo" width="40"/>
+    
+	</mx:TitleWindow>
+
+<mx:Script source="pop_up_foto_script.as"/>
+
+
+<mx:RemoteObject id="ro" destination="UploadImage-ro" result="handleResult(event)"/>
+
+<mx:RemoteObject id="ro_foto_alumno" destination="libreria.frm_foto_alumno" showBusyCursor="true" fault="Fault(event)">
+	<mx:method name="foto_alumno_actualiza_alu_foto" result="result_foto_alumno_actualiza_alu_foto(event)"/>
+	<mx:method name="foto_alumno_borra_alu_foto" result="result_foto_alumno_borra_alu_foto(event)"/>
+</mx:RemoteObject>	
+
+</mx:Application>

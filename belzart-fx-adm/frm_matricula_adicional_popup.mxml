@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:TitleWindow xmlns:mx="http://www.adobe.com/2006/mxml" 
+				creationComplete="inicio()"
+				width="688" height="338" layout="absolute" title="Matrículas Encontradas">
+	<mx:Label x="11" y="10" text="Seleccione una matrícula:"/>
+	<mx:DataGrid id="dg_matricula" x="31" y="36" width="606" height="219" fontSize="10">
+		<mx:columns>
+			<mx:DataGridColumn width="50" dataField="campo_uno" headerText="Matrícula" textAlign="center"/>
+			<mx:DataGridColumn width="100" dataField="campo_once" headerText="Carrera" textAlign="center"/>
+		</mx:columns>
+	</mx:DataGrid>
+	<mx:Button id="btn_cancelar" x="31" y="263" label="Cancelar" click="btn_cancelar_click()"/>
+	<mx:Button id="btn_seleccionar" x="546" y="263" width="91" label="seleccionar"
+			   click="btn_seleccionar_click()"/>
+	<mx:Script source="frm_matricula_adicional_popup_script.as"/>
+</mx:TitleWindow>

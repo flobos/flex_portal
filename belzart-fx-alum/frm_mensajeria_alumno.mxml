@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Module xmlns:mx="http://www.adobe.com/2006/mxml" creationComplete="cargar_mensajes()" height="100%" width="100%" backgroundColor="#CCCCCC">
+ <mx:DateFormatter id="dfconv" formatString="DD-MM-YYYY"/>
+<mx:TitleWindow width="624" height="492" title="Aula Virtual - Sus mensajes" id="tw_mensajeria" >
+    <mx:Canvas width="588" height="440">
+   
+     <mx:TabNavigator width="568" height="439" x="0" y="0">
+
+        <mx:Canvas label="Mensajes Sin Revisar" width="562" height="371">
+		
+		<mx:DataGrid id="dg_mensajes_no_leidos"  width="533" x="9" y="22" height="331"  click="change_tl_mensajes(event)" >
+            <mx:columns>
+              <mx:Array>
+                <mx:DataGridColumn headerText="Fecha" dataField="campo_cinco"  textAlign="center"  />
+                <mx:DataGridColumn headerText="Título mensaje" dataField="campo_tres" textAlign="center"   />
+                
+              </mx:Array>
+            </mx:columns>
+          </mx:DataGrid>
+		
+		
+        </mx:Canvas>
+
+        <mx:Canvas label="Mensajes Leidos" width="563" height="389"     >
+       
+		    <mx:DataGrid id="dg_mensajes_leidos"  width="533" x="9" y="22" height="331"  creationComplete="cargar_mensajes_leidos()" click="change_tl_mensajes_leidos(event)"  >
+            <mx:columns>
+              <mx:Array>
+                <mx:DataGridColumn headerText="Fecha" dataField="campo_cinco"  textAlign="center"  />
+                <mx:DataGridColumn headerText="Título mensaje" dataField="campo_tres" textAlign="center"   />
+                
+              </mx:Array>
+            </mx:columns>
+          </mx:DataGrid>
+        </mx:Canvas>
+        
+    </mx:TabNavigator>
+	
+	</mx:Canvas>
+  </mx:TitleWindow>
+  <mx:Script source="frm_mensajeria_alumno_script.as"/>
+  
+    <mx:RemoteObject id="ro_alumno_mensaje" destination="libreria_alm.frm_mensajeria_alumno" showBusyCursor="true" fault="error_fx(event)">
+
+	<mx:method name="muestra_mensaje_alumno" result="result_muestra_mensaje_alumno(event)" />
+ 	<mx:method name="mensaje_actualiza_fecha_leido" result="result_mensaje_actualiza_fecha_leido(event)" />
+	<mx:method name="tutor_mensaje_muestra_leidos" result="result_tutor_mensaje_muestra_leidos(event)" />
+ 	
+	</mx:RemoteObject>
+	
+  
+</mx:Module>

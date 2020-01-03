@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Module xmlns:mx="http://www.adobe.com/2006/mxml" xmlns:descarga="*" backgroundColor="#CCCCCC" creationComplete="inicio()" width="100%" height="100%" >
+<descarga:FileDownload id="archivo_bajada" creationComplete="archivo_bajada.init(progressBar,btn_comenzar_descarga );" />
+<mx:DateFormatter id="dfconv" formatString="DD-MM-YYYY"/>
+<mx:TitleWindow width="557" height="564" x="89" y="30" title="Aula Virtual - Materiales de Apoyo" >
+  <mx:Canvas width="521" height="514" enabled="true">
+	    <mx:Label x="8" y="250"  text="Detalle Materiales" width="129" fontWeight="bold" />
+	    <mx:Label x="60" y="294" width="110" id="lbl_eje_aca_idn" visible="false" />
+	    <mx:Label x="170" y="294" width="106" id="lbl_tip_prod_idn" visible="false" />
+	    <mx:Tree x="9" y="275" width="501" height="122" id="lst_material_detalle" defaultLeafIcon="@Embed('imagenes/clases.png')" itemClick="carga_url_material(event)" labelField="@label">
+        </mx:Tree>
+        
+<!--        <mx:DataGrid id="dg_material_detalle"  width="501" x="9" y="275" height="122"  click="carga_url_material(event)"  >
+            <mx:columns>
+              <mx:Array>
+                <mx:DataGridColumn headerText="Cód." dataField="campo_uno"  width="101" />
+                <mx:DataGridColumn headerText="Nombre" dataField="campo_dos" width="300"  />
+                <mx:DataGridColumn headerText="Url" dataField="campo_tres"  visible="false"/>
+                <mx:DataGridColumn headerText="Material" dataField="campo_cuatro"  width="100"/>
+              </mx:Array>
+            </mx:columns>
+        </mx:DataGrid>
+-->        
+	    <mx:Button label="Salir" x="443" y="294" width="72" height="72" id="btn_cerrar" click="btn_cerrar_click()" visible="false" />
+	    <mx:Label x="276" y="294" width="100" height="15" id="lbl_control" visible="false" />
+	    <mx:Label x="5" y="5"  text="Unidad" height="17" fontWeight="bold" />
+	    <mx:ComboBox x="70" y="5" width="445" height="21" id="cmb_unidades" change="cmb_unidades_change(event)" >
+        </mx:ComboBox>
+        <mx:TileList id="hl_menu" itemRenderer="tmb_materiales" width="510" height="205" x="4" y="40" change="hl_menu_change(event)" />
+	    
+	    <mx:Label id="lbl_bib_vir" x="5" y="294"  text="" width="55" visible="false" />
+	    <mx:FormItem label="Progreso" x="16" y="402" width="79" height="27">
+        </mx:FormItem>
+	    <mx:ProgressBar id="progressBar" mode="manual" width="202" height="85" x="95" y="403" label="Esperando archivo."/>
+	    <mx:Button id="btn_comenzar_descarga" visible="false"/>
+  </mx:Canvas>
+</mx:TitleWindow>
+	
+	<mx:Script source="frm_materiales_de_apoyo_script.as" />
+	
+
+	<mx:RemoteObject id ="ro_materiales_apoyo" destination="libreria_alm.frm_materiales_de_apoyo"	 showBusyCursor="true" fault="error_fx(event)">
+		<mx:method name="carga_unidades_materiales"  result="result_carga_unidades_materiales(event)" />
+		<mx:method name="materiales_apoyo_carga_menu"  result="result_materiales_apoyo_carga_menu(event)" />
+		<mx:method name="material_apoyo_carga_detalle_materiales"  result="result_material_apoyo_carga_detalle_materiales(event)" />
+
+	</mx:RemoteObject>
+	
+
+</mx:Module>
+

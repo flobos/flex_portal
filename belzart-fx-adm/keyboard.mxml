@@ -1,0 +1,8 @@
+<?xml version="1.0"?> 
+<!-- as/MainDeleteTextArea.mxml -->
+<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" 
+    xmlns:MyComp="myComponents.*">
+  
+    <MyComp:DeleteTextArea/>
+  
+</mx:Application>

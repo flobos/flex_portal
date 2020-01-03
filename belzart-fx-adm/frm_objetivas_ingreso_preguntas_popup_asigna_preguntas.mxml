@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:TitleWindow xmlns:mx="http://www.adobe.com/2006/mxml" layout="absolute" width="616" height="414" initialize="inicio()" title="Asignar Preguntas">
+	<mx:Label x="29" y="18" text="Ramo/Código" fontWeight="bold"/>
+	<mx:ComboBox y="38" width="537" id="cmb_ramo" right="30" change="cmb_ramo_change()"></mx:ComboBox>
+	<mx:Label x="354" y="72" text="Unidad" fontWeight="bold"/>
+	<mx:ComboBox y="68" id="cmb_unidad" right="30"></mx:ComboBox>
+	<mx:HRule x="29" y="104" width="537" />
+	<mx:Button x="385.5" y="330" label="Salir" id="btn_salir"  click="btn_salir_click()" width="85" icon="@Embed(source='imagenes/edit_remove.png')"/>
+	<mx:Button x="478.5" y="330" label="Guardar" id="btn_guardar"  click="btn_guardar_click()" icon="@Embed(source='imagenes/guardar.png')"/>
+	<mx:Label x="29.5" y="123" text="Preguntas Seleccionadas" themeColor="#232527" fontWeight="bold" textDecoration="normal"/>
+	<mx:Canvas x="29.5" y="163" width="537" height="124" borderStyle="solid" cornerRadius="10">
+		<mx:VBox  x="0" y="3" height="80%" width="517">
+			<mx:Repeater id="rp_preguntas_seleccionadas">
+				<mx:HBox>
+					<mx:Label width="10"/>
+					<mx:CheckBox id="chk_ok_sel" selected="{rp_preguntas_seleccionadas.currentItem.campo_cuatro}" width="17"/>
+					<mx:Label  id="lbl_cod_preg_cam" width="0" visible="false" text="{rp_preguntas_seleccionadas.currentItem.campo_cuatro}"/>
+					<mx:Label id="lbl_cod_sel" 		width="45" 	text="{rp_preguntas_seleccionadas.currentItem.campo_uno}" />
+					<mx:Label id="lbl_pregunta_sel" width="294"	toolTip="{rp_preguntas_seleccionadas.currentItem.campo_dos}" 		text="{rp_preguntas_seleccionadas.currentItem.campo_dos}"/>
+					<mx:Label id="lbl_tipo_sel" 	width="70"	toolTip="{rp_preguntas_seleccionadas.currentItem.campo_tres}"	text="{rp_preguntas_seleccionadas.currentItem.campo_tres}"/>
+				</mx:HBox>
+			</mx:Repeater>
+		</mx:VBox>
+	</mx:Canvas>
+	<mx:Label x="71.5" y="148" text="Código" fontWeight="bold" textDecoration="underline"/>
+	<mx:Label x="128.5" y="148" text="Preguntas" fontWeight="bold" textDecoration="underline"/>
+	<mx:Label x="425.5" y="148" text="Tip. Pregunta" fontWeight="bold" textDecoration="underline"/>
+	<mx:Label x="119" y="18" id="lbl_pro_cam_idn" width="73"/>
+	<mx:CheckBox x="29.5" y="298" label="Quitar Seleccion" click="chk_todos_click_2()" id="chk_todos_2" selected="true"/>
+	
+	<mx:Script source="frm_objetivas_ingreso_preguntas_popup_asigna_preguntas_script.as"/>
+	
+	
+	<mx:RemoteObject id="ro_asigna_preguntas" destination="libreria.frm_objetivas_asigna_preguntas_ramo" showBusyCursor="true" fault="error_fx(event)">
+		<mx:method name="muestra_ramos" result="result_muestra_ramos(event)"/>
+		<mx:method name="muestra_unidades" result="result_muestra_unidades(event)"/>
+		<mx:method name="asigna_pregunta" result="limpiar()"/>
+	</mx:RemoteObject>
+</mx:TitleWindow>

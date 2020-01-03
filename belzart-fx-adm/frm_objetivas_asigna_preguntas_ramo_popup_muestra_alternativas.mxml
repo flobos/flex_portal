@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:TitleWindow xmlns:mx="http://www.adobe.com/2006/mxml" layout="absolute" width="628" height="271" title="Alternativas" initialize="inicio()" >
+	<mx:Label text="Cod." fontWeight="bold" textDecoration="underline" x="7" y="17"/>
+	<mx:Label text="Respuesta" fontWeight="bold" textDecoration="underline" x="51" y="17"/>
+	<mx:Label text="Correcta" textAlign="right" fontWeight="bold" textDecoration="underline" x="543" y="17"/>
+	<mx:VBox height="146" width="588" x="9" y="41">
+		<mx:Repeater id="rp_alternativas">
+			<mx:HBox>
+				<mx:Label id="lbl_alternativa" width="31" text="{rp_alternativas.currentItem.campo_uno}" />
+				<mx:Label width="510" id="txt_respuesta" text="{rp_alternativas.currentItem.campo_dos}"/>
+				<mx:RadioButton id="opt_correcta" enabled="false"/>
+			</mx:HBox>
+		</mx:Repeater>
+	</mx:VBox>
+	<mx:Button x="522" y="199" label="Cerrar" id="btn_cerrar" click="btn_cerrar_click()" icon="@Embed(source='imagenes/edit_remove.png')"/>
+	
+	<mx:Script source="frm_objetivas_asigna_preguntas_ramo_popup_muestra_alternativas_script.as"/>
+	<mx:RemoteObject id="ro_alternativas" destination="libreria.frm_objetivas_asigna_preguntas_ramo" showBusyCursor="true" fault="error_fx(event)">
+		<mx:method name="busca_respuesta" result="result_busca_respuesta(event)"/>
+	</mx:RemoteObject>
+</mx:TitleWindow>

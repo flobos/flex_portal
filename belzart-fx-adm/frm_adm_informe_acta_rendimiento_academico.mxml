@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml">
+
+  <mx:TitleWindow id="tw_recaudacion" creationComplete="tw_recaudacion_creationComplete()" width="302" height="167" title="Informe Acta rendimiento Académico" enabled="false"  horizontalAlign="left">
+    <mx:VBox width="271" height="99" horizontalAlign="center">
+	  <mx:Label text="Código Ejecución Academica"  width="171" textAlign="left"/>
+	  <mx:TextInput width="99" textAlign="center" id="txt_eje_aca"/>
+	  <mx:Button label="Ver informe" id="btn_informe" click="btn_informe_click()"  textAlign="center" labelPlacement="left"/>
+    </mx:VBox>
+  </mx:TitleWindow>
+  
+
+  
+  <mx:Script source="frm_adm_informe_acta_rendimiento_academico_script.as"/>
+
+</mx:Application>

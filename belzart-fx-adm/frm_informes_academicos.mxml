@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" layout="absolute"> 
+	<mx:TitleWindow x="132" y="65" width="387" height="321" layout="absolute"
+					title="Informes Académicos" initialize="inicio()">
+
+		
+		<mx:Label x="10" y="160" text="Ejecucion"/>
+		<mx:ComboBox id="cmb_ejecuciones" x="117" y="158" width="227"></mx:ComboBox>
+		<mx:Label id="txt_est_pru" x="10" y="186" text="Estado de Prueba"/>
+		<mx:ComboBox id="cmb_est_pru" x="117" y="184" width="227"></mx:ComboBox>
+		<mx:RadioButtonGroup id="radiogroup" change="radiogroup_changeHandler(event)"/>
+		<mx:VBox x="10" y="28">
+			<mx:RadioButton id="r1" label="Acta Rendimiento Academico" groupName="radiogroup"/>
+			<mx:RadioButton id="r2" label="Nomina Notas Cursos" groupName="radiogroup"/>
+			<mx:RadioButton id="r4" label="Base de Datos General de Notas" groupName="radiogroup"/>
+			<mx:RadioButton id="r3" label="Resumen Estado Notas por Tipo Prueba" groupName="radiogroup"/>
+		</mx:VBox>
+		<mx:Button id="btn_ver_informe" x="247" y="234" label="Ver Informe" click="ver_informe()"/>
+		<mx:Label x="10" y="10" text="Seleccione el Informe"/>
+		<mx:Label x="10" y="134" text="Indique los parámetros"/>
+		
+		
+		
+	</mx:TitleWindow>
+	<mx:Script source="frm_informes_academicos_script.as"/>
+	
+	<mx:RemoteObject id="ro_informes_academicos" destination="libreria.frm_informes_academicos" showBusyCursor="true" fault="error_fx(event)">
+		<mx:method name="muestra_ejecuciones" result="result_muestra_ejecuciones(event)"/>
+		<mx:method name="muestra_tipo_prueba" result="result_muestra_tipo_prueba(event)"/>
+		<mx:method name="obtiene_modalidad_campus" result="result_obtiene_modalidad_campus(event)"/>
+	</mx:RemoteObject>
+	</mx:Application>

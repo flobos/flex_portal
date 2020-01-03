@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:TitleWindow xmlns:mx="http://www.adobe.com/2006/mxml" width="100%" height="100%" creationComplete="tw_creationComplete()" title="Responda" x="50" y="50" >
+  <mx:VBox id="vb_preguntas" height="428" width="618" enabled="false">
+    <mx:HBox width="578">
+		<mx:Label  text="ENCUESTA:" color="#009933" fontWeight="bold" />
+		<mx:Label id="lbl_nombre" text="----" color="#000033" fontWeight="bold" />
+		<mx:Label id="lbl_codigo" text="----" color="#000033" fontWeight="bold" visible="false" />
+	</mx:HBox>
+	<mx:Label text="NOTA: Responda con nota de 1 a 7" color="#FF0000" fontWeight="bold" />
+	<mx:HRule width="574" />
+	<mx:VBox>
+		 <mx:Repeater id="rpt_preguntas" >
+	 	  <mx:Grid id="Grid_pretoma">
+			<mx:GridRow>
+            	<mx:GridItem >
+					<mx:Label id="lbl_codigo_pregunta" text="{rpt_preguntas.currentItem.campo_uno}" visible="false" />   
+					<mx:Text  text="{rpt_preguntas.currentItem.campo_dos}" width="500" />
+					<mx:NumericStepper id="ns_nota" maximum="7" minimum="1" />
+					 <!--<mx:Label text="{rpt_preguntas.currentItem.campo_dos}" />-->
+				</mx:GridItem>
+	        </mx:GridRow>
+
+		  </mx:Grid> 
+           
+		  </mx:Repeater>
+	   </mx:VBox>
+	   <mx:VBox>
+		 <mx:Repeater id="rpt_preguntas_desarrollo" >
+	 	  <mx:Grid id="Grid_pretoma1">
+			<mx:GridRow>
+            	<mx:GridItem >
+				<mx:Label id="lbl_codigo_pregunta_desarrollo" text="{rpt_preguntas_desarrollo.currentItem.campo_uno}" visible="false" /> 	   
+					<mx:Text text="{rpt_preguntas_desarrollo.currentItem.campo_dos}" width="500" />
+		        
+				</mx:GridItem>
+	        </mx:GridRow>
+   			<mx:GridRow>
+            	<mx:GridItem >		   
+				<mx:TextArea id="ta_pregunta" width="500" maxChars="99" />        
+				</mx:GridItem>
+	        </mx:GridRow>
+
+
+		  </mx:Grid> 
+           
+		  </mx:Repeater>
+	   </mx:VBox>
+	   <mx:HRule width="574" />
+	   
+	   <mx:HBox>
+	   <mx:Button label="Responder encuesta" id="btn_reponder" click="btn_reponder_click()" />
+	   <mx:Button label="Cerrar" id="btn_cerrar" click="btn_cerrar_click()" />
+	   </mx:HBox>
+	   
+  </mx:VBox>
+  
+<mx:RemoteObject id="ro_encuesta_preguntas_alumno" destination="libreria_alm.frm_encuesta_contesta" showBusyCursor="true">
+<mx:method name="encuesta_muestra_preguntas_tipo_nota" result="encuesta_muestra_preguntas_tipo_nota_result(event)" />
+<mx:method name="encuesta_muestra_preguntas_tipo_desarrollo" result="encuesta_muestra_preguntas_tipo_desarrollo_result(event)" />
+<mx:method name="encuesta_inserta_encuesta_pregunta_alumno" result="encuesta_inserta_encuesta_pregunta_alumno_result(event)" />
+</mx:RemoteObject>  
+<mx:Script source="frm_encuesta_contesta_popup_preguntas_script.as" />
+</mx:TitleWindow>

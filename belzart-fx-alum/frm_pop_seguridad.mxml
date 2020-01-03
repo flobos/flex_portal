@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<mx:TitleWindow xmlns:mx="http://www.adobe.com/2006/mxml" title="Aula Virtual - Auntentificación" x="10" y="10" creationComplete="inicio()" height="268" horizontalAlign="center" width="300">
+
+	
+	   <mx:DateFormatter id="dfconv" formatString="DD-MM-YYYY"/>
+<mx:Form width="246" height="213">
+
+          <mx:FormItem label="Pais">
+            <mx:ComboBox width="142" id="cmb_paises" change="cmb_paises_change(event)">
+            </mx:ComboBox>
+          </mx:FormItem>
+          <mx:FormItem label="Usuario" required="true" horizontalAlign="left" width="177">
+            <mx:TextInput id="txt_usuario" width="104" maxChars="12"  keyUp="txt_usuario_presskey(event)" />
+        </mx:FormItem>
+
+        <mx:FormItem label="Clave" required="true" horizontalAlign="left" width="148">
+            <mx:TextInput id="txt_clave" width="46" maxChars="4" keyDown="txt_clave_presskey(event)" displayAsPassword="true"/>
+        </mx:FormItem>
+        <mx:FormItem width="195" height="67" horizontalAlign="left">
+		
+		<mx:Label id="lbl_alu_idn" visible="false" />
+		
+		<mx:Button label="Entrar"  id="btn_entrar"  click="btn_entrar_click(event)" keyUp="btn_entrar_presskey(event)" selected="false" width="116" height="32"/>
+
+        </mx:FormItem>
+	    </mx:Form>
+	
+	<mx:Script source="frm_pop_seguridad_script.as" />
+		
+	<mx:RemoteObject id="ro_seguridad" destination="libreria_alm.frm_pop_seguridad" showBusyCursor="true" fault="error_fx(event)">
+        <mx:method name="muestra_paises" result="devuelve_datos_servicio_paises(event)" /> 
+        <mx:method name="devuelve_datos_seguridad_nacional" result="result_devuelve_datos_seguridad_nacional(event)" />
+		<mx:method name="devuelve_datos_alumnos_internacional" result="result_devuelve_datos_seguridad_nacional(event)" />			
+
+	</mx:RemoteObject>
+	
+	
+</mx:TitleWindow>
+

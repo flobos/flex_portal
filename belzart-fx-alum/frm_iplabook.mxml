@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" layout="absolute" width="388" height="236">
+	<mx:Script>
+		<![CDATA[
+			import mx.controls.Alert;
+			import com.facebook.Facebook;
+			import com.facebook.events.FacebookEvent; 
+			import com.facebook.utils.FacebookSessionUtil;
+			import com.facebook.net.FacebookCall; 
+			import com.facebook.commands.users.GetInfo;
+			import com.facebook.data.users.GetInfoFieldValues;  
+			import com.facebook.data.users.FacebookUser;
+			import com.facebook.data.users.GetInfoData; 
+			
+			[Bindable] protected var user:FacebookUser=new FacebookUser();   //Informacion del usuario  
+			
+			protected var session: FacebookSessionUtil;
+			protected var fbook:Facebook;
+			
+			protected const API_KEY:String="d81029ee619025c7592015eddc31e613";
+			protected const SECRET:String="8ac589e6631c82894c513e6ce3d6a4d9";
+			
+			//Conectarme a facebook
+			private function ConectFacebook():void
+			{
+				session=new FacebookSessionUtil(API_KEY,SECRET,loaderInfo);
+				fbook=session.facebook;
+				session.addEventListener(FacebookEvent.CONNECT, onConnect);
+				session.addEventListener(FacebookEvent.WAITING_FOR_LOGIN, onWaitLogin);
+				session.login();
+			}
+			
+			
+			//Al conectarse a facebook      
+			protected function onConnect(event:FacebookEvent):void
+			{
+				Alert.show('Conectado a facebook');
+				LogoutFb.enabled=true;      //Activo el boton de salir de facebook
+				var call:FacebookCall=fbook.post(new GetInfo([fbook.uid],[GetInfoFieldValues.ALL_VALUES]));
+				call.addEventListener(FacebookEvent.COMPLETE, onGetInfo);                   
+				
+			}
+			
+			//Cuando facebook regresa los datos a la aplicacion
+			protected function onGetInfo(event:FacebookEvent):void 
+			{ 
+				user=(event.data as GetInfoData).userCollection.getItemAt(0) as FacebookUser; 
+				
+			}
+			
+			//Esperando el login
+			protected function onWaitLogin(event:FacebookEvent):void
+			{
+				var alert:Alert=Alert.show("Presiona OK despues que te loguees en facebook","Esperando loguearse");
+				alert.addEventListener(Event.CLOSE,onClose);
+			}
+			
+			//Al cerrar el Alert
+			protected function onClose(event:Event):void 
+			{    
+				session.validateLogin(); 
+			}
+			
+			//SALIR DE FACEBOOK
+			protected function LogoutFacebook(event:MouseEvent):void
+			{
+				session.logout();          
+				user=new FacebookUser();
+			}   
+		]]>
+	</mx:Script>
+	<mx:Button x="10" y="10" label="Conectarse A Facebook" click="ConectFacebook();"/>
+	<mx:Image id="userImg" source="{user.pic_square}" x="24" y="75"/>
+	<mx:Label id="loginLbl" text="{user.name}" x="10" y="49"/>
+	<mx:Button x="10" y="126" label="Salir de facebook" click="LogoutFacebook(event);" enabled="false" id="LogoutFb"/>
+</mx:Application>

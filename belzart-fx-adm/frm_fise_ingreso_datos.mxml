@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" layout="absolute" width="100%" height="980" >
+<mx:DateFormatter id="dfconv" formatString="DD-MM-YYYY"/>
+	<mx:TitleWindow layout="absolute" width="820" height="979" creationComplete="inicio()" title="Formulario de Información Socio-Económica FISE"  x="10" y="1">
+	<mx:VBox  id="vbx_todo" width="100%" height="929" verticalScrollPolicy="on">
+		
+		
+		
+		
+		<mx:Panel width="761" height="60" layout="absolute" dropShadowEnabled="false" headerHeight="20" borderThicknessBottom="5" borderThicknessLeft="5" borderThicknessRight="5" borderThicknessTop="0" cornerRadius="10" title="1. ANTECEDENTES DEL ALUMNO(A):" id="tw_alternativas0" x="10" y="-11">
+				<mx:TextInput x="230" y="7" id="lbl_rut" maxChars="12" width="104" click="limpia()" textAlign="right" tabIndex="0" tabIndexChange="0"/>
+				<mx:Text x="194" y="11" text="RUT"/>
+				<mx:Button x="342" y="7" label="Buscar" id="btn_buscar"   click=" btn_buscar_click() "/>
+				<mx:TextInput x="342" y="7" width="326" id="lbl_nombre" editable="false" borderStyle="none" fontSize="12" enabled="true" textAlign="left"/>
+				<mx:Label x="10" y="10" text="ANTECEDENTES PERSONALES:" fontWeight="bold" enabled="true"/>
+				<mx:TextInput x="684" y="7" width="47" id="lbl_correlativo" enabled="false" textAlign="right" visible="false"/>
+		</mx:Panel>
+			
+			
+			
+			
+			
+			
+		<mx:Panel width="763" height="211" layout="absolute" dropShadowEnabled="false" headerHeight="20" borderThicknessBottom="5" borderThicknessLeft="5" borderThicknessRight="5" borderThicknessTop="0" cornerRadius="10" title="2. ANTECEDENTES DEL GRUPO FAMILIAR:" id="tw_alternativas2" x="10" y="78">
+			<mx:Text x="609.5" y="8" text="RUT" width="35" fontSize="8" fontWeight="bold" enabled="true"/>
+			<mx:Text x="424.5" y="3" text="APELLIDO MATERNO" width="54" fontSize="8" fontWeight="bold" enabled="true"/>
+			<mx:Text x="233" y="3" text="APELLIDO PATERNO" width="54" height="30" fontSize="8" fontWeight="bold" enabled="true"/>
+			<mx:Button x="625.5" y="83" label="Agrega Familiar" id="cmd_agrega_grupo_familiar"  width="117.5" click="btn_agregar_familiar_click()" tabIndex="14" tabIndexChange="15"/>
+			<mx:TextInput x="639" y="4" textAlign="right" width="93" id="txt_rut_familiar" tabIndex="4" tabIndexChange="4" toolTip="Sin puntos ni guión"/>
+			<mx:TextInput x="288" y="5" textAlign="left" width="122.5" id="txt_apellido_paterno_familiar" tabIndex="2" restrict="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ " tabIndexChange="2"/>
+			<mx:TextInput x="480" y="5" textAlign="left" width="122.5" id="txt_apellido_materno_familiar" tabIndex="3" restrict="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ " tabIndexChange="3"/>
+			<mx:Canvas x="16.5" y="110" width="720" height="75" borderStyle="solid" cornerRadius="10" id="cnv_ingreso1">
+				<mx:VBox  x="0" y="10" height="58" width="718">
+					<mx:Repeater id="rp_familiar">
+						<mx:HBox width="715" horizontalScrollPolicy="off">
+							<mx:Button id="btn_elimina_familiar" width="15" height="15" icon="@Embed(source='imagenes/delete.gif')"  click="btn_elimina_familiar_click(event)"/>
+							<mx:Label id="lbl_nombre_familiar" textAlign="left" width="70"	fontSize="9" toolTip="{rp_familiar.currentItem.campo_uno}" 		text="{rp_familiar.currentItem.campo_uno}"/>
+							<mx:Label id="lbl_apellido_paterno_familiar" textAlign="left" width="70"	fontSize="9" toolTip="{rp_familiar.currentItem.campo_dos}" 		text="{rp_familiar.currentItem.campo_dos}"/>
+							<mx:Label id="lbl_apellido_materno_familiar" textAlign="left" width="70"	fontSize="9" toolTip="{rp_familiar.currentItem.campo_tres}" 		text="{rp_familiar.currentItem.campo_tres}"/>
+							<mx:Label id="lbl_rut_familiar"	textAlign="right" width="90"	fontSize="9" toolTip="{rp_familiar.currentItem.campo_cuatro}"		text="{rp_familiar.currentItem.campo_cuatro}" />
+							<mx:Label id="lbl_fecha_nacimiento_familiar" textAlign="right" width="90"	fontSize="9" toolTip="{rp_familiar.currentItem.campo_cinco}"	text="{rp_familiar.currentItem.campo_cinco}"/>
+							<mx:Label id="lbl_desc_estado_civil" textAlign="right" fontSize="9" toolTip="{rp_familiar.currentItem.campo_seis}" text="{rp_familiar.currentItem.campo_seis}" width="70"/>
+							<mx:Label id="lbl_tipo_estado_civil" textAlign="right" fontSize="9" toolTip="{rp_familiar.currentItem.campo_siete}" text="{rp_familiar.currentItem.campo_siete}" width="2" visible="false" />
+							<mx:Label id="lbl_desc_sexo" textAlign="right" fontSize="9" toolTip="{rp_familiar.currentItem.campo_ocho}" text="{rp_familiar.currentItem.campo_ocho}" width="2" visible="false"/>
+							<mx:Label id="lbl_tipo_sexo" textAlign="right" fontSize="9" toolTip="{rp_familiar.currentItem.campo_nueve}" text="{rp_familiar.currentItem.campo_nueve}" width="2" visible="false" />
+							<mx:Label id="lbl_desc_parentesco" textAlign="right" fontSize="9" toolTip="{rp_familiar.currentItem.campo_diez}" text="{rp_familiar.currentItem.campo_diez}" width="90"/>
+							<mx:Label id="lbl_tipo_parentesco" textAlign="right" fontSize="9" toolTip="{rp_familiar.currentItem.campo_once}" text="{rp_familiar.currentItem.campo_once}" width="2" visible="false" />
+							<mx:Label id="lbl_desc_nivel_estudios" textAlign="right" fontSize="9" toolTip="{rp_familiar.currentItem.campo_doce}" text="{rp_familiar.currentItem.campo_doce}" width="2" visible="false"/>
+							<mx:Label id="lbl_tipo_nivel_estudios" textAlign="right" fontSize="9" toolTip="{rp_familiar.currentItem.campo_trece}" text="{rp_familiar.currentItem.campo_trece}" width="2" visible="false"  />
+							<mx:Label id="lbl_desc_prevision_social" textAlign="right" fontSize="9" toolTip="{rp_familiar.currentItem.campo_catorce}" text="{rp_familiar.currentItem.campo_catorce}" width="2" visible="false"/>
+							<mx:Label id="lbl_tipo_prevision_social" textAlign="right" fontSize="9" toolTip="{rp_familiar.currentItem.campo_quince}" text="{rp_familiar.currentItem.campo_quince}" width="2" visible="false"  />
+     						<mx:Label id="lbl_desc_prevision_salud" textAlign="right" fontSize="9" toolTip="{rp_familiar.currentItem.campo_dieciseis}" text="{rp_familiar.currentItem.campo_dieciseis}" width="2" visible="false"/>
+							<mx:Label id="lbl_tipo_prevision_salud" textAlign="right" fontSize="9" toolTip="{rp_familiar.currentItem.campo_diecisiete}" text="{rp_familiar.currentItem.campo_diecisiete}" width="2" visible="false" />
+							<mx:Label id="lbl_desc_actividad" textAlign="right" fontSize="9" toolTip="{rp_familiar.currentItem.campo_diceciocho}" text="{rp_familiar.currentItem.campo_diceciocho}" width="2" visible="false"/>
+							<mx:Label id="lbl_tipo_actividad" textAlign="right" fontSize="9" toolTip="{rp_familiar.currentItem.campo_diecinueve}" text="{rp_familiar.currentItem.campo_diecinueve}" width="2" visible="false" />
+							<mx:Label id="lbl_desc_enfermedad_grave" textAlign="right" fontSize="9" toolTip="{rp_familiar.currentItem.campo_veinte}" text="{rp_familiar.currentItem.campo_veinte}" width="2" visible="false"/>
+							<mx:Label id="lbl_tipo_enfermedad_grave" textAlign="right" fontSize="9" toolTip="{rp_familiar.currentItem.campo_veintiuno}" text="{rp_familiar.currentItem.campo_veintiuno}" width="2" visible="false" />
+							<mx:Label id="lbl_desc_jefe_hogar" textAlign="right" fontSize="9" toolTip="{rp_familiar.currentItem.campo_veintidos}" text="{rp_familiar.currentItem.campo_veintidos}" width="2" visible="false"/>
+							<mx:Label id="lbl_jefe_hogar" textAlign="right" fontSize="9" toolTip="{rp_familiar.currentItem.campo_veintitres}" text="{rp_familiar.currentItem.campo_veintitres}" width="2" visible="false" />							
+
+						</mx:HBox>
+					</mx:Repeater>
+				</mx:VBox>
+			</mx:Canvas>
+			<mx:Text x="6.5" y="9" text="NOMBRES" width="54" fontSize="8" fontWeight="bold" enabled="true"/>
+			<mx:TextInput x="68.5" y="5" width="160.5" id="txt_nombre_familiar" tabIndex="1" restrict="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ " tabIndexChange="1"/>
+			<mx:Text x="7" y="28" text="FECHA NACIMIENTO" width="63" height="30" fontSize="8" fontWeight="bold" enabled="true"/>
+			<mx:DateField x="69" y="31" width="98" id="txt_fecha_nacimiento_familiar" yearNavigationEnabled="true" labelFunction="formatea_fecha"  firstDayOfWeek="1" monthNames="['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre']" dayNames="['D', 'L', 'M', 'M', 'J', 'V', 'S']"  tabIndex="5" tabIndexChange="5" editable="false"/>
+			<mx:ComboBox width="122.5" id="cmb_estado_civil"  x="230" y="31" tabIndex="6" tabIndexChange="6">
+			</mx:ComboBox>
+			<mx:Text x="175" y="28" text="ESTADO CIVIL&#xa;" width="47" height="30" fontSize="8" fontWeight="bold" enabled="true"/>
+			<mx:ComboBox width="119" id="cmb_sexo"  x="400" y="31" tabIndex="7" tabIndexChange="7">
+			</mx:ComboBox>
+			<mx:Text x="365" y="34" text="SEXO&#xa;" width="33.5" height="13" fontSize="8" fontWeight="bold" enabled="true"/>
+			<mx:ComboBox width="132.5" id="cmb_parentesco"  x="599.5" y="31" tabIndex="8" tabIndexChange="8">
+			</mx:ComboBox>
+			<mx:Text x="529.5" y="36" text="PARENTESCO&#xa;&#xa;" width="73" height="13" fontSize="8" fontWeight="bold" enabled="true"/>
+			<mx:ComboBox width="150.5" id="cmb_nivel_estudios"  x="69" y="57" tabIndex="9" tabIndexChange="9">
+			</mx:ComboBox>
+			<mx:Text x="10" y="54" text="NIVEL ESTUDIOS" width="73" height="27" fontSize="8" fontWeight="bold" enabled="true"/>
+			<mx:ComboBox width="122.5" id="cmb_prevision_social"  x="289.5" y="57" tabIndex="10" tabIndexChange="10">
+			</mx:ComboBox>
+			<mx:Text x="227.5" y="55" text="PREVISION SOCIAL" width="73" height="27" fontSize="8" fontWeight="bold" enabled="true"/>
+			<mx:ComboBox width="122.5" id="cmb_prevision_salud"  x="475" y="57" tabIndex="11" tabIndexChange="11">
+			</mx:ComboBox>
+			<mx:Text x="415" y="55" text="PREVISION SALUD" width="61" height="27" fontSize="8" fontWeight="bold" enabled="true"/>
+			<mx:ComboBox width="416" id="cmb_actividad"  x="69" y="83" tabIndex="13" fontSize="9" tabIndexChange="13">
+			</mx:ComboBox>
+			<mx:Text x="10" y="87" text="ACTIVIDAD" width="73" height="18" fontSize="8" fontWeight="bold" enabled="true"/>
+			<mx:Text x="600.5" y="55" text="ENFERMEDAD GRAVE" width="66" height="27" fontSize="8" fontWeight="bold" enabled="true"/>
+			<mx:ComboBox width="61.5" id="cmb_enfermedad_grave"  x="673" y="57" tabIndex="12" tabIndexChange="12">
+			</mx:ComboBox>
+			<mx:Text x="493" y="81" text="JEFE &#xa;HOGAR" width="40" height="30" fontSize="8" fontWeight="bold" enabled="true"/>
+			<mx:ComboBox width="61.5" id="cmb_jefe_hogar"  x="537" y="82" tabIndex="12" tabIndexChange="14">
+			</mx:ComboBox>
+
+		</mx:Panel>
+
+
+
+		<mx:HBox width="763"  horizontalAlign="right" borderStyle="none" height="23">
+            <mx:ComboBox width="240.5" id="cmb_tipo_familia"  x="69" y="121" tabIndex="16" tabIndexChange="16"></mx:ComboBox>
+            <mx:Text x="10" y="116" text="TIPO FAMILIA" width="63" height="30" fontSize="8" fontWeight="bold" enabled="true"/>
+        	<mx:NumericStepper x="563" y="121" width="48" minimum="0" maximum="20" id="stp_integrantes_familia" value="1"  tabIndex="15"/>
+			<mx:Text x="475" y="119" text="Nº INTEGRANTES GRUPO FAMILIAR" width="85" height="30" fontSize="8" fontWeight="bold" enabled="true"/>
+		</mx:HBox>
+
+
+
+
+		<mx:Panel width="763" height="277" layout="absolute" dropShadowEnabled="false" headerHeight="20" borderThicknessBottom="5" borderThicknessLeft="5" borderThicknessRight="5" borderThicknessTop="0" cornerRadius="10" title="3. INGRESOS DEL GRUPO FAMILIAR:" id="tw_alternativas">
+			<mx:Text x="18.5" y="21" text="RUT" width="35" fontSize="8" fontWeight="bold" enabled="true"/>
+			<mx:Text x="18.5" y="73" text="HONORARIO" width="76" fontSize="8" fontWeight="bold" enabled="true"/>
+			<mx:Text x="18.5" y="41" text="REMUNERACION &#xa;CONTRATO" width="83" height="30" fontSize="8" fontWeight="bold" enabled="true"/>
+			<mx:Text x="493.5" y="44" text="TIPO BECA&#xa;" width="53" height="18" fontSize="8" fontWeight="bold" enabled="true"/>
+			<mx:Text x="254.35" y="15" text="ARRIENDO BIENES&#xa;MUEBLES&#xa;" width="103.5" height="30" fontSize="8" fontWeight="bold" enabled="true"/>
+			<mx:Text x="252.35" y="40" text="ARRIENDO BIENES&#xa;INMUEBLES&#xa;" width="102.5" height="32" fontSize="8" fontWeight="bold" enabled="true"/>
+			<mx:Text x="493.5" y="12" text="BECAS U OTROS&#xa;INGRESOS&#xa;&#xa;" width="82.25" height="30" fontSize="8" fontWeight="bold" enabled="true"/>
+			<mx:Text x="252.1" y="65" text="PENSION ALIMENTICIA,&#xa;DE VEJEZ U OTRA&#xa;" width="127" height="26" fontSize="8" fontWeight="bold" enabled="true"/>
+			<mx:Label x="16.5" y="205" text="ALIMENTACION" fontWeight="bold" enabled="true" fontSize="8"/>
+			<mx:Text x="551" y="226" text="(*) Solo considere Luz, Agua y Gas" width="177" fontSize="8" fontWeight="bold" enabled="true" />
+			<mx:TextInput x="90.5" y="201" width="94.5" id="lbl_alimentacion" textAlign="right" text="0" fontSize="10" tabIndex="26" restrict="0-9" tabIndexChange="26"/>
+			<mx:Button x="594" y="66" label="Agrega Ingreso" id="cmd_agrega_ingreso"  width="117" click="btn_agregar_click()" tabIndex="25" tabIndexChange="25"/>
+			<mx:ComboBox width="127.25" id="cmb_becas"  x="583.75" y="40" tabIndex="24" tabIndexChange="24">
+			</mx:ComboBox>
+			<mx:TextInput x="618" y="14" textAlign="right" text="0" width="93" id="txt_becas" tabIndex="23" restrict="0-9" tabIndexChange="23"/>
+			<mx:TextInput x="377.85" y="67" textAlign="right" text="0" width="93" id="txt_pension" tabIndex="22" restrict="0-9" tabIndexChange="22"/>
+			<mx:TextInput x="377.85" y="42" textAlign="right" text="0" width="93" id="txt_arriendo_bienes_inmuebles" tabIndex="21" restrict="0-9" tabIndexChange="21"/>
+			<mx:TextInput x="144" y="17" textAlign="right" width="93" id="txt_rut_ingreso" tabIndex="17" tabIndexChange="17" toolTip="Sin puntos ni guión"/>
+			<mx:TextInput x="144" y="42" textAlign="right" text="0" width="93" id="txt_remuneracion_contrato" tabIndex="18" restrict="0-9" tabIndexChange="18"/>
+			<mx:TextInput x="144" y="68" textAlign="right" text="0" width="93" id="txt_honorario" tabIndex="19" restrict="0-9" tabIndexChange="19"/>
+			<mx:TextInput x="377.85" y="17" textAlign="right" text="0" width="93" id="txt_arriendo_bienes_muebles" tabIndex="20" restrict="0-9" tabIndexChange="20"/>
+			<mx:Canvas x="16.5" y="93" width="720" height="89" borderStyle="solid" cornerRadius="10" id="cnv_ingreso">
+				<mx:VBox  x="0" y="10" height="67" width="718">
+					<mx:Repeater id="rp_ingresos">
+						<mx:HBox width="715" horizontalScrollPolicy="off">
+							<mx:Button id="btn_elimina_selec" width="15" height="15" icon="@Embed(source='imagenes/delete.gif')"  click="btn_elimina_selec_click(event)"/>
+							<mx:Label id="lbl_rut_ingreso" textAlign="right" width="80"	fontSize="9" toolTip="{rp_ingresos.currentItem.campo_uno}" 		text="{rp_ingresos.currentItem.campo_uno}"/>
+							<mx:Label id="lbl_remuneracion_contrato" textAlign="right" width="70"	fontSize="9" toolTip="{rp_ingresos.currentItem.campo_dos}" 		text="{rp_ingresos.currentItem.campo_dos}"/>
+							<mx:Label id="lbl_honorario" textAlign="right" width="70"	fontSize="9" toolTip="{rp_ingresos.currentItem.campo_tres}" 		text="{rp_ingresos.currentItem.campo_tres}"/>
+							<mx:Label id="lbl_arriendo_bienes_muebles"	textAlign="right" width="70"	fontSize="9" toolTip="{rp_ingresos.currentItem.campo_cuatro}"		text="{rp_ingresos.currentItem.campo_cuatro}" />
+							<mx:Label id="lbl_arriendo_bienes_inmuebles" textAlign="right" width="70"	fontSize="9" toolTip="{rp_ingresos.currentItem.campo_cinco}"	text="{rp_ingresos.currentItem.campo_cinco}"/>
+							<mx:Label id="lbl_pension" textAlign="right" fontSize="9" toolTip="{rp_ingresos.currentItem.campo_seis}" text="{rp_ingresos.currentItem.campo_seis}" width="70"/>
+							<mx:Label id="lbl_becas" textAlign="right" fontSize="9" toolTip="{rp_ingresos.currentItem.campo_siete}" text="{rp_ingresos.currentItem.campo_siete}" width="70"  />
+							<mx:Label id="lbl_tipo_beca" fontSize="9" toolTip="{rp_ingresos.currentItem.campo_ocho}" text="{rp_ingresos.currentItem.campo_ocho}" width="140"  />
+							<mx:Label id="lbl_codigo_beca" fontSize="9" toolTip="{rp_ingresos.currentItem.campo_nueve}" text="{rp_ingresos.currentItem.campo_nueve}" width="2" visible="false"  />
+						</mx:HBox>
+					</mx:Repeater>
+				</mx:VBox>
+			</mx:Canvas>
+			<mx:Label x="16.5" y="230" text="VESTUARIO" fontWeight="bold" enabled="true" fontSize="8"/>
+			<mx:TextInput x="90.5" y="226" width="94.5" id="lbl_vestuario" textAlign="right" text="0" fontSize="10" tabIndex="26" restrict="0-9" tabIndexChange="27"/>
+			<mx:Label x="193" y="205" text="ESTUDIOS" fontWeight="bold" enabled="true" fontSize="8"/>
+			
+			<mx:Label x="193" y="228" text="VIVIENDA" fontWeight="bold" enabled="true" fontSize="8"/>
+			<mx:TextInput x="245" y="227" width="94.5" id="lbl_vivienda" textAlign="right" text="0" fontSize="10" tabIndex="26" restrict="0-9" tabIndexChange="29"/>
+			<mx:Label x="352" y="206" text="TRANSPORTE" fontWeight="bold" enabled="true" fontSize="8"/>
+			<mx:TextInput x="424" y="202" width="94.5" id="lbl_transporte" textAlign="right" text="0" fontSize="10" tabIndex="26" restrict="0-9" tabIndexChange="30"/>
+			<mx:Label x="344" y="230" text="MEDICAMENTOS" fontWeight="bold" enabled="true" fontSize="8"/>
+			<mx:TextInput x="424" y="226" width="94.5" id="lbl_medicamentos" textAlign="right" text="0" fontSize="10" tabIndex="26" restrict="0-9" tabIndexChange="31"/>
+			<mx:TextInput x="246.25" y="202" width="94.5" id="lbl_estudios" textAlign="right" text="0" fontSize="10" tabIndex="26" restrict="0-9" tabIndexChange="28"/>
+			<mx:Label x="526.5" y="206" text="SERVICIOS BASICOS" fontWeight="bold" enabled="true" fontSize="8"/>
+			<mx:TextInput x="633.5" y="202" width="94.5" id="lbl_serv_basicos" textAlign="right" text="0" fontSize="10" tabIndex="26" restrict="0-9" tabIndexChange="32"/>
+			<mx:Label x="16.5" y="183" text="EGRESOS GRUPO FAMILIAR:" fontWeight="bold" enabled="true"/>
+			<mx:Label x="16.5" y="0" text="INGRESOS POR PERSONA:" fontWeight="bold" enabled="true"/>
+		</mx:Panel>
+		
+		
+		
+		
+		
+		
+		<mx:Panel width="759" height="298" layout="absolute" dropShadowEnabled="false" headerHeight="20" borderThicknessBottom="5" borderThicknessLeft="5" borderThicknessRight="5" borderThicknessTop="0" cornerRadius="10" title="4. DECLARACION DE BIENES" id="tw_alternativas1">
+			<mx:Label x="10" y="-1" text="BIENES RAICES:" fontWeight="bold" enabled="true"/>
+			<mx:Text x="383" y="62" text="USO" width="35" fontSize="8" fontWeight="bold" enabled="true"/>
+			<mx:Text x="10" y="14" text="TIPO PROPIEDAD&#xa;" width="77" height="27" fontSize="8" fontWeight="bold" enabled="true"/>
+			<mx:Text x="10" y="43" text="TIPO CONSTRUCCION&#xa;" width="93" height="27" fontSize="8" fontWeight="bold" enabled="true"/>
+			<mx:Text x="10" y="71" text="TENENCIA PROPIEDAD&#xa;&#xa;" width="66" height="27" fontSize="8" fontWeight="bold" enabled="true"/>
+			<mx:Text x="10" y="99" text="ESTADO DE&#xa;CONSERVACION&#xa;" width="84" height="27" fontSize="8" fontWeight="bold" enabled="true"/>
+			<mx:Text x="382" y="1" text="MTS2 CONSTRUIDOS&#xa;" width="84" height="27" fontSize="8" fontWeight="bold" enabled="true"/>
+			<mx:Text x="382" y="107" text="NUMERO&#xa;HABITACIONES" width="84" height="27" fontSize="8" fontWeight="bold" enabled="true"/>
+			<mx:Text x="382" y="87" text="AVALUO FISCAL" width="84" height="16" fontSize="8" fontWeight="bold" enabled="true"/>
+			<mx:Text x="382" y="33" text="SUPERFICIE TOTAL&#xa;MTS2 CONSTRUIDOS&#xa;" width="114" height="38" fontSize="8" fontWeight="bold" enabled="true"/>
+			<mx:Text x="10" y="127" text="SERVICIOS BASICOS&#xa;QUE POSEE&#xa;" width="80" height="38" fontSize="8" fontWeight="bold" enabled="true"/>
+			<mx:Button x="588" y="129" label="Agrega Bien" id="cmd_agrega_bienes"  width="121" click="btn_agregar_bien_click()" tabIndex="37" tabIndexChange="43"/>
+			<mx:ComboBox width="260" id="cmb_tipo_propiedad" x="95" y="17" tabIndex="27" tabIndexChange="33"/>
+			<mx:ComboBox width="259" id="cmb_tipo_construccion" x="96" y="44" tabIndex="28" tabIndexChange="34"/>
+			<mx:ComboBox width="258" id="cmb_tenencia_propiedad" x="97" y="72" tabIndex="29" tabIndexChange="35"/>
+			<mx:ComboBox width="257" id="cmb_estado_conservacion" x="98" y="100" tabIndex="30" tabIndexChange="36"/>
+			<mx:ComboBox width="215" id="cmb_uso" x="494" y="55" tabIndex="34" tabIndexChange="40"/>
+			<mx:NumericStepper x="494" y="109" width="48" minimum="1" maximum="30" id="stp_habitaciones" value="1"  tabIndex="36" tabIndexChange="42"/>
+			<mx:ComboBox width="257" id="cmb_servicios_basicos"  x="98" y="129" tabIndex="31" tabIndexChange="37"/>
+			<mx:TextInput x="492" y="3" textAlign="right" text="0" width="213" id="txt_metros_construidos" tabIndex="32" restrict="0-9" tabIndexChange="38"/>
+			<mx:TextInput x="492" y="29" textAlign="right" text="0" width="213" id="txt_superficie" tabIndex="33" restrict="0-9" tabIndexChange="39"/>
+			<mx:TextInput x="494" y="82" textAlign="right" text="0" width="211" id="txt_avaluo" tabIndex="35" restrict="0-9" tabIndexChange="41"/>
+			<mx:Canvas x="10" y="173" width="729" height="98" borderStyle="solid" cornerRadius="10" id="cnv_ingreso0">
+				<mx:VBox  x="0" y="10" height="81" width="718">
+					<mx:Repeater id="rp_bienes">
+						<mx:HBox width="714" horizontalScrollPolicy="off">
+							<mx:Button id="btn_elimina_bien" width="15" height="15" icon="@Embed(source='imagenes/delete.gif')"  click="btn_elimina_bien_click(event)"/>
+							<mx:Label id="lbl_tipo_propiedad" fontSize="9" width="150"	toolTip="{rp_bienes.currentItem.campo_uno}" 		text="{rp_bienes.currentItem.campo_uno}"/>
+							<mx:Label id="lbl_tipo_construccion" fontSize="9" width="60"	toolTip="{rp_bienes.currentItem.campo_dos}" 		text="{rp_bienes.currentItem.campo_dos}"/>
+							<mx:Label id="lbl_tenencia_propiedad" fontSize="9" width="120"	toolTip="{rp_bienes.currentItem.campo_tres}" 		text="{rp_bienes.currentItem.campo_tres}"/>
+							<mx:Label id="lbl_estado_conservacion"	fontSize="9" width="60"	toolTip="{rp_bienes.currentItem.campo_cuatro}"		text="{rp_bienes.currentItem.campo_cuatro}" />
+							<mx:Label id="lbl_servicios_basicos" 	fontSize="9" width="70"	toolTip="{rp_bienes.currentItem.campo_cinco}"	text="{rp_bienes.currentItem.campo_cinco}"/>
+							<mx:Label id="lbl_metros_construidos" fontSize="9" width="40" toolTip="{rp_bienes.currentItem.campo_seis}" text="{rp_bienes.currentItem.campo_seis}" />
+							<mx:Label id="lbl_superficie" width="40" fontSize="9" toolTip="{rp_bienes.currentItem.campo_siete}" text="{rp_bienes.currentItem.campo_siete}"/>
+							<mx:Label id="lbl_uso" fontSize="9" width="30" toolTip="{rp_bienes.currentItem.campo_ocho}" text="{rp_bienes.currentItem.campo_ocho}"/>
+							<mx:Label id="lbl_habitaciones" fontSize="9" width="20" toolTip="{rp_bienes.currentItem.campo_nueve}" text="{rp_bienes.currentItem.campo_nueve}" />
+							<mx:Label id="lbl_avaluo" fontSize="9" width="60" toolTip="{rp_bienes.currentItem.campo_diez}" text="{rp_bienes.currentItem.campo_diez}" />
+							<mx:Label id="lbl_codigo_tipo_propiedad" width="2"	toolTip="{rp_bienes.currentItem.campo_once}" text="{rp_bienes.currentItem.campo_once}" visible="false"/>
+							<mx:Label id="lbl_codigo_tipo_construccion" width="2"	toolTip="{rp_bienes.currentItem.campo_doce}" text="{rp_bienes.currentItem.campo_doce}" visible="false"/>
+							<mx:Label id="lbl_codigo_tenencia_propiedad" width="2"	toolTip="{rp_bienes.currentItem.campo_trece}" text="{rp_bienes.currentItem.campo_trece}" visible="false"/>
+							<mx:Label id="lbl_codigo_estado_conservacion" width="2"	toolTip="{rp_bienes.currentItem.campo_catorce}" text="{rp_bienes.currentItem.campo_catorce}" visible="false"/>
+							<mx:Label id="lbl_codigo_servicios_basicos" width="2"	toolTip="{rp_bienes.currentItem.campo_quince}" text="{rp_bienes.currentItem.campo_quince}" visible="false"/>
+							<mx:Label id="lbl_codigo_uso" width="2"	toolTip="{rp_bienes.currentItem.campo_dieciseis}" text="{rp_bienes.currentItem.campo_dieciseis}" visible="false"/>
+						</mx:HBox>
+					</mx:Repeater>
+				</mx:VBox>
+			</mx:Canvas>
+		</mx:Panel>
+
+		
+		<mx:HBox width="758"  horizontalAlign="right">
+		<mx:Button label="Guardar Datos" id="cmd_guardar"  click="btn_guardar_click()" tabIndex="38" visible="true"  tabIndexChange="44"/>
+		</mx:HBox>
+
+
+        
+
+	</mx:VBox>
+
+	</mx:TitleWindow> 
+	
+	<mx:Script source="frm_fise_ingreso_datos_script.as" />
+
+	<mx:RemoteObject id="ro_buscar" destination="libreria.frm_fise_ingreso_datos" showBusyCursor="true" fault="error_fx(event)">
+		<mx:method name="buscar_por_rut"  result = "result_buscar(event)"/>
+		<mx:method name="llena_combo_becas"  result = "result_llena_combo_becas(event)"/>
+		
+		<mx:method name="llena_combo_tipo_propiedad"  result = "result_llena_combo_tipo_propiedad(event)"/>
+		<mx:method name="llena_combo_tipo_construccion"  result = "result_llena_combo_tipo_construccion(event)"/>
+		<mx:method name="llena_combo_tenencia_propiedad"  result = "result_llena_combo_tenencia_propiedad(event)"/>
+		<mx:method name="llena_combo_estado_conservacion"  result = "result_llena_combo_estado_conservacion(event)"/>
+		<mx:method name="llena_combo_uso"  result = "result_llena_combo_uso(event)"/>
+		<mx:method name="llena_combo_servicios_basicos"  result = "result_llena_combo_servicios_basicos(event)"/>
+		
+		<mx:method name="llena_combo_estado_civil"  result = "result_llena_combo_estado_civil(event)"/>
+		<mx:method name="llena_combo_sexo"  result = "result_llena_combo_sexo(event)"/>
+		<mx:method name="llena_combo_parentesco"  result = "result_llena_combo_parentesco(event)"/>
+		<mx:method name="llena_combo_nivel_estudios"  result = "result_llena_combo_nivel_estudios(event)"/>
+		<mx:method name="llena_combo_prevision_social"  result = "result_llena_combo_prevision_social(event)"/>
+		<mx:method name="llena_combo_prevision_salud"  result = "result_llena_combo_prevision_salud(event)"/>
+		<mx:method name="llena_combo_actividad"  result = "result_llena_combo_actividad(event)"/>
+		<mx:method name="llena_combo_enfermedad_grave"  result = "result_llena_combo_enfermedad_grave(event)"/>
+		<mx:method name="llena_combo_tipo_familia"  result = "result_llena_combo_tipo_familia(event)"/>
+		<mx:method name="llena_combo_jefe_hogar"  result = "result_llena_combo_jefe_hogar(event)"/>
+
+		<mx:method name="guarda_datos_ingresos" result="result_guarda_datos_ingresos()"/>
+		<mx:method name="guarda_datos_bienes" result="result_guarda_datos_bienes()"/>
+		<mx:method name="guarda_datos_egresos" result="result_guarda_datos_egresos()"/>
+		<mx:method name="guarda_datos_grupo_familiar" result="result_guarda_datos_grupo_familiar()"/>
+		<mx:method name="guarda_datos_fise" result="result_guarda_datos_fise()"/>
+		<mx:method name="trae_datos_ingresos" result="result_trae_datos_ingresos(event)"/>
+		<mx:method name="trae_datos_bienes" result="result_trae_datos_bienes(event)"/>
+		<mx:method name="trae_datos_egresos" result="result_trae_datos_egresos(event)"/>
+		<mx:method name="trae_datos_familia" result="result_trae_datos_familia(event)"/>
+		<mx:method name="trae_datos_correlativo" result="result_trae_datos_correlativo(event)"/>
+		<mx:method name="trae_datos_fise" result="result_trae_datos_fise(event)"/>
+	</mx:RemoteObject>
+	
+</mx:Application>

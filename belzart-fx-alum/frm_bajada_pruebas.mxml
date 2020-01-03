@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Module xmlns:mx="http://www.adobe.com/2006/mxml" xmlns:descarga="*" creationComplete="inicio()" width="100%" height="100%" backgroundColor="#CCCCCC">
+<descarga:FileDownload id="archivo_bajada" creationComplete="archivo_bajada.init(downloadProgress,btn_comenzar_descarga );" />
+<mx:DateFormatter id="dfconv" formatString="DD-MM-YYYY"/>
+<mx:TitleWindow width="415" height="307" x="5" y="5" title="Aula Virtual - Bajar Prueba" >
+<mx:Canvas width="381" height="253" id="txt_nombre_tipo_prueba" visible="true">
+  <mx:TextInput x="10" y="55" id="txt_url_archivo" width="360" visible="false" />
+  <mx:Label x="5" y="5"  text="Seleccione la Prueba para bajarla." />
+  <mx:ComboBox x="5" y="27" width="365" height="22" id="cmb_pruebas" visible="true" >
+  </mx:ComboBox>
+  	<mx:Panel title="Descarga del Archivo" paddingTop="10" paddingBottom="10" paddingLeft="10" paddingRight="10" x="60" y="79">
+			<mx:ProgressBar id="downloadProgress" label="" mode="manual" />
+			<mx:ControlBar horizontalAlign="right">
+				<mx:Button id="btn_comenzar_descarga" label="Descargar" click="btn_comenzar_descarga_click(event)" />
+			</mx:ControlBar>
+	</mx:Panel>
+</mx:Canvas>
+</mx:TitleWindow>
+	<mx:Script source="frm_bajada_pruebas_script.as" />
+
+
+	 <mx:RemoteObject id="ro_bajar_pruebas_alumnos" destination="libreria_alm.frm_bajada_pruebas" showBusyCursor="true" fault="error_fx(event)">
+	 	<mx:method name="bajada_pruebas_verifica" result="result_bajada_pruebas_verifica(event)"/>
+	</mx:RemoteObject>
+	
+
+</mx:Module>

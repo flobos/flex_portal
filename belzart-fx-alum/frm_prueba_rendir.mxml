@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Module xmlns:mx="http://www.adobe.com/2006/mxml" backgroundColor="#CCCCCC" width="100%" height="100%">
+<mx:DateFormatter id="dfconv" formatString="DD-MM-YYYY"/>
+<mx:TitleWindow xmlns:mx="http://www.adobe.com/2006/mxml" xmlns:subida="*"  x="0" y="0" width="522" height="577" title="Aula Virtual - Envio de Pruebas"  backgroundColor="#FFFFFF" barColor="#666666" themeColor="#CCCCCC" creationComplete="carga()">
+<subida:FileUpload id="archivo_subida" creationComplete="archivo_subida.init(progressBar, btn_guardar, btn_examinar, lbl_presione, test, lbl_peso_total, lbl_peso_archivo, generar_grupos);" />
+<mx:Canvas width="490" height="506" color="#000000">
+           <mx:Button x="386" y="320"  label="Enviar" id="btn_guardar" click="click_btn_guardar()" enabled="true" width="89" />
+	       <mx:Label x="5" y="5"  text="Tipo Evaluación" width="101" color="#000000" height="18" />
+	    <mx:HRule x="5" y="19" width="470" height="22"  />
+        <mx:Label x="5" y="77"  text="R.U.T. :" color="#000000" fontFamily="Arial" />
+        <mx:TextInput x="141" y="77" id="txt_rut" keyUp="txt_usuario_presskey(event)" width="173" height="22" text=""  />
+        <mx:Button x="386" y="77"  label="Ingresar" width="89" id="btn_ingresar" click="busca_alumno()" keyDown="busca_alumno()" />
+        <mx:Label x="5" y="405" width="54" height="17" id="lbl_viajero" visible="true" />
+        <mx:Label x="50" y="405"  text="countgrilla" width="73" height="20" id="lbl_count_grilla" visible="false" />
+        <mx:Button x="50" y="405"  label="Cancelar" width="129" height="20" id="btn_cancelar" click="cancelar()" visible="false" />
+        <mx:DataGrid id="dt_grupos" x="5" y="122" height="103" width="470" >
+          <mx:columns>
+            <mx:Array>
+              <mx:DataGridColumn headerText="Matricula" dataField="matricula" width="100" />
+              <mx:DataGridColumn headerText="Nombre" dataField="nombre" width="469" />
+			  <mx:DataGridColumn headerText="" dataField="responsable" width="0" />
+            </mx:Array>
+          </mx:columns>
+        </mx:DataGrid>
+        <mx:Button x="401" y="355"  label="Salir" id="btn_salir" click="salir()" width="72" height="72" />
+        <mx:Text x="5" y="39"  text="¿Desea enviar esta prueba junto a otros compañeros?" width="327" height="18" color="#000000" />
+        <mx:Button x="354" y="39"  label="Si" width="52" height="20" id="btn_si" click="prueba_grupal()" />
+        <mx:Button x="422" y="39"  label="No" height="20" width="53" id="btn_no" click="prueba_individual()" />
+        <mx:Label x="21" y="409" width="54" height="18" id="lbl_q" visible="true" fontWeight="bold" color="#0000FF" />
+        <mx:ComboBox x="141" y="5" id="cmb_prueba" width="334" height="18" change="cmb_prueba_change(event)" >
+        </mx:ComboBox>
+        <mx:Label x="5" y="405"  text="Label" id="lbl_eje_aca" width="36" height="20" visible="false" />
+        <mx:ProgressBar id="progressBar" mode="manual" x="6" y="252" label=" seleccione archivo." color="#000000" themeColor="#000099" height="84" width="271" />
+        <mx:Button x="386" y="228"  label="Examinar" width="89" id="btn_examinar"  click="click_btn_examinar()" enabled="true"/>
+        <mx:Label x="379" y="100" id="lbl_ya" text="holayo" visible="false" />
+        <mx:Label x="5" y="99" id="lbl_correlativo_trabajo" color="#000000" visible="true" />
+        <mx:Label x="7" y="228"  text="Presione examinar para seleccionar el archivo que desea enviar." width="359" height="18" fontSize="9" />
+        <mx:Text x="3" y="429"  text="NOTA: Para el envío de pruebas es necesario instalar Macromedia Flash Player 10. El nombre del archivo que va a enviar no debe contener espacios, subguiones ni letra Ñ." width="472" height="59" color="#535E95" />
+        <mx:Label x="8" y="316"  text="Presione el boton Enviar para mandar su prueba. " width="351" height="18" id="lbl_presione" visible="false" />
+        <mx:Label x="106" y="361"  text="Para finalizar presione generar comprobante." width="277" height="19" id="lbl_generar" visible="false" />
+        <mx:Label x="195" y="355" id="lbl_peso_archivo" width="105" height="24" color="#990000" fontWeight="bold" visible="false" />
+        <mx:Label x="66" y="355" id="lbl_peso_total" width="110" height="24" color="#000066" fontWeight="bold" visible="false" />
+        <mx:Label x="55" y="99"  text="Nota: Los integrantes deben pertenecer a la misma sección." color="#535E95" />
+		<mx:CheckBox x="0" y="0" id="flag" visible="false" change="generar_grupos()" />
+		<mx:Label x="86" y="405" id="test" width="55" height="24" fontWeight="bold" color="#990000" visible="false" />  
+		      
+         </mx:Canvas>
+
+	
+	 
+		  <mx:Script source="frm_prueba_rendir_script.as" />
+		
+		
+    </mx:TitleWindow>
+    <mx:RemoteObject id="ro_grupos" destination="libreria_alm.frm_prueba_rendir" showBusyCursor="true" fault="error_fx(event)">
+			<mx:method name="ro_obtiene_correlativo_trabajos" result="devuelve_datos_correlativos_trabajo(event)" />
+			<mx:method name="ro_carga_tipo_evaluacion" result="devuelve_datos_carga_tipo_evaluacion(event)" />
+			<mx:method name="ro_comprueba_unico_participante" result="devuelve_datos_comprueba_unico_participante(event)" />			
+			<mx:method name="ro_consulta_busca_alumno" result="devuelve_datos_consulta_busca_alumno(event)" />						
+			<mx:method name="ro_genera_grupos_trabajo_web" result="result_ro_genera_grupos_trabajo_web(event)" />									
+			<mx:method name="ro_genera_detalle_grupos_trabajo_web"/>
+			<mx:method name="ro_actualiza_nota" result="result_ro_actualiza_nota(event)" />
+			<mx:method name="muestra_informacion_de_toma_curso" result="result_muestra_informacion_de_toma_curso(event)" />	
+		</mx:RemoteObject>
+</mx:Module>	
+	
+		
+		

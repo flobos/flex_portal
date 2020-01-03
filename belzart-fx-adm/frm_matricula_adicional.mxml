@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" creationComplete="inicio()" layout="absolute">
+	<mx:TitleWindow x="146" y="52" width="479" height="497" layout="absolute" title="Antecedentes Contratos">
+		<mx:Label x="10" y="38" text="Matrícula"/>
+		<mx:Label x="40" y="66" text="Rut"/>
+		<mx:TextInput id="txt_matric" keyUp="txt_matric_presskey(event)" x="72" y="36"/>
+		<mx:Label x="10" y="94" text="Nombre"/>
+		<mx:Label x="10" y="120" text="Carrera"/>
+		<mx:TextInput id="txt_nombre" x="72" y="92" width="363" editable="false"/>
+		<mx:Form x="12" y="141" width="437" height="270">
+			<mx:FormItem label="Sexo" fontWeight="bold" required="true">
+				<mx:ComboBox id="cmb_sexo" width="200" enabled="true"></mx:ComboBox>
+			</mx:FormItem>
+			<mx:FormItem label="Fecha Nacimiento" fontWeight="bold" required="true">
+				<mx:TextInput id="txt_fecha_nacimiento" width="225" editable="true"/>
+			</mx:FormItem>
+			<mx:FormItem label="País de Estudios Anteriores" fontWeight="bold" required="false">
+				<mx:ComboBox id="cmb_pais_estudios" width="200" enabled="true"></mx:ComboBox>
+			</mx:FormItem>
+			<mx:FormItem label="N° de contrato" fontWeight="bold" required="false">
+				<mx:TextInput id="txt_num_contrato" width="225" editable="true"/>
+			</mx:FormItem>
+			<mx:FormItem label="N° Celular Aval/Apoderado" fontWeight="bold" required="false">
+				<mx:TextInput id="txt_celular_aval" width="225" editable="true"/>
+			</mx:FormItem>
+			<mx:FormItem id="xx" label="Nº Pasaporte" fontWeight="bold" required="false">
+				<mx:TextInput id="txt_num_pasaporte" width="225" editable="true"/>
+			</mx:FormItem>
+			<mx:FormItem id="xx1" label="Tipo de Residencia" fontWeight="bold" required="false">
+				<mx:ComboBox id="cmb_residencia" width="225" enabled="true"></mx:ComboBox>
+			</mx:FormItem>			
+			<mx:Button id="btn_Guardar" label="Guardar" click="btn_grava_datos(event)"/>
+		</mx:Form>
+		<mx:TextInput id="txt_rut" keyUp="txt_rut_presskey(event)" x="72" y="64"/>
+		<mx:Button id="btn_busca_matricula" x="290" y="36" width="121" label="Buscar Matricula" click="buscar_matricula()"/>
+		<mx:Button id="btn_busca_rut" x="290" y="64" width="121" label="Buscar Rut" click="buscar_rut()"/>
+		<mx:Label x="10" y="10" fontWeight="bold" text="BUSCAR ALUMNO"/>
+		<mx:Button id="btn_nueva_busqueda" x="387" y="419" label="Nuevo" click="btn_nueva_busqueda_click()"/>
+		<mx:TextInput id="txt_carrera" x="72" y="118" width="363" editable="false"/>
+	</mx:TitleWindow>
+	<mx:Script source="frm_matricula_adicional_script.as"/>
+	<mx:RemoteObject id="ro_frm_matricula_adicional" destination="libreria.frm_matricula_adicional" showBusyCursor="true" fault="error_fx(event)">
+		<mx:method name="busca_matriculas_por_matriculas" result= "result_busca_matriculas_por_matriculas(event)"/>
+		<mx:method name="busca_matriculas_por_rut" result = "result_busca_matriculas_por_rut(event)"/>
+		<mx:method name="rellena_combo_pais" result = "result_rellena_combo_pais(event)"/>
+		<mx:method name="rellena_combo_sexo" result = "result_rellena_combo_sexo(event)"/>
+		<mx:method name="rellena_combo_residencia" result = "result_rellena_combo_residencia(event)"/>
+		<mx:method name="guarda_datos" result="result_guarda_datos(event)"/>
+		</mx:RemoteObject>	
+	<mx:StringValidator id="val_cmb_sexo" source="{cmb_sexo}" property="text" requiredFieldError="Es requerido" minLength="2" />
+	<mx:DateValidator id="val_txt_fecha_nacimiento" source="{txt_fecha_nacimiento}" property="text" inputFormat="dd-mm-yyyy" allowedFormatChars="*-" requiredFieldError="Es requerido" />
+	</mx:Application>
+

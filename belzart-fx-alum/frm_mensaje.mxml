@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<mx:TitleWindow xmlns:mx="http://www.adobe.com/2006/mxml" title="" x="30" y="50" width="684" height="339" horizontalAlign="center">
+
+ <mx:DateFormatter id="dfconv" formatString="DD-MM-YYYY"/>
+<mx:Canvas width="618" height="279">
+    <mx:Button label="Cerrar" id="btn_cerrar" click="btn_cerrar_click()" x="545" y="247" />
+    <mx:Text x="9" y="7"  text="Estimados Alumnos." width="598" height="26" textAlign="center" fontSize="18" />
+    <mx:Text x="9" y="53"  text="Junto con saludar, informamos a todos los alumnos de carreras e-learning, que la fecha de inicio de pruebas se pospondrá una semana, esto quiere decir que el inicio ya no será el día Viernes 25 de Septiembre, sino el día Viernes 3 de Octubre. También recomendamos revisar el día Lunes 29 de Septiembre el calendario académico que se encuentra en su aula virtual, ya que existirá  modificación en las fechas de evaluación.
+
+ 
+
+La razón principal de estos cambios es facilitar el periodo de estudio a nuestros alumnos.
+
+" width="598" height="120" fontSize="12" />
+    <mx:Text x="9" y="183"  text="Sin otro particular
+
+ 
+
+ 
+
+Atte.
+
+" width="598" height="21" textAlign="center" fontSize="12" />
+    <mx:Text x="9" y="204"  text="I.P IPLACEX.
+
+" width="598" height="21" textAlign="center" fontSize="12" />
+  </mx:Canvas>
+  
+<mx:Script source="frm_mensaje_script.as" />
+</mx:TitleWindow>

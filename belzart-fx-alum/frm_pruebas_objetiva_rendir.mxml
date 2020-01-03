@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Module xmlns:mx="http://www.adobe.com/2006/mxml" backgroundColor="#CCCCCC" width="100%" height="100%">
+<mx:DateFormatter id="dfconv" formatString="DD-MM-YYYY"/>
+<mx:NumberFormatter id="numberFormatter" precision="0" rounding="down" />
+<mx:TitleWindow xmlns:mx="http://www.adobe.com/2006/mxml" width="844" height="579" creationComplete="cargar()" horizontalAlign="left" verticalAlign="top" showCloseButton="false" id="ventana" title="Prueba de Selección Múltiple en tiempo real">
+<mx:VBox width="798" height="100%" id="prueba_objetiva">
+	  <mx:TextArea id="txt_info" editable="false" width="762" borderStyle="none" color="#535E95" fontWeight="bold" height="20"/>
+	  <mx:TextArea id="txt_intro" editable="false" width="762" borderStyle="none" color="#535E95" fontWeight="bold"/>
+	   <mx:TextArea editable="false" text="Después de dar respuesta a todas las preguntas planteadas, deberá presionar el botón “Enviar Prueba”, lo que generará un comprobante que tendrá que imprimir  y guardar." width="762" borderStyle="none" color="#535E95" fontWeight="bold"/>
+		<mx:TextArea editable="false" visible="false"  width="762" borderStyle="none" color="#535E95" fontWeight="bold" id="lbl_comenzar_prueba"/>   
+	<mx:Button visible="false" label="Comenzar Prueba" id="btn_comenzar_prueba" click="btn_comenzar_click()"/>
+	<mx:Label visible="false" width="762" color="#535E95" fontWeight="bold" id="lbl_hora_inicio"/>  
+	<mx:Label visible="false" width="762" color="#535E95" fontWeight="bold" id="lbl_hora_fin"/>  
+	<mx:Label visible="false" width="762" color="#F31909" fontWeight="normal" id="lbl_hora" fontSize="12"/>  
+	<mx:HRule width="779" />
+	  <mx:Label id="lbl_trab_idn" visible="false" />
+		 <mx:Repeater id="rpt_preguntas" >
+	 	  <mx:Grid id="Grid_pretoma">
+			<mx:GridRow>
+            	<mx:GridItem >
+				<mx:VBox width="778" id="snap_area">
+					<mx:Label id="lbl_codigo" text="{rpt_preguntas.currentItem.campo_uno}" visible="false"  />   
+					<mx:TextArea id="lbl_pregunta" width="774" text="{rpt_preguntas.currentItem.campo_dos}" fontWeight="bold"  height="84" editable="false"/>
+					<mx:Image id="img_pregunta"  width="305" visible="true" source="{uploadFOLDER +rpt_preguntas.currentItem.campo_cuatro + '/' + rpt_preguntas.currentItem.campo_tres}" height="{(((String(rpt_preguntas.currentItem.campo_tres).indexOf('.',0)) + 1)*160) /(String(rpt_preguntas.currentItem.campo_tres).indexOf('.',0)) }">
+					</mx:Image>
+				 	<mx:Repeater id="rpt_respuestas" >
+					<mx:VBox>
+					<mx:HBox>
+					  <mx:RadioButton id="rb_codigo" toolTip="Seleccione una alternativa" label="{rpt_respuestas.currentItem.data}" groupName="{rpt_respuestas.currentItem.campo_uno}" width="20" labelPlacement="right" visible="true" color="#FFFFFF"  />
+					  <mx:TextArea id="lbl_codigo_res" text="{rpt_respuestas.currentItem.label}" width="746" borderStyle="none"  editable="false"/>
+					</mx:HBox>
+					</mx:VBox>
+
+					</mx:Repeater>
+				
+					
+				</mx:VBox>
+					
+					
+				</mx:GridItem>
+	        </mx:GridRow>
+
+		  </mx:Grid> 
+           
+	    </mx:Repeater>
+		<mx:HRule width="774" height="20" />
+		<mx:Label id="lbl_guardando" width="778" height="17" visible="false"  text="Estamos registrando su prueba. Por favor espere algunos segundos hasta que se muestre su comprobante." color="#F70A0A"/>
+		<mx:Button label="Enviar Prueba" id="btn_envia" click="click_btn_envia()" width="130" height="35" />
+		
+      </mx:VBox>
+	
+
+<mx:Script source="frm_pruebas_objetiva_rendir_script.as"/>
+
+
+
+  </mx:TitleWindow>
+   
+<mx:RemoteObject id="ro_preguntas" destination="libreria_alm.frm_pruebas_objetiva_rendir" showBusyCursor="true" fault="error_fx(event)">
+	<mx:method name="ingresa_inicio_rendicion" result="result_ingresa_inicio_rendicion(event)" />
+	<mx:method name="muestra_preguntas" result="result_muestra_preguntas(event)" />
+	<mx:method name="muestra_respuestas" result="result_muestra_respuestas(event)" />
+	<mx:method name="genera_trabajo" result="result_genera_trabajo(event)" />
+	<mx:method name="genera_respuestas_alumnos" result="result_genera_respuestas_alumnos(event)" />
+	<mx:method name="calcula_nota" result="result_calcula_nota(event)" />
+</mx:RemoteObject>
+
+ </mx:Module>
+  
+  

@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Module xmlns:mx="http://www.adobe.com/2006/mxml" width="100%" height="100%" creationComplete="inicio()" backgroundColor="#CCCCCC" >
+<mx:TitleWindow width="755" height="426" x="10" y="102" title="Info - Tutor"  >
+  <mx:Canvas width="721" height="350">
+  <mx:Image x="15" y="16"  source="imagenes/tutores/logo_ipx.jpg" width="140" height="144" />
+    <mx:Label x="15" y="180"  text="Contacto: (71) 613110" fontWeight="bold" width="140" textAlign="center" />
+    <mx:Grid x="184" y="10" >
+      <mx:GridRow>
+        <mx:GridItem>
+          <mx:Label x="204" y="24"  text="Nombre" fontWeight="bold" color="#FF0000" />
+        </mx:GridItem>
+        <mx:GridItem>
+          <mx:Label x="314" y="5" width="299" height="18" id="lbl_nombre" fontWeight="bold" />
+        </mx:GridItem>
+      </mx:GridRow>
+      <mx:GridRow>
+        <mx:GridItem>
+          <mx:Label x="200" y="42"  text="Título Profesional" fontWeight="bold" color="#FF0000" />
+        </mx:GridItem>
+        <mx:GridItem>
+          <mx:VBox width="100%" height="100%" x="138" y="212">
+   	    	  <mx:Repeater id="titulo_prof">
+			      <mx:VBox width="100%" height="100%">
+			      <mx:Label width="300" height="100%" text="{titulo_prof.currentItem.titulo}"/>
+			      </mx:VBox>
+	    	  </mx:Repeater>
+          </mx:VBox>
+        </mx:GridItem>
+      </mx:GridRow>
+      <mx:GridRow>
+        <mx:GridItem>
+          <mx:Label x="254" y="248"  text="Universidad" color="#FF0000" fontWeight="bold" />
+        </mx:GridItem>
+        <mx:GridItem>
+		          <mx:VBox width="100%" height="100%" x="138" y="212">
+   	  		<mx:Repeater id="universidad">
+			  	<mx:VBox width="100%" height="100%">
+			  		<mx:Label width="100%" height="100%" text="{universidad.currentItem.uni}"/>
+				</mx:VBox>
+	  		</mx:Repeater>
+          </mx:VBox>
+        </mx:GridItem>
+      </mx:GridRow>
+      <mx:GridRow>
+        <mx:GridItem>
+          <mx:Label x="191" y="113"  text="Perfeccionamiento" fontWeight="bold" color="#FF0000" />
+        </mx:GridItem>
+        <mx:GridItem>
+		
+          <mx:VBox width="100%" height="100%" x="138" y="212">
+   	  		<mx:Repeater id="titulo_perf">
+			  	<mx:VBox width="100%" height="100%">
+			  		<mx:Label width="100%" height="100%" text="{titulo_perf.currentItem.perfeccionamiento}"/>
+				</mx:VBox>
+	  		</mx:Repeater>
+          </mx:VBox>
+		  
+        </mx:GridItem>
+      </mx:GridRow>
+      <mx:GridRow>
+        <mx:GridItem>
+          <mx:Label x="205" y="162"  text="Institución" fontWeight="bold" color="#FF0000" />
+        </mx:GridItem>
+        <mx:GridItem>
+		
+		    <mx:VBox width="100%" height="100%" x="138" y="212">
+   	  		<mx:Repeater id="uni_perf">
+			  	<mx:VBox width="100%" height="100%">
+			  		<mx:Label width="100%" height="100%" text="{uni_perf.currentItem.uni}"/>
+				</mx:VBox>
+	  		</mx:Repeater>
+          </mx:VBox>
+		  
+        </mx:GridItem>
+      </mx:GridRow>
+      <mx:GridRow>
+        <mx:GridItem>
+          <mx:Label x="204" y="210"  text="Horario Tutoría" color="#FF0000" fontWeight="bold" />
+        </mx:GridItem>
+        <mx:GridItem>
+          <mx:Label x="286" y="187" id="lbl_horario" width="262" height="18" />
+        </mx:GridItem>
+      </mx:GridRow>
+    </mx:Grid>
+    <mx:Image x="655" y="182"  source="@Embed('imagenes/tutores/ser-+.gif')" width="62" height="168" />
+  </mx:Canvas>
+  <mx:Canvas width="723" height="15" backgroundColor="#FF0000">
+  </mx:Canvas>
+
+</mx:TitleWindow>
+  <mx:Script source="frm_ficha_tutor_script.as" />
+  
+
+    <mx:RemoteObject id="ro_ficha_tutor" destination="libreria_alm.frm_ficha_tutor" showBusyCursor="true" fault="error_fx(event)">
+		<mx:method name="ro_carga_datos_tutor" result="devuelve_datos_carga_datos_tutor(event)" />
+		<mx:method name="ro_carga_nombre_tutor" result="devuelve_datos_carga_nombre_tutor(event)" />
+	</mx:RemoteObject>
+	
+	
+	  	  
+</mx:Module>

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:TitleWindow xmlns:mx="http://www.adobe.com/2006/mxml" layout="absolute" width="358" height="219" title="Ingreso Registro - Agregar Fono"  creationComplete="inicio()" horizontalAlign="left" verticalAlign="top" fontWeight="bold">
+	
+	<mx:Script>
+		<![CDATA[
+			
+			protected function lbl_cod_area_keyUpHandler(event:KeyboardEvent):void
+			{
+				// TODO Auto-generated method stub
+				if (event.charCode == 13)
+				{
+					if (this.lbl_cod_area.text == "")
+					{
+						this.btn_ver_codigos.setFocus();
+					}
+					else
+					{
+						this.lbl_numero.setFocus();
+					}
+				}
+			}
+			protected function lbl_numero_keyUpHandler(event:KeyboardEvent):void
+			{
+				// TODO Auto-generated method stub
+				if (event.charCode == 13)
+				{
+					this.cmb_tipo_telefono.setFocus();
+				}
+			}
+			
+			
+			
+			protected function cmb_tipo_telefono_keyUpHandler(event:KeyboardEvent):void
+			{
+				// TODO Auto-generated method stub
+				if (event.charCode == 13)
+				{
+					this.btn_guardar.setFocus();
+				}
+			}
+			protected function btn_ver_codigos_keyUpHandler(event:KeyboardEvent):void
+			{
+				// TODO Auto-generated method stub
+				if (event.charCode == 13)
+				{
+					popup_codigos();
+				}
+			}
+			protected function btn_guardar_keyUpHandler(event:KeyboardEvent):void
+			{
+				// TODO Auto-generated method stub
+				if (event.charCode == 13)
+				{
+					btn_guardar_click();
+				}
+			}
+			
+		]]>
+	</mx:Script>
+	
+	<mx:Label x="10" y="98.5" text="Tipo de Teléfono" fontWeight="normal"/>
+	<mx:TextInput x="183" y="43" width="49" maxChars="10" keyUp="lbl_cod_area_keyUpHandler(event)" id="lbl_cod_area"/>
+	<mx:TextInput x="183" y="69" maxChars="20" keyUp="lbl_numero_keyUpHandler(event)" id="lbl_numero" width="115"/>
+	<mx:ComboBox x="183" y="95" id="cmb_tipo_telefono" keyUp="cmb_tipo_telefono_keyUpHandler(event)" width="140"></mx:ComboBox>
+	<mx:Label x="10" y="9.5" text="Nuevo Teléfono" fontWeight="bold" textDecoration="underline"/>
+	<mx:Label x="10" y="46.5" text="Cód. Area" fontWeight="normal"/>
+	<mx:Label x="10" y="72.5" text="Número" fontWeight="normal"/>
+	<mx:Button x="171" y="147" label="Guardar y Seleccionar" click="btn_guardar_click()" id="btn_guardar" keyUp="btn_guardar_keyUpHandler(event)"/>
+	<mx:Button x="10" y="147" label="Cancelar" id="btn_cancelar" click="btn_cancelar_click()"/>
+
+<mx:Script source="frm_registro_admision_ingreso_registro_popup_fonos_script.as" />
+	
+	<mx:RemoteObject id="ro_ingreso_registro" destination="libreria.frm_registro_admision_ingreso_registro" showBusyCursor="true" fault="error_fx(event)">
+		<mx:method name="muestra_tipo_telefono" result="result_muestra_tipo_telefono(event)"/>
+		<mx:method name="agrega_telefono" result="result_agrega_telefono(event)"/>
+	</mx:RemoteObject>	
+	<mx:Button id="btn_ver_codigos" x="254" y="43" label="Ver Cód." click="popup_codigos()" keyUp="btn_ver_codigos_keyUpHandler(event)"/>
+	
+	
+</mx:TitleWindow>
+ 

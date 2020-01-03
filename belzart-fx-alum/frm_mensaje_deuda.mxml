@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:TitleWindow xmlns:mx="http://www.adobe.com/2006/mxml" title="Avisos" x="30" y="50" width="640" height="192" creationComplete="frm_mensaje_deuda_load()" horizontalAlign="center" verticalAlign="middle" showCloseButton="false">
+  
+  <mx:DateFormatter id="dfconv" formatString="DD-MM-YYYY"/>
+<mx:VBox width="592" height="109">
+
+     <mx:Text text=" Se informa a todos nuestros alumnos que existe una nueva dirección para acceder a nuestra página y aula virtual:  www.iplacex.cl en  dicha página encontrará información respecto de nuestra institución y asimismo podrá acceder al aula virtual en el link “CAMPVS VIRTUAL” en la parte superior derecha." width="557" fontSize="12" />
+     <mx:Button id="bnt_leido" label="Aviso Leído" width="187" color="#0000FF"  click="btn_leido_click()" />
+     <mx:Text text=" Estimado(a) Alumno(a): Junto con saludarle, informo a usted que según nuestros registros presenta morosidad en el pago de arancel correspondiente a los programas de estudio que se detallan a continuación:" width="538" fontSize="12"  visible="false"/>
+   <mx:DataGrid id="dg_deuda" width="552" visible="false">
+       <mx:columns>
+         <mx:Array>
+           <mx:DataGridColumn headerText="Programa Estudio" dataField="campo_uno" width="301"  />
+           <mx:DataGridColumn headerText="Año" dataField="campo_dos" width="35" textAlign="center"/>
+		    <mx:DataGridColumn headerText="Cuotas Atrasadas" dataField="campo_tres" width="110" textAlign="center"/>
+           <mx:DataGridColumn headerText="Valor Atrasado" dataField="campo_cuatro"  width="94" textAlign="center"/>
+         </mx:Array>
+       </mx:columns>
+     </mx:DataGrid>
+     <mx:Text id="t_fecha" text="Le sugerimos regularizar su situación  a la brevedad posible, con el fin de que este retraso no le genere costos adicionales por conceptos de interés y gastos de cobranza.   
+
+Ahora bien, si usted ya canceló dicho monto, solicitamos enviarnos a la brevedad copia de los comprobantes de pago o depósito a través del Fax 613110 (confirme su correcta recepción), con objeto de actualizar su estado de cuenta en nuestro sistema. 
+" width="550" height="106" fontSize="12"  visible="false"/>
+   </mx:VBox>
+   <mx:Script source="frm_mensaje_deuda_script.as" />
+
+<mx:RemoteObject id="ro_mensaje_deuda" destination="libreria_alm.frm_mensaje_deuda" showBusyCursor="true" fault="error_fx(event)">
+	<mx:method name="muestra_mensaje_deuda" result="result_muestra_mensaje_deuda(event)" />
+</mx:RemoteObject>
+
+
+
+</mx:TitleWindow>

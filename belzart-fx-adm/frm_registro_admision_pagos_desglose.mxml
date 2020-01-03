@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:TitleWindow xmlns:mx="http://www.adobe.com/2006/mxml" layout="absolute" width="500" height="415" title="Detalle de la Operacion" creationComplete="inicio()" horizontalAlign="left" verticalAlign="top" fontWeight="bold">
+	<mx:Label x="10" y="10" text="Glosa"/>
+	<mx:DataGrid id="dg_glosa" x="10" y="36" width="440">
+		<mx:columns>
+			<mx:DataGridColumn dataField="data" headerText="Detalle"/>
+			<mx:DataGridColumn dataField="label" headerText="Valor" width="125"/>
+		</mx:columns>
+	</mx:DataGrid>
+	<mx:Button x="378" y="335" label="Aceptar" click="btn_cancelar_click()"/>
+	<mx:Label x="11" y="203" text="Medios de Pago"/>
+	<mx:DataGrid id="dg_medios_pago" x="10" y="229" width="440" height="98">
+		<mx:columns>
+			<mx:DataGridColumn dataField="data" headerText="Valor" width="125"/>
+			<mx:DataGridColumn dataField="label" headerText="Medio Pago"/>
+		</mx:columns>
+	</mx:DataGrid>
+	
+	
+	<mx:Script source="frm_registro_admision_pagos_desglose_script.as" />
+	
+	
+	<mx:RemoteObject id="ro_pagos" destination="libreria.frm_registro_admision_pagos" showBusyCursor="true" fault="error_fx(event)">
+		<mx:method name="muestra_glosa" result="result_muestra_glosa(event)"/>
+		<mx:method name="muestra_medios" result="result_muestra_medios(event)"/>
+	</mx:RemoteObject>
+</mx:TitleWindow>

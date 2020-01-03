@@ -1,0 +1,34 @@
+<properties>
+  <property>
+    <name>UploadFOLDER</name>
+    <value>http://164.77.193.131:8100/lcds/pruebas_upload/</value>
+  </property>
+  <property>
+    <name>UploadURL</name>
+    <value>http://164.77.193.131:8100/lcds/upload.jsp</value>
+  </property>
+  <property>
+    <name>UploadSnapURL</name>
+    <value>http://164.77.193.131:8100/lcds/upload_snapshot.jsp</value>
+  </property>
+  <property>
+    <name>UploadImgFOLDER</name>
+    <value>http://164.77.193.131:8100/lcds/imagenes_upload/</value>
+  </property>
+  <property>
+    <name>FMSURL</name>
+    <value>rtmp://164.77.193.131:1935/chat_test/</value>
+  </property>
+ <property>
+    <name>flexURL</name>
+    <value>http://164.77.193.131:8100/</value>
+  </property>
+  <property>
+    <name>chatURL</name>
+    <value>http://www.belzart.cl:2000</value>
+  </property>
+  <property>
+    <name>iplacexURL</name>
+    <value>http://164.77.193.131/iplacex/</value>
+  </property>
+</properties>

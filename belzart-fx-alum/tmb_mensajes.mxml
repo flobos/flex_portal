@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:HBox xmlns:mx="http://www.adobe.com/2006/mxml" 
+    verticalGap="0" borderStyle="none" horizontalAlign="left">
+    <mx:Script>
+        var product: Object;
+        function setValue(str: String, item: Object) {
+            if (item==undefined) {
+                visible = false;
+                return;
+            } else {
+                product=item;
+                visible=true;
+            } 
+        }
+    </mx:Script>
+		
+   <mx:Image id="image" width="40" height="40" source="{product.campo_seis}"/>
+	<!-- <mx:Label text="{product.nombre}" width="115" textAlign="center" height="30"/> -->
+	<mx:Text text="{product.campo_tres} - {product.campo_cinco.charAt(product.campo_cinco.length-13)}{product.campo_cinco.charAt(product.campo_cinco.length-12)}/{product.campo_cinco.charAt(product.campo_cinco.length-16)}{product.campo_cinco.charAt(product.campo_cinco.length-15)}/{product.campo_cinco.charAt(product.campo_cinco.length-21)}{product.campo_cinco.charAt(product.campo_cinco.length-20)}{product.campo_cinco.charAt(product.campo_cinco.length-19)}{product.campo_cinco.charAt(product.campo_cinco.length-18)}-{product.campo_siete}" width="414" textAlign="left" height="40" color="#000000" fontWeight="bold" />
+
+</mx:HBox>

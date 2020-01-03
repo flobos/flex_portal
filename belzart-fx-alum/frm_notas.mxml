@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Module xmlns:mx="http://www.adobe.com/2006/mxml" width="100%" height="100%" backgroundColor="#CCCCCC" creationComplete="inicio()" >
+<mx:DateFormatter id="dfconv" formatString="DD-MM-YYYY"/>
+<mx:TitleWindow title="Aula Virtual - Notas" width="664" height="391" horizontalAlign="left">
+    <mx:Canvas width="632" height="336" color="#000000" x="0" y="0">
+      <mx:DataGrid id="dg_notas" width="617" x="7.5" y="153" height="153">
+        <mx:columns>
+          <mx:Array>
+			<mx:DataGridColumn headerText="Proceso Evaluativo" dataField="campo_once" width="140" />
+            <mx:DataGridColumn headerText="Tipo Prueba" dataField="campo_uno" width="130" />
+            <mx:DataGridColumn headerText="Nota" dataField="campo_dos" width="80" />
+            <mx:DataGridColumn headerText="Estado" dataField="campo_tres" />
+            <mx:DataGridColumn headerText="Fecha Nota" dataField="campo_cuatro" visible="false"/>
+            <mx:DataGridColumn headerText="Fecha Toma Prueba" dataField="campo_cinco" width="130" />
+			<mx:DataGridColumn headerText="" width="0" dataField="campo_siete" />
+			<mx:DataGridColumn headerText="Código confirmacion" dataField="campo_ocho" visible="false" />
+			<mx:DataGridColumn headerText="" width="0" dataField="campo_diez" />
+          </mx:Array>
+        </mx:columns>
+      </mx:DataGrid>
+      <mx:Label x="533" y="10" color="#000099" width="89" height="18"  text="" fontSize="12" id="lbl_promedio" visible="true" />
+      <mx:Label x="7" y="146"  visible="false" text="Promedio" width="89" height="18" id="lbl_promedio_lbl" fontStyle="normal" fontWeight="bold" />
+	  
+      <mx:Label id="lbl_tipo" width="177" visible="false" x="95" y="146" />
+      <mx:Button x="10" y="314"  label="Ver Corrección" id="btn_detalle" click="genera_detalle()" />
+      <mx:Label x="125" y="316"  text="Seleccione la nota y presione&quot; Detalle&quot; para ver el detalle de la correccion" width="442" height="19" />
+		<mx:DataGrid id="dg_procesos" x="10" y="23" width="331" height="95" click="cargar_notas()">
+			<mx:columns>
+				<mx:DataGridColumn dataField="campo_uno" headerText="" visible="false"/>
+				<mx:DataGridColumn dataField="campo_dos" headerText="Proceso Evaluativo"/>
+				<mx:DataGridColumn dataField="campo_tres" headerText="Promedio" width="70"/>
+			</mx:columns>
+		</mx:DataGrid>
+		<mx:Label x="10" y="0" text="Seleccione Proceso Evaluativo"/>
+		<mx:Label x="10" y="127" text="Notas del Proceso"/>
+    </mx:Canvas>
+
+</mx:TitleWindow>
+	<mx:Script source="frm_notas_script.as" />
+	
+    <mx:RemoteObject id ="ro_muestra_notas" destination="libreria_alm.frm_notas"	 showBusyCursor="true" fault="error_fx(event)">
+		<mx:method name="notas_muestra_web"  result="result_notas_muestra_web(event)"  />
+		<mx:method name="procesos_muestra_web"  result="result_procesos_muestra_web(event)"  />
+	</mx:RemoteObject>
+
+</mx:Module>

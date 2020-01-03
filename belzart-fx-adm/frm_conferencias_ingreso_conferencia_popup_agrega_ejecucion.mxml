@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:TitleWindow xmlns:mx="http://www.adobe.com/2006/mxml" width="668" height="418" layout="absolute" initialize="inicio()" title="Agregar Ejecución Académica" horizontalAlign="center" verticalAlign="middle">
+		<mx:Canvas x="10" y="37" width="628" height="268" borderStyle="solid" cornerRadius="10">
+			<mx:VBox  x="0" y="3" height="253" width="605">
+				<mx:Repeater id="rp_ejecuciones_academicas">
+					<mx:HBox>
+						<mx:Label width="3"/>
+						<mx:CheckBox id = "chk_ok_sel"    width="17"/>
+						<mx:Label id = "lbl_codigo_ramo"      width="80"  text    = "{rp_ejecuciones_academicas.currentItem.campo_uno}" />
+						<mx:Label id = "lbl_ramo"      width="263"  text    = "{rp_ejecuciones_academicas.currentItem.campo_dos}" />
+						<mx:Label id = "lbl_jornada" width="90" text = "{rp_ejecuciones_academicas.currentItem.campo_tres}"/>
+						<mx:Label id = "lbl_seccion" 	  width="90"  text = "{rp_ejecuciones_academicas.currentItem.campo_cuatro}"/>				
+					</mx:HBox>
+				</mx:Repeater>
+			</mx:VBox>
+		</mx:Canvas>
+		<mx:Button x="530.8" y="337" label="Seleccionar" click="btn_seleccionar_click()" id="btn_seleccionar" icon="@Embed(source='imagenes/edit_add.png')"/>
+		<mx:Button x="10" y="337" label="Cancelar" click="btn_cancelar_click()"/>
+		<mx:Script source="frm_conferencias_ingreso_conferencia_popup_agrega_ejecucion_script.as" />
+		<mx:RemoteObject id="ro_ingreso_conferencia" destination="libreria.frm_conferencias_ingreso_conferencia" showBusyCursor="true" fault="error_fx(event)">
+			<mx:method name="busca_ejecuciones_academicas" result="result_busca_ejecuciones_academicas(event)"/>
+			<mx:method name="busca_ejecuciones_academicas_tutor" result="result_busca_ejecuciones_academicas(event)"/>
+		</mx:RemoteObject>	
+		<mx:Label x="54" y="20" text="Código" fontWeight="bold"/>
+		<mx:Label x="10" y="313" text="Marque la casilla de las ejecuciones que desea seleccionar" fontSize="9"/>
+		<mx:Label x="142" y="20" text="Ramo" fontWeight="bold"/>
+		<mx:Label x="410" y="20" text="Jornada" fontWeight="bold"/>
+		<mx:Label x="509" y="20" text="Sección" fontWeight="bold"/>
+</mx:TitleWindow>

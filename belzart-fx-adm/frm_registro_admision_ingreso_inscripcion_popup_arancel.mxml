@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:TitleWindow xmlns:mx="http://www.adobe.com/2006/mxml"
+				width="344" height="268" layout="absolute" creationComplete="inicio()" title="Aranceles por Ejecución">
+	
+	<mx:Script>
+		<![CDATA[
+			import libreria.obj_tres_campos;
+			import mx.managers.PopUpManager;
+			import mx.collections.ArrayCollection;
+			import mx.controls.Alert;
+			public var aranceles:ArrayCollection;
+			
+			private function inicio():void
+			{
+				this.dg_aranceles.dataProvider = aranceles;
+			}
+			
+			protected function btn_seleccionar_clickHandler(event:MouseEvent):void
+			{
+				// TODO Auto-generated method stub
+				if (dg_aranceles.selectedItem != null)
+				{
+					var formulario:Array;
+					var indice:int;
+					
+					indice = this.parentApplication.tn_productos.selectedIndex;
+					formulario = this.parentApplication.tn_productos.getChildren();
+					formulario[indice].lbl_valor_arancel.text = this.dg_aranceles.selectedItem.campo_tres;
+					PopUpManager.removePopUp(this);	
+			
+				}
+				else
+				{
+					mx.controls.Alert.show("Debe seleccionar un Arancel de la Lista","Alerta");
+				}
+			}
+		]]>
+	</mx:Script>
+	
+	<mx:DataGrid x="10" y="36" id="dg_aranceles">
+		<mx:columns>
+			<mx:DataGridColumn dataField="campo_uno" headerText="eje_idn" visible="false"/>
+			<mx:DataGridColumn dataField="campo_dos" headerText="Ejecución" width="200"/>
+			<mx:DataGridColumn dataField="campo_tres" headerText="Arancel"/>
+		</mx:columns>
+	</mx:DataGrid>
+	<mx:Label x="10" y="10" text="Seleccione un Arancel"/>
+	<mx:Button x="221" y="200" label="Seleccionar" id="btn_seleccionar" click="btn_seleccionar_clickHandler(event)"/>
+	
+</mx:TitleWindow>

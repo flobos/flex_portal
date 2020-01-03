@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:TitleWindow xmlns:mx="http://www.adobe.com/2006/mxml"
+				width="444" height="340" layout="absolute" title="Detalle de Cheque" creationComplete="inicio()">
+	<mx:Label x="10" y="50" text="Banco"/>
+	<mx:ComboBox id="cmb_bancos" x="90" y="48" width="324"></mx:ComboBox>
+	<mx:Label x="10" y="76" text="Plazo"/>
+	<mx:NumericStepper id="ns_plazo" x="90" y="74" maximum="120"/>
+	<mx:Label x="172" y="76" text="N° Serie:"/>
+	<mx:TextInput id="lbl_serie" x="234" y="74" width="180"/>
+	<mx:Label x="10" y="120" text="Girador:"/>
+	<mx:Label x="10" y="146" text="Rut:"/>
+	<mx:Label x="10" y="172" text="Nombres:"/>
+	<mx:Label x="10" y="198" text="Apellido Paterno:"/>
+	<mx:Label x="10" y="224" text="Apellido Materno:"/>
+	<mx:TextInput id="lbl_rut" x="132" y="144" keyUp="lbl_rut_presskey(event)"/>
+	<mx:TextInput id="lbl_nombres" x="132" y="170" width="282"/>
+	<mx:TextInput id="lbl_ap_paterno" x="132" y="196" width="282"/>
+	<mx:TextInput id="lbl_ap_materno" x="132" y="222" width="282"/>
+	<mx:HRule x="11" y="110" width="403"/>
+	<mx:Button x="342" y="268" label="Aceptar" click="agregar_detalle()"/>
+	<mx:Button x="10" y="268" label="Cancelar" click="btn_cancelar_click()"/>
+	
+	<mx:Script source="frm_registro_admision_pagos_detalle_cheque_script.as"/>
+	
+	<mx:RemoteObject id="ro_pagos_sedes" destination="libreria.frm_registro_admision_pagos" showBusyCursor="true" fault="error_fx(event)">
+		<mx:method name="orden_pago_muestra_banco" result="result_orden_pago_muestra_banco(event)"/>
+	</mx:RemoteObject>
+	<mx:Label id="lbl_monto" x="10" y="10" text="Monto:"/>
+	<mx:Label x="295" y="146" fontSize="8" text="Presione Enter para Validar"/>
+	
+	
+</mx:TitleWindow>

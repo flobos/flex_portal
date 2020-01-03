@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:TitleWindow xmlns:mx="http://www.adobe.com/2006/mxml" layout="absolute" width="628" height="427" title="Agregar Dirección" initialize="inicio()" horizontalAlign="left" verticalAlign="top" fontWeight="bold">
+	
+	<mx:Script>
+		<![CDATA[
+			protected function lbl_calle_keyUpHandler(event:KeyboardEvent):void
+			{
+				// TODO Auto-generated method stub
+				if (event.charCode == 13)
+				{
+					lbl_numero.setFocus();
+				}
+			}
+			
+			protected function lbl_numero_keyUpHandler(event:KeyboardEvent):void
+			{
+				// TODO Auto-generated method stub
+				if (event.charCode == 13)
+				{
+					lbl_depto.setFocus();
+				}
+			}
+			
+			protected function lbl_depto_keyUpHandler(event:KeyboardEvent):void
+			{
+				// TODO Auto-generated method stub
+				if (event.charCode == 13)
+				{
+					lbl_cod_zip.setFocus();
+				}
+			}
+			
+			protected function lbl_cod_zip_keyUpHandler(event:KeyboardEvent):void
+			{
+				// TODO Auto-generated method stub
+				if (event.charCode == 13)
+				{
+					lbl_referencia.setFocus();
+				}
+			}
+			protected function lbl_referencia_keyUpHandler(event:KeyboardEvent):void
+			{
+				// TODO Auto-generated method stub
+				if (event.charCode == 13)
+				{
+					cmb_pais.setFocus();
+				}
+			}
+			
+			protected function cmb_pais_keyUpHandler(event:KeyboardEvent):void
+			{
+				// TODO Auto-generated method stub
+				if (event.charCode == 13)
+				{
+					this.cmb_region.setFocus();
+				}
+			}
+			
+			protected function cmb_comuna_keyUpHandler(event:KeyboardEvent):void
+			{
+				// TODO Auto-generated method stub
+				if (event.charCode == 13)
+				{
+					btn_guardar.setFocus();
+				}
+			}
+			
+			protected function cmb_tipo_direccion_keyUpHandler(event:KeyboardEvent):void
+			{
+				// TODO Auto-generated method stub
+				if (event.charCode == 13)
+				{
+					this.lbl_buscar_direccion.setFocus();
+				}
+			}
+			
+			protected function cmb_tipo_busqueda_keyUpHandler(event:KeyboardEvent):void
+			{
+				// TODO Auto-generated method stub
+				if (event.charCode == 13)
+				{
+					this.btn_buscar_direcciones.setFocus();
+				}
+			}
+			
+			protected function btn_buscar_direcciones_keyUpHandler(event:KeyboardEvent):void
+			{
+				if (event.charCode == 13)
+				{
+					this.buscar_direccion();
+				}
+				
+			}
+			
+			protected function dg_direcciones_keyUpHandler(event:KeyboardEvent):void
+			{
+				// TODO Auto-generated method stub
+				if (event.charCode == 13)
+				{
+					this.btn_seleccionar.setFocus();
+				}
+			}
+			
+			protected function btn_seleccionar_keyUpHandler(event:KeyboardEvent):void
+			{
+				// TODO Auto-generated method stub
+				if (event.charCode == 13)
+				{
+					this.btn_seleccionar_click();
+				}
+			}
+			
+			protected function btn_guardar_keyUpHandler(event:KeyboardEvent):void
+			{
+				// TODO Auto-generated method stub
+				if (event.charCode == 13)
+				{
+					btn_guardar_click();
+				}
+			}
+			
+			protected function cmb_region_changeHandler(event:ListEvent):void
+			{
+				// TODO Auto-generated method stub
+				this.ro_ingreso_registro.muestra_comuna(this.cmb_region.selectedItem.campo_uno);
+			}
+			
+			protected function cmb_region_keyUpHandler(event:KeyboardEvent):void
+			{
+				// TODO Auto-generated method stub
+				if (event.charCode == 13)
+				{
+					this.cmb_comuna.setFocus();
+				}
+			}
+			
+		]]>
+	</mx:Script>
+	
+	<mx:Label x="10" y="24" text="Buscar Entidad" fontWeight="normal"/>
+	<mx:DataGrid x="10" y="73" width="585" id="dg_direcciones" height="89" keyUp="dg_direcciones_keyUpHandler(event)">
+		<mx:columns>
+			<mx:DataGridColumn width="100" headerText="Cod." dataField="campo_diez"/>
+			<mx:DataGridColumn id="dir_idn" dataField="campo_uno" visible="false"/>
+			<mx:DataGridColumn width="200" headerText="Calle" dataField="campo_dos"/>
+			<mx:DataGridColumn width="45" headerText="Nº" dataField="campo_tres"/>
+			<mx:DataGridColumn width="80" headerText="Depto." dataField="campo_cuatro"/>
+			<mx:DataGridColumn width="130" headerText="Ref." dataField="campo_once"/>
+			<mx:DataGridColumn width="50" headerText="Zip" dataField="campo_cinco"/>
+			<mx:DataGridColumn width="100" id="id_comuna" dataField="campo_seis" visible="false"/>
+			<mx:DataGridColumn width="100" headerText="Comuna" dataField="campo_siete"/>
+			<mx:DataGridColumn width="100" headerText="Región" dataField="campo_ocho"/>
+			<mx:DataGridColumn width="100" headerText="País" dataField="campo_nueve"/>
+		</mx:columns>
+	</mx:DataGrid>
+	<mx:TextInput x="112" y="44" width="191" id="lbl_buscar_direccion" maxChars="200" keyUp="lbl_buscar_direccion_presskey(event)"/>
+	<mx:Label x="290" y="9.5" text="Tipo de Dirección" fontWeight="normal"/>
+	<mx:ComboBox x="424" y="6" id="cmb_tipo_direccion" keyUp="cmb_tipo_direccion_keyUpHandler(event)"></mx:ComboBox>
+	<mx:Button x="505" y="167" label="Seleccionar" id="btn_seleccionar" click="btn_seleccionar_click()" keyUp="btn_seleccionar_keyUpHandler(event)"/>
+	<mx:Label x="10" y="172" text="Nueva Dirección" fontWeight="bold" textDecoration="underline"/>
+	<mx:Label x="12" y="201" text="Calle" fontWeight="normal"/>
+	<mx:Label x="12" y="222" text="Número" fontWeight="normal"/>
+	<mx:Label x="272" y="224" text="Depto." fontWeight="normal"/>
+	<mx:TextInput x="84" y="198" width="395" id="lbl_calle" maxChars="200" change="mayusculas(lbl_calle)" keyUp="lbl_calle_keyUpHandler(event)"/>
+	<mx:TextInput x="84" y="221" maxChars="10" id="lbl_numero" keyUp="lbl_numero_keyUpHandler(event)"/>
+	<mx:TextInput x="343" y="221" width="51" maxChars="10" id="lbl_depto" keyUp="lbl_depto_keyUpHandler(event)"/>
+	<mx:TextInput x="497" y="219" width="81" maxChars="10" id="lbl_cod_zip" keyUp="lbl_cod_zip_keyUpHandler(event)"/>
+	<mx:TextInput x="84" y="244" width="414" id="lbl_referencia" keyUp="lbl_referencia_keyUpHandler(event)"/>
+	<mx:Label x="294" y="300.5" text="Comuna" fontWeight="normal" id="txt_comuna"/>
+	<mx:ComboBox x="380" y="297" id="cmb_comuna" change="cmb_comuna_change()" keyUp="cmb_comuna_keyUpHandler(event)" enabled="true" width="181"></mx:ComboBox>
+
+	<mx:Button x="436" y="347.5" label="Guardar y Seleccionar" click="btn_guardar_click()" id="btn_guardar" keyUp="btn_guardar_keyUpHandler(event)"/>
+	<mx:Button x="10" y="347.5" label="Nueva Dirección" id="btn_nuevo" click="btn_nueva_direccion_click()"/>
+	<mx:Button x="347" y="347.5" label="Cancelar" id="btn_cancelar" click="btn_cancelar_click()"/>
+
+<mx:Script source="frm_registro_admision_ingreso_registro_popup_direccion_script.as" />
+	
+	<mx:RemoteObject id="ro_ingreso_registro" destination="libreria.frm_registro_admision_ingreso_registro" showBusyCursor="true" fault="error_fx(event)">
+		<mx:method name="muestra_tipo_direccion" result="result_muestra_tipo_direcciones(event)"/>
+		<mx:method name="muestra_pais" result="result_muestra_pais(event)"/>
+		<mx:method name="muestra_comuna" result="result_muestra_comuna(event)"/>
+		<mx:method name="muestra_regiones" result="result_muestra_regiones(event)"/>
+		<mx:method name="muestra_direcciones" result="result_muestra_direcciones(event)"/>
+		<mx:method name="muestra_direcciones_nombre" result="result_muestra_direcciones(event)"/>
+		<mx:method name="muestra_direcciones_apellidos" result="result_muestra_direcciones(event)"/>
+		<mx:method name="agrega_direccion" result="result_agrega_direccion(event)"/>
+	</mx:RemoteObject>	
+	<mx:Label x="426" y="222" text="Cód. Zip" fontWeight="normal"/>
+	<mx:Label x="12" y="247" text="Referencia" fontWeight="normal"/>
+	<mx:Label x="487" y="201" text="*"/>
+	<mx:Label x="224" y="224" text="*"/>
+	<mx:Label x="577" y="300.5" text="*"/>
+	<mx:Label x="10" y="330" text="Los datos marcados con asterisco son obligatorios."/>
+	<mx:Label x="10" y="47" text="Parámetro"/>
+	<mx:ComboBox id="cmb_tipo_busqueda" x="317" y="43" change="cmt_tipo_busqueda_change()"
+				 click="buscar_direccion()" keyUp="cmb_tipo_busqueda_keyUpHandler(event)"></mx:ComboBox>
+	<mx:Button x="495" y="43" label="Buscar" width="98" id="btn_buscar_direcciones" click="btn_buscar_click()" keyUp="btn_buscar_direcciones_keyUpHandler(event)"/>
+	<mx:ComboBox x="84" y="267" id="cmb_pais" change="cmb_pais_change()" keyUp="cmb_pais_keyUpHandler(event)"></mx:ComboBox>
+	<mx:Label x="12" y="270.5" text="País" fontWeight="normal"/>
+	<mx:ComboBox id="cmb_region" x="85" y="296.5" change="cmb_region_changeHandler(event)" keyUp="cmb_region_keyUpHandler(event)" labelField="campo_dos"></mx:ComboBox>
+	<mx:Label x="10" y="299.5" fontWeight="normal" text="Región"/>
+	
+	
+</mx:TitleWindow>

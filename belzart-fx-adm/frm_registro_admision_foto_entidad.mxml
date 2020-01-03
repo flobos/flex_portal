@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:TitleWindow xmlns:mx="http://www.adobe.com/2006/mxml" creationComplete="inicio()" x="23" y="10" width="577" height="326" layout="absolute"  title="Fotografía Entidad" backgroundColor="#ffffff">
+	
+		<mx:Canvas x="10" y="10" width="536" height="263">
+		<!--	<mx:Button x="259" y="330" label="Sacar foto" id="btn_sacar_foto" click="sacar_foto()"/>-->
+			<mx:TextInput x="76" y="80" id="txt_nombre" width="256" editable="false" borderStyle="none"/>
+			<mx:TextInput x="76" y="110" id="txt_Matricula" editable="false" borderStyle="none"/>
+			<mx:TextInput x="76" y="110" id="txt_alu_foto" editable="false" borderStyle="none" visible="true"/>
+			<mx:TextInput x="66" y="150" id="txt_alu_idn" editable="false" borderStyle="none" visible="true"/>
+			<mx:VBox x="340" y="10" width="179" height="230" borderColor="#ffffff" backgroundColor="#ffffff">
+			        <!-- Image control to load the image. -->
+			        <mx:Image id="image1" complete="loadComplete(event)" width="172" height="222"  themeColor="#000000" alpha="1.0"/>
+			
+			        <!-- Button triggers the load. --> 
+			     <!--   <mx:Button id="myButton" label="Show" visible="true"/> -->         
+			
+			    </mx:VBox>
+			<mx:Button x="10" y="10" label="Fotografiar" click="sacar_foto()"/>
+			<mx:Button id="btn_cerrar" x="10" y="231" label="Cerrar" click="cerrar()"/>
+		</mx:Canvas>
+	<mx:Script source="frm_registro_admision_foto_entidad_script.as" />
+	
+	<mx:RemoteObject id="ro_foto_alumno" destination="libreria.frm_foto_alumno" showBusyCursor="true" fault="Fault(event)">
+		<mx:method name="foto_alumno_busca_datos_alumno" result="result_foto_alumno_busca_datos_alumno(event)"/>
+	</mx:RemoteObject>
+
+</mx:TitleWindow>

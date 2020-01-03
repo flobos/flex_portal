@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<mx:VBox xmlns:mx="http://www.adobe.com/2006/mxml" horizontalAlign="center"
+    verticalGap="0" borderStyle="none">
+
+    <mx:Script>
+
+        var product: Object;
+
+        function setValue(str: String, item: Object) {
+
+            if (item==undefined) {
+                visible = false;
+                return;
+            } else {
+                product=item;
+                visible=true;
+            }
+        }
+    </mx:Script>
+
+  	<mx:Image id="image" width="64" height="64" source="imagenes/fuc.jpg"/>
+    <mx:Label text="{product.campo_uno}" width="140" textAlign="center" height="15" color="#000099" fontWeight="bold"/>
+	<mx:Label text="{product.campo_dos}" width="140" textAlign="center" height="15" />
+	<mx:Label text="{product.campo_cuatro}" width="140" textAlign="center" height="15" />
+    
+
+</mx:VBox>

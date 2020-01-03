@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:TitleWindow xmlns:mx="http://www.adobe.com/2006/mxml" layout="absolute" initialize="inicio();" width="600" height="353" title="Ingreso Inscripción - Agregar Entidad"  horizontalAlign="left" verticalAlign="top" fontWeight="bold">
+	<mx:DataGrid x="10" y="40" width="558" height="140" id="dg_entidades">
+		<mx:columns>
+			<mx:DataGridColumn headerText="Id Entidad" dataField="campo_uno" width="40"/>
+			<mx:DataGridColumn headerText="Identificador" dataField="campo_dos" width="100"/>
+			<mx:DataGridColumn headerText="Nombre" dataField="campo_tres"/>
+			<mx:DataGridColumn headerText="Tipo" dataField="campo_cuatro" width="100"/>
+		</mx:columns>
+	</mx:DataGrid>
+	<mx:Label x="10" y="14" text="Buscar por"/>
+	<mx:ComboBox id="cmb_tipo_busqueda" x="84" y="10" width="123"></mx:ComboBox>
+	<mx:TextInput x="290" y="10" width="161" id="lbl_parametro" keyUp="lbl_parametro_presskey(event)" />
+	<mx:Label x="215" y="12" text="Parámetro"/>
+	<mx:CheckBox x="10" y="198" label="Alumno" click="selecciona_documentacion()" id="chk_documentacion"/>
+	<mx:ComboBox x="179" y="224.5" enabled="false" id="cmb_dir_env_doc" width="389" labelField="campo_dos"></mx:ComboBox>
+	<mx:Label x="10" y="228" text="Direccion(es) disponible(s):"/>
+	<mx:CheckBox x="270" y="198" label="Pagador" id="chk_pago" click="selecciona_documentacion()"/>
+	<mx:HRule x="10" y="188" width="558"/>
+	<mx:HRule x="10" y="261" width="558"/>
+	<mx:Button x="505" y="271" label="Agregar" click="btn_agregar_click()"/>
+	<mx:Button x="428" y="271" label="Cancelar" click="btn_cancelar_click()"/>
+	<mx:Button x="12" y="271" label="Limpiar pantalla" click="btn_limpiar_pantalla_click()"/>
+	<mx:Script source="frm_registro_admision_ingreso_inscripcion_popup_agrega_entidad_script.as"/>
+	<mx:RemoteObject id="ro_ingreso_inscripcion" destination="libreria.frm_registro_admision_ingreso_inscripcion" showBusyCursor="true" fault="error_fx(event)">
+		<mx:method name="busca_entidades" result="result_busca_entidades(event)"/>
+		<mx:method name="muestra_direcciones" result="result_muestra_direcciones(event)"/>
+	</mx:RemoteObject>
+	<mx:Button x="503" y="10" label="Buscar" click="buscar_entidades()"/>
+</mx:TitleWindow>

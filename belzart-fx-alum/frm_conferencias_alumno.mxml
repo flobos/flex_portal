@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Module xmlns:mx="http://www.adobe.com/2006/mxml" xmlns="*" backgroundColor="#CCCCCC" width="100%" height="100%" >
+	<mx:DataService id="ds" destination="fdms-conferencia" autoSyncEnabled="true" />
+	<mx:ArrayCollection id="conferencias_dia"/>
+	<mx:ArrayCollection id="conferencias"/>
+	<mx:ArrayCollection id="conferencias_dif"/>
+	<mx:TitleWindow x="105" y="31" width="870" height="423" layout="absolute" title="Tutorías Virtuales" initialize="inicio()">
+	
+		<mx:DataGrid x="10" y="36" width="829" height="112" id="dg_conferencias_dia" dataProvider="{conferencias_dia}">
+			<mx:columns>
+				<mx:DataGridColumn headerText="Código" dataField="campo_uno" width="60"/>
+				<mx:DataGridColumn headerText="Título" dataField="campo_dos"/>
+				<mx:DataGridColumn headerText="Estado" dataField="campo_tres" width="100" visible="false"/>
+				<mx:DataGridColumn headerText="Tipo" dataField="campo_cuatro" width="90" visible="false"/>
+				<mx:DataGridColumn headerText="N°Máx." dataField="campo_cinco" width="0" visible="false"/>
+				<mx:DataGridColumn headerText="Hora Inicio" dataField="campo_seis" width="140"/>
+				<mx:DataGridColumn headerText="" dataField="campo_siete" width="0" visible="false"/>
+				<mx:DataGridColumn headerText="" dataField="campo_ocho" width="0" visible="false"/>
+				<mx:DataGridColumn headerText="Hora Fin" dataField="campo_nueve" width="140" />
+				<mx:DataGridColumn headerText="" dataField="campo_diez" width="0" visible="false"/>
+				<mx:DataGridColumn headerText="" dataField="campo_once" width="0" visible="false"/>
+				<mx:DataGridColumn headerText="Estado" dataField="campo_doce" width="70" visible="false"/>
+				<mx:DataGridColumn headerText="Estado" dataField="campo_trece" width="70"/>
+			</mx:columns>
+		</mx:DataGrid>
+		<mx:DataGrid id="dg_conferencias" visible="false" x="11" y="197" width="829" height="116"
+					 dataProvider="{conferencias}">
+			<mx:columns>
+				<mx:DataGridColumn headerText="Código" dataField="campo_uno" width="60"/>
+				<mx:DataGridColumn headerText="Título" dataField="campo_dos"/>
+				<mx:DataGridColumn headerText="Estado" dataField="campo_tres" width="100" visible="false"/>
+				<mx:DataGridColumn headerText="Tipo" dataField="campo_cuatro" width="90" visible="false"/>
+				<mx:DataGridColumn headerText="N°Máx." dataField="campo_cinco" width="0" visible="false"/>
+				<mx:DataGridColumn headerText="Fecha Inicio" dataField="campo_seis" width="140"/>
+				<mx:DataGridColumn headerText="" dataField="campo_siete" width="0" visible="false"/>
+				<mx:DataGridColumn headerText="" dataField="campo_ocho" width="0" visible="false"/>
+				<mx:DataGridColumn headerText="Hora Fin" dataField="campo_nueve" width="70" />
+				<mx:DataGridColumn headerText="" dataField="campo_diez" width="0" visible="false"/>
+				<mx:DataGridColumn headerText="" dataField="campo_once" width="0" visible="false"/>
+				<mx:DataGridColumn headerText="Estado" dataField="campo_doce" width="70" visible="false"/>
+				<mx:DataGridColumn headerText="Estado" dataField="campo_trece" width="70"/>
+			</mx:columns>
+		</mx:DataGrid>
+		<mx:DataGrid x="10" y="212" width="829" height="116"  id="dg_conferencias_fin" dataProvider="{conferencias_dif}">
+			<mx:columns>
+				<mx:DataGridColumn headerText="Código" dataField="campo_uno" width="60"/>
+				<mx:DataGridColumn headerText="Título" dataField="campo_dos"/>
+				<mx:DataGridColumn headerText="Estado" dataField="campo_tres" width="100" visible="false"/>
+				<mx:DataGridColumn headerText="Tipo" dataField="campo_cuatro" width="90" visible="false"/>
+				<mx:DataGridColumn headerText="N°Máx." dataField="campo_cinco" width="0" visible="false"/>
+				<mx:DataGridColumn headerText="Fecha Inicio" dataField="campo_seis" width="140"/>
+				<mx:DataGridColumn headerText="" dataField="campo_siete" width="0" visible="false"/>
+				<mx:DataGridColumn headerText="" dataField="campo_ocho" width="0" visible="false"/>
+				<mx:DataGridColumn headerText="Hora Fin" dataField="campo_nueve" width="70" />
+				<mx:DataGridColumn headerText="" dataField="campo_diez" width="0" visible="false"/>
+				<mx:DataGridColumn headerText="" dataField="campo_once" width="0" visible="false"/>
+				<mx:DataGridColumn headerText="Estado" dataField="campo_doce" width="70" visible="false"/>
+				<mx:DataGridColumn headerText="Estado" dataField="campo_trece" width="70"/>
+			</mx:columns>
+		</mx:DataGrid>
+		<mx:Label x="10" y="10" text="Tutorías Virtuales On-Line" textDecoration="underline"/>
+		<mx:Button x="776" y="156" label="Entrar" enabled="true" id="btn_iniciar_conferencia" click="iniciar_conferencia()"/>
+		<mx:Label visible="false" x="11" y="171" text="Videoconferencias aún no disponibles:"
+				  textDecoration="underline"/>
+		<mx:Label x="11" y="186" text="Tutorías Virtuales On-Demand" textDecoration="underline"/>
+		<mx:Button x="744" y="336" label="Volver a Ver" click="ver_conferencia()"/>
+	</mx:TitleWindow>
+	<mx:Script  source="frm_conferencias_alumno_script.as"/>
+	<mx:RemoteObject id="ro_conferencias" destination="libreria_alm.frm_conferencias_alumno" showBusyCursor="true" fault="error_fx(event)">
+		<mx:method name="muestra_conferencias_dia" result="result_muestra_conferencias_dia(event)"/>
+		<mx:method name="muestra_conferencias" result="result_muestra_conferencias(event)"/>
+		<mx:method name="muestra_conferencias_fin" result="result_muestra_conferencias_fin(event)"/>
+	</mx:RemoteObject>
+</mx:Module>

@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" layout="absolute" width="100%" height="100%" initialize="inicio()">
+	<mx:TitleWindow width="621" layout="absolute" title="Asignación de Preguntas A la Prueba" horizontalCenter="12" top="10" height="749">
+		<mx:ComboBox y="17" width="284" id="cmb_ejecucion" left="88" change="cmb_ejecucion_change()"></mx:ComboBox>
+		<mx:Label x="25" y="19" text="Ejecución" fontWeight="bold"/>
+		<mx:HRule x="25" y="45" width="562" height="9"/>
+		<mx:Label x="530" y="19" id="lbl_codigo_ejecucion" width="57"/>
+		<mx:Label x="475" y="19" text="Código:" fontWeight="bold"/>
+		<mx:ComboBox y="110" id="cmb_tipo_prueba" textAlign="left" right="310" width="202" change="cmb_tip_prueba_change()"/>
+		<mx:Label x="25" y="112" text="Prueba" fontWeight="bold"/>
+		<mx:Label x="25" y="62" text="Ramo" fontWeight="bold"/>
+		<mx:ComboBox x="88" y="60" width="499" id="cmb_ramo" change="cmb_ramo_change()"></mx:ComboBox>
+		<mx:Button x="388" y="677" label="Nuevo" id="btn_nuevo" width="93" icon="@Embed(source='imagenes/nuevo.png')" click="limpiar()"/>
+		<mx:Button label="Guardar" id="btn_guardar" click="btn_guardar_click()" icon="@Embed(source='imagenes/guardar.png')" width="102" height="22" y="677" x="489"/>
+		<mx:Label x="25" y="508" text="Preguntas Seleccionadas" themeColor="#232527" fontWeight="bold" textDecoration="normal"/>
+		<mx:Canvas x="10" y="368" width="577" height="101" borderStyle="solid" cornerRadius="10">
+			<mx:VBox  x="0" y="3" height="100%" width="555">
+				<mx:Repeater id="rp_preguntas">
+					<mx:HBox width="552">
+						<mx:Label 					width="5" 	/>
+						<mx:CheckBox id="chk_ok" selected="true" label="{rp_preguntas.currentItem.campo_uno}" width="63"/>
+						<mx:Label id="lbl_pregunta" width="294"	toolTip="{rp_preguntas.currentItem.campo_dos}" 		text="{rp_preguntas.currentItem.campo_dos}"/>
+						<mx:Label id="lbl_uni_nombre" 	width="62"	toolTip="{rp_preguntas.currentItem.campo_siete}"	text="{rp_preguntas.currentItem.campo_siete}"/>
+						<mx:Label id="lbl_pauta" width="0"															text="{rp_preguntas.currentItem.campo_tres}" visible="false"/>
+						<mx:Label id="lbl_tip_preg_idn"	width="0"													text="{rp_preguntas.currentItem.campo_cuatro}" visible="false"/>
+						<mx:Label id="lbl_cla_nombre" 	width="62"	toolTip="{rp_preguntas.currentItem.campo_ocho}"	text="{rp_preguntas.currentItem.campo_ocho}"/>
+						<mx:Label id="lbl_uni_idn"		width="0"													text="{rp_preguntas.currentItem.campo_seis}" visible="false"/>
+						<mx:Label id="lbl_cla_idn"		width="0"													text="{rp_preguntas.currentItem.campo_nueve}" visible="false"/>
+					</mx:HBox>
+				</mx:Repeater>
+			</mx:VBox>
+		</mx:Canvas>
+		<mx:Button x="489" y="475" label="Agregar" icon="@Embed(source='imagenes/edit_add.png')" id="btn_agregar" click="btn_agregar_click()"/>
+		<mx:Label x="43" y="351" text="Código" fontWeight="bold" textDecoration="underline"/>
+		<mx:Label x="113" y="351" text="Pregunta" fontWeight="bold" textDecoration="underline"/>
+		<mx:Label x="411" y="351" text="Unidad" fontWeight="bold" textDecoration="underline"/>
+		<mx:Label x="25" y="156" text="Pregunta" fontWeight="bold"/>
+		<mx:Label x="25" y="196" text="Preguntas ya asignadas a la prueba" fontWeight="bold"/>
+		<mx:ComboBox y="154" id="cmb_tip_pregunta" x="91" width="165" change="cmb_tip_pregunta_change()"></mx:ComboBox>
+		<mx:CheckBox x="25" y="477" label="Quitar Seleccion" id="chk_todos" selected="true" enabled="true" click="seleccionar_todo()"/>
+		<mx:HRule x="25" y="498" width="562" height="7"/>
+		<mx:HRule x="25" y="184" width="562" height="9"/>
+		<mx:Label x="23" y="337" text="Preguntas disponibles para asignar" fontWeight="bold"/>
+		<mx:HRule x="25" y="326" width="562" height="9"/>
+		<mx:Label x="299" y="108" text="Objetivas" fontWeight="bold"/>
+		<mx:Label x="356" y="90" text="Cantidad" fontWeight="bold"/>
+		<mx:Label x="414" y="90" text="Puntos" fontWeight="bold"/>
+		<mx:Label x="299" y="160" text="Total" fontWeight="bold"/>
+		<mx:Label x="479" y="90" text="Exigencia" fontWeight="bold"/>
+		<mx:Label x="299" y="134" text="Desarrollo" fontWeight="bold"/>
+		<mx:Label x="362" y="134" fontWeight="normal" width="43" id="lbl_cant_des" textAlign="right"/>
+		<mx:Label x="412" y="134" fontWeight="normal" width="43" id="lbl_porc_des" textAlign="right"/>
+		<mx:Label x="412" y="108" id="lbl_porc_obj" width="43" textAlign="right"/>
+		<mx:Label x="362" y="108" id="lbl_cant_obj" width="43" textAlign="right"/>
+		<mx:Button x="479" y="158" label="Detalle" id="btn_detalle" click="btn_detalle_click()" icon="@Embed(source='imagenes/apunte.png')"/>
+		<mx:Canvas x="10" y="542" width="577" height="100" borderStyle="solid" cornerRadius="10">
+			<mx:VBox  x="0" y="3" height="95" width="565">
+				<mx:Repeater id="rp_preguntas_sel">
+					<mx:HBox width="562">
+						<mx:Label 					width="5" 	/>
+						<mx:Button id="btn_elimina_selec" width="15" height="15" icon="@Embed(source='imagenes/delete.gif')" click="btn_elimina_selec_click(event)"/>
+						<mx:Label id="lbl_cod_sel" text="{rp_preguntas_sel.currentItem.campo_uno}" width="48"/>
+						<mx:Label id="lbl_pregunta_sel" width="239"	toolTip="{rp_preguntas_sel.currentItem.campo_dos}" 		text="{rp_preguntas_sel.currentItem.campo_dos}"/>
+						<mx:Label id="lbl_tipo_pregunta_sel" width="60"	toolTip="{rp_preguntas_sel.currentItem.campo_cinco}" 		text="{rp_preguntas_sel.currentItem.campo_cinco}"/>
+						<mx:Label id="lbl_uni_idn_sel"		width="0"								text="{rp_preguntas_sel.currentItem.campo_tres}" visible="false"/>
+						<mx:Label id="lbl_uni_nombre_sel" 	width="62"	toolTip="{rp_preguntas_sel.currentItem.campo_seis}"	text="{rp_preguntas_sel.currentItem.campo_seis}"/>
+						<mx:Label id="lbl_cla_nombre_sel" 	width="62"	toolTip="{rp_preguntas_sel.currentItem.campo_ocho}"	text="{rp_preguntas_sel.currentItem.campo_ocho}"/>
+						<mx:Label id="lbl_cla_idn_sel"		width="0"		text="{rp_preguntas_sel.currentItem.campo_nueve}" visible="false"/>
+					</mx:HBox>
+				</mx:Repeater>
+			</mx:VBox>
+		</mx:Canvas>
+		<mx:Label x="53" y="525" text="Código" fontWeight="bold" textDecoration="underline"/>
+		<mx:Label x="120" y="525" text="Pregunta" fontWeight="bold" textDecoration="underline"/>
+		<mx:Label x="374" y="525" text="Tipo" fontWeight="bold" textDecoration="underline"/>
+		<mx:Label x="456" y="525" text="Unidad" fontWeight="bold" textDecoration="underline"/>
+		<mx:Label x="14" y="650" text="Objetivas" fontWeight="bold"/>
+		<mx:Label x="84" y="650" fontWeight="normal" id="total_objetivas" width="77"/>
+		<mx:Label x="10" y="669" text="Desarrollo" fontWeight="bold"/>
+		<mx:Label x="85" y="669" fontWeight="normal" id="total_desarrollo" width="76"/>
+		<mx:Label x="412" y="160" width="43" id="lbl_puntaje_total" fontWeight="bold" color="#0C5E6F" textAlign="right"/>
+		<mx:Label x="479" y="108" width="83" id="lbl_exigencia" color="#0C5E6F" fontWeight="bold" textAlign="center"/>
+		<mx:Label x="362" y="160" width="42" id="lbl_cantidad_total" color="#0C5E6F" textAlign="right" fontWeight="bold"/>
+		<mx:Label x="494" y="351" text="Clase" fontWeight="bold" textDecoration="underline"/>
+		<mx:Label x="508" y="525" text="Clase" fontWeight="bold" textDecoration="underline"/>
+		<mx:Canvas x="12" y="227" width="577" height="101" borderStyle="solid" cornerRadius="10">
+			<mx:VBox  x="0" y="3" height="100%" width="556">
+				<mx:Repeater id="rp_preguntas_asignadas">
+					<mx:HBox width="556">
+						<mx:Label 					width="5" 	/>
+						<mx:Button id="btn_elimina_asig" width="15" height="15" icon="@Embed(source='imagenes/delete.gif')" click="btn_elimina_asig_click(event)"/>
+						<mx:Label id="lbl_pregunta_idn_asig"  toolTip="{rp_preguntas_asignadas.currentItem.campo_uno}" 		text="{rp_preguntas_asignadas.currentItem.campo_uno}" width="63"/>
+						<mx:Label id="lbl_pregunta_asig" width="281"	toolTip="{rp_preguntas_asignadas.currentItem.campo_dos}" 		text="{rp_preguntas_asignadas.currentItem.campo_dos}"/>
+						<mx:Label id="lbl_uni_nombre_asig" 	width="66"	toolTip="{rp_preguntas_asignadas.currentItem.campo_tres}"	text="{rp_preguntas_asignadas.currentItem.campo_tres}"/>
+						<mx:Label id="lbl_cla_nombre0" 	width="75"	toolTip="{rp_preguntas_asignadas.currentItem.campo_cuatro}"	text="{rp_preguntas_asignadas.currentItem.campo_cuatro}"/>
+					</mx:HBox>
+				</mx:Repeater>
+			</mx:VBox>
+		</mx:Canvas>
+		<mx:Label x="45" y="210" text="Código" fontWeight="bold" textDecoration="underline"/>
+		<mx:Label x="115" y="210" text="Pregunta" fontWeight="bold" textDecoration="underline"/>
+		<mx:Label x="412" y="210" text="Unidad" fontWeight="bold" textDecoration="underline"/>
+		<mx:Label x="494" y="210" text="Clase" fontWeight="bold" textDecoration="underline"/>
+	</mx:TitleWindow>
+	
+	<mx:Script source="frm_objetivas_asigna_preguntas_prueba_unidad_script.as"/>
+	
+	<mx:RemoteObject id="ro_asigna_preguntas_prueba_unidad" destination="libreria.frm_objetivas_asigna_preguntas_prueba_unidad" showBusyCursor="true" fault="error_fx(event)">
+		<mx:method name="muestra_ejecuciones" result="result_muestra_ejecuciones(event)"/>
+		<mx:method name="muestra_ramos_ejecucion" result="result_muestra_ramos_ejecucion(event)"/>
+		<mx:method name="muestra_tipo_prueba" result="result_muestra_tipo_prueba(event)"/>
+		<mx:method name="muestra_tipo_pregunta" result="result_muestra_tipo_pregunta(event)"/>
+		<mx:method name="muestra_detalle_prueba_cantidades" result="result_muestra_detalle_prueba_cantidades(event)"/>
+		<mx:method name="muestra_preguntas" result="result_muestra_preguntas(event)"/>
+		<mx:method name="muestra_preguntas_asignadas" result="result_muestra_preguntas_asignadas(event)"/>
+		<mx:method name="asigna_preguntas" result="result_asigna_preguntas(event)"/>
+		<mx:method name="desasigna_preguntas" result="result_desasigna_preguntas(event)"/>
+	</mx:RemoteObject>
+	
+	<mx:RemoteObject id="ro_desencripta" destination="libreria.des_encripta" showBusyCursor="true">
+		<mx:method name="desencriptar_func_mod_fun_idn" result="result_desencriptar_func_mod_fun_idn(event)"/>
+	</mx:RemoteObject>
+	
+</mx:Application>

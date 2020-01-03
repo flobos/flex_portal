@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+		<mx:HBox x="0" y="0" width="90%" height="71" creationComplete="inicio()" xmlns:mx="http://www.adobe.com/2006/mxml"  >
+			<mx:TextArea id="txt_pregunta" width="393" height="70" borderStyle="solid"
+						 editable="false" fontWeight="bold" text="PREGUNTAS" textAlign="center"/>
+			
+			<mx:HBox width="317" height="70" borderStyle="none">
+			<mx:Repeater id="rpt_respuestas" >
+			
+					<mx:HBox x="33" width="33" height="70" borderStyle="solid" id="hb_respuestas" verticalScrollPolicy="off">
+					
+						<mx:Image id="img_alt" source="{'imagenes/encuestas/'+rpt_respuestas.currentItem.campo_dos+'.jpg'}"  >
+							
+						</mx:Image>
+					</mx:HBox>
+				
+			</mx:Repeater>
+			</mx:HBox>
+			<mx:Script source="frm_encuestas_item_encabezado_script.as"/>
+			
+			<mx:RemoteObject id="ro_encuestas" destination="libreria_alm.frm_ver_encuesta" showBusyCursor="true" fault="error_fx(event)">
+				<mx:method name="cargar_pregunta" result="result_cargar_pregunta(event)" />
+				<mx:method name="busca_respuestas" result="result_busca_respuestas(event)" />
+			</mx:RemoteObject>
+
+		</mx:HBox>

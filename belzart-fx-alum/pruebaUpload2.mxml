@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" layout="vertical"><mx:Script>
+<![CDATA[
+import flash.net.FileReference;
+import mx.controls.Alert;
+
+private var fileRef:FileReference = new FileReference();
+private var servletTarget:URLRequest = new URLRequest("http://192.168.1.127:8080/flex/ProcessFileUpload/ProcessFileUpload");
+
+private function fileBrowse():void {
+fileRef = new FileReference();
+	fileRef.addEventListener(Event.SELECT, onSelect);
+	fileRef.addEventListener(Event.COMPLETE, onUploadComplete);
+	fileRef.addEventListener(ProgressEvent.PROGRESS, progressHandler);
+	fileRef.addEventListener(IOErrorEvent.IO_ERROR, onUploadError);
+	fileRef.addEventListener(SecurityErrorEvent.SECURITY_ERROR, onUploadError);	
+
+uploadStatus.text = "Browsing the File System";
+fileTitle.text = "";
+description.text = "";
+fileLocation.text = "";
+fileRef.browse();
+}
+
+private function onSelect(event:Event):void {
+uploadStatus.text = "File selected";
+fileLocation.text = fileRef.name;
+}
+
+private function onUploadComplete(event:DataEvent):void
+{
+	uploadStatus.text = "Complete";
+}
+
+
+private function onUploadError(event:Event):void
+{
+	if (event is IOErrorEvent)
+	{
+		Alert.show("io" + event.toString());
+	}
+	else if (event is SecurityErrorEvent)
+	{
+		Alert.show("seguridad" + event.toString());
+	}
+}
+
+private function progressHandler(event:ProgressEvent):void {
+var percentLoaded:Number = Number((event.bytesLoaded / event.bytesTotal) * 100);
+uploadStatus.text = "The file is " + percentLoaded + "% loaded";
+}
+
+private function fileUpload():void {
+uploadStatus.text = "Uploading....";
+var menuURLVars:URLVariables = new URLVariables();
+menuURLVars.fileTitle = fileTitle.text;
+menuURLVars.description = description.text;
+servletTarget.method = URLRequestMethod.POST;
+fileRef.upload(servletTarget);
+}
+]]>
+</mx:Script>
+
+<mx:Panel title="Uploader">
+<mx:Text text="Manual:&#xd;Step 1. Enter a title for the file&#xd;Step 2. Enter a description for the file&#xd;Step 3. Click the ‘Browse’ button to search the file that one wants to upload&#xd;Step 4. Click the ‘Upload’ button to upload the file to the server" width="100%"/>
+<mx:Form>
+<mx:FormItem label="File title" required="true">
+<mx:TextInput id="fileTitle" width="300"/>
+</mx:FormItem>
+<mx:FormItem label="Description" required="true">
+<mx:TextArea id="description" width="300"/>
+</mx:FormItem>
+<mx:FormItem label="File to upload" direction="horizontal" required="true">
+<mx:TextInput id="fileLocation" width="300" editable="false" color="#001234"/>
+<mx:Button id="browseButton" label="Browse" click="fileBrowse()"/>
+</mx:FormItem>
+<mx:FormItem label="">
+<mx:Button id="uploadButton" label="Upload" click="fileUpload()"/>
+</mx:FormItem>
+<mx:FormItem label="Upload status">
+<mx:Label id="uploadStatus" text="Select a file to upload"/>
+</mx:FormItem>
+</mx:Form>
+</mx:Panel>
+
+</mx:Application>

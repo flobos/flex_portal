@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" layout="absolute" xmlns="*" creationComplete="iFrame.visible=true" viewSourceURL="srcview/index.html" height="100%" initialize="inicio()" > 
+<mx:Panel width="100%" id="pnl_principal" height="100%" title="Belzart FX - Menu Principal" horizontalCenter="0" verticalCenter="0" backgroundAlpha="0.75">
+	<mx:Canvas width="100%" height="56">
+		<mx:Canvas x="10" y="10" width="98%" height="41" borderStyle="solid" borderColor="#B2BFC6">
+			<mx:Label x="10" y="2" text="Nombre"/>
+			<mx:Label x="66" y="1" text="l_ent_reg_nombre" width="325" id="l_ent_reg_nombre" fontWeight="bold"/>
+			<mx:Label x="399" y="1" text="Rut"/>
+			<mx:Label x="455" y="1" width="113" id="l_ent_reg_rut" fontWeight="bold" text="l_ent_reg_rut"/>
+			<mx:Label x="10" y="18" text="Función"/>
+			<mx:Label x="66" y="18" text="lbl_funcion" fontWeight="bold" id="lbl_funcion"/>
+			<mx:Label x="253" y="18" text="Campus/Modalidad"/>
+			<mx:Label x="385" y="18" text="lbl_modalidad" id="lbl_modalidad" fontWeight="bold"/>
+			<mx:Button label="Función/Modalidad" right="105" top="2" id="cmb_cambio" visible ="false"  click="click_cambio_funcion()"/>
+			<mx:Button label="Mensajeria" click="click_mensaje()" visible="false" right="10" top="2"/>
+		</mx:Canvas>
+	</mx:Canvas>
+<mx:VDividedBox width="100%" height="100%" y="78">
+    <mx:HBox width="100%" height="100%">
+		<mx:HDividedBox backgroundColor="#CCCCCC" backgroundAlpha="0.0" width="100%" height="100%">
+	        <mx:Panel title="Menu" width="250" height="100%" backgroundAlpha="0.0">
+	             <mx:Tree id="tree_menu" labelField="@label" width="100%" height="100%" borderStyle="outset" itemClick="click_tree_menu(event)"/>
+	        </mx:Panel>
+	
+	        <mx:Panel width="100%" verticalScrollPolicy="auto" horizontalScrollPolicy="auto" height="100%" title="" paddingTop="1" paddingBottom="1" paddingLeft="1" paddingRight="1">
+	            <IFrame id="iFrame" source="" width="100%" height="100%"/>
+	        </mx:Panel>
+		</mx:HDividedBox>
+
+    </mx:HBox>
+</mx:VDividedBox>
+</mx:Panel>
+    
+    <mx:Script source="frm_main_frame.as" />
+
+
+	<mx:RemoteObject id="ro_frm_main_frame" destination="libreria.frm_main_frame" showBusyCursor="true" fault="error_fx(event)">
+		<mx:method name="carga_menus_asignados" result="result_carga_menus_asignados(event)"/>
+		<mx:method name="funcionario_muestra_menu" result="result_carga_menus_asignados(event)"/>
+		<mx:method name="encripta_rut" result="result_encriptador_rut(event)"/>
+		<mx:method name="encripta_func_mod_fun_idn" result="result_encriptador_func(event)"/>
+		<mx:method name="encripta_mod_idn" result="result_encriptador_modalidad(event)"/>
+		<!--<mx:method name="muestra_ejecuciones_academicas" result="result_muestra_ejecuciones_academicas(event)"/>-->
+		
+	</mx:RemoteObject>
+	
+	<mx:RemoteObject id="echoRO" destination="libreria.EchoService" showBusyCursor="true" fault="error_fx(event)">
+		<mx:method name="return_sub_entidad_identificacion" result="result_return_sub_entidad_identificacion(event)"/>
+		<mx:method name="return_funcion_modalidad" result="result_return_funcion_modalidad(event)"/>
+	</mx:RemoteObject>
+	
+	
+	
+</mx:Application>

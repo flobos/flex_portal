@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:TitleWindow xmlns:mx="http://www.adobe.com/2006/mxml" layout="absolute" title="Aula Virtual - Sus Matriculas" width="712" height="339" creationComplete="frm_matriculas_load()" horizontalAlign="center" x="10" y="10">
+    <mx:DataGrid id="dt_matriculas" x="5" y="87" width="658"  height="133" toolTip="Para ver la infomacion haga click con el mouse" visible="false">
+          <mx:columns>
+              <mx:Array>
+				  <mx:DataGridColumn dataField="campo_cinco" headerText="Matricula" width="80" textAlign="center"/>
+         		  <mx:DataGridColumn dataField="campo_tres"  headerText="Producto" textAlign="left"/>
+				  <mx:DataGridColumn dataField="campo_dos"  headerText="Unidad Académica" width="120" textAlign="left"/>
+				  <mx:DataGridColumn dataField="campo_ocho"  headerText="mal" width="0" textAlign="left"/>
+				  <mx:DataGridColumn dataField="campo_nueve"  headerText="rut" width="0" textAlign="left"/>
+				  <mx:DataGridColumn dataField="campo_diez"  headerText="Institución" width="120" textAlign="left"/>
+  				<mx:DataGridColumn dataField="campo_seis"  headerText="tipo_producto" width="0" textAlign="left"/>		
+		      </mx:Array>
+          </mx:columns>
+      </mx:DataGrid>
+    <mx:Label id="txt_mat_1" x="5" y="223" width="584" height="20"
+			  text="Para ver la infomacion, seleccione la matricula en el recuadro superior y luego presione 'Entrar'." visible="false"/>
+    <mx:Button label="Entrar" id="btn_entrar" click="btn_entrar_click()" width="94" height="32" x="277" y="248" visible="false"/>
+    <mx:Button x="192" y="24"  label="Como usar Zona segura..." width="260" click="clic_ayuda()" height="36" fontSize="14" visible="false" />
+    <mx:Label x="535" y="54" id="lbl_alu_idn" visible="false" />
+   <mx:Script source="frm_matriculas_script.as" />
+
+<mx:RemoteObject id="ro_matriculas_alumno" destination="libreria_alm.frm_matriculas" showBusyCursor="true" fault="error_fx(event)">
+
+	<mx:method name="muestra_matriculas_por_idn" result="result_muestra_matriculas_por_idn(event)" />
+	<mx:method name="muestra_encuestas_pendientes_por_idn" result="result_muestra_encuestas_pendientes_por_idn(event)" />
+</mx:RemoteObject>
+	<mx:DataGrid x="19" y="50" width="654" height="126" id="dg_encuestas" visible="false">
+		<mx:columns>
+			<mx:DataGridColumn dataField="campo_uno" headerText="ID" width="50"/>
+			<mx:DataGridColumn dataField="campo_dos" headerText="Encuesta"/>
+			<mx:DataGridColumn dataField="campo_tres" headerText="Versión" width="70"/>
+			<mx:DataGridColumn dataField="campo_cuatro" headerText="Matrícula" width="150"/>
+		</mx:columns>
+	</mx:DataGrid>
+	<mx:Button id="btn_responder_encuesta" x="268" y="237" width="156" height="38"
+			   label="Responder Encuesta" click="contestar_encuesta()"/>
+
+
+  </mx:TitleWindow>

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" layout="absolute" width="100%" height="100%">
+	<mx:DateFormatter id="dfconv" formatString="DD-MM-YYYY"/>
+	<mx:TitleWindow width="587" height="602" layout="absolute" horizontalAlign="center" verticalAlign="middle" title="Ingreso Conferencia" initialize="inicio()" x="51" y="29">
+		<mx:Label x="10" y="10" text="Título"/>
+		<mx:TextInput x="66" y="8" id="lbl_nombre_conferencia" width="246" maxChars="50"/>
+		<mx:Label x="10" y="40" text="Tipo"/>
+		<mx:ComboBox x="66" y="38" id="cmb_tipo_conferencia"></mx:ComboBox>
+		<mx:Label x="205" y="81" text="Máx."/>
+		<mx:DateField x="27" y="91" width="136" editable="true" id="lbl_fecha_inicio" showToday="true" labelFunction="formatea_fecha" firstDayOfWeek="1" monthNames="['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre']" dayNames="['D', 'L', 'M', 'M', 'J', 'V', 'S']" enabled="true" />
+		<mx:Label x="10" y="66" text="Fecha y Hora de Inicio"/>
+		<mx:NumericStepper x="27" y="121" width="60" maximum="23" id="ns_hora_inicio"/>
+		<mx:Label x="91" y="123" text=":"/>
+		<mx:NumericStepper x="103" y="121" stepSize="5" maximum="59" id="ns_min_inicio"/>
+		<mx:NumericStepper x="266" y="81" stepSize="5" id="ns_max_integrantes" maximum="999"/>
+		<mx:HRule x="10" y="81" width="177"/>
+		<mx:HRule x="10" y="153" width="177"/>
+		<mx:VRule x="10" y="81" height="74"/>
+		<mx:VRule x="185" y="81" height="74"/>
+		<mx:Label x="205" y="109" text="Duración"/>
+		<mx:NumericStepper x="266" y="109" stepSize="5" id="ns_duracion" maximum="999" value="60"/>
+		<mx:Label x="347.8" y="111" text="minutos"/>
+		<mx:DataGrid x="10" y="397" width="530" height="125" id="dg_ejecuciones_academicas">
+			<mx:columns>
+				<mx:DataGridColumn headerText="Código" dataField="campo_uno" width="60"/>
+				<mx:DataGridColumn headerText="Ramo" dataField="campo_dos"/>
+				<mx:DataGridColumn headerText="Jornada" dataField="campo_tres"/>
+				<mx:DataGridColumn headerText="Sección" dataField="campo_cuatro"/>
+			</mx:columns>
+		</mx:DataGrid>
+		<mx:Label x="10" y="379" text="Ejecuciones Académicas"/>
+		<mx:Label x="10" y="178" text="Funcionario Encargado"/>
+		<mx:Button x="453" y="370" label="Agregar" icon="@Embed(source='imagenes/edit_add.png')" id="btn_agrega_eje_academica" click="popup_agregar_ejecucion_academica()"/>
+		<mx:Button x="365" y="370" label="Quitar" icon="@Embed(source='imagenes/delete.gif')" id="btn_quitar_eje_academica"  click="btn_quitar_eje_click()"/>
+		<mx:Button x="450" y="530" label="Guardar" icon="@Embed(source='imagenes/guardar.png')" click="btn_guardar_click()"/>
+		<mx:Button x="453" y="189" label="Agregar" icon="@Embed(source='imagenes/edit_add.png')" id="btn_agrega_funcionario" click="popup_agregar_funcionario()"/>
+		<mx:Button x="367" y="189" label="Quitar" icon="@Embed(source='imagenes/delete.gif')" id="btn_quitar_funcionario" click="btn_quitar_fun_click()" enabled="false"/>
+		<mx:Label x="347.8" y="83" text="integrantes ('0' - sin límite)"/>
+		<mx:Button x="10" y="530" label="Limpiar Pantalla" click="limpiar_pantalla()"/>
+		<mx:Label x="10" y="324" text="Ejecución"/>
+		<mx:ComboBox x="77" y="322" width="329" id="cmb_ejecuciones" change="cmb_ejecuciones_change()" enabled="false"></mx:ComboBox>
+		<mx:Label x="10" y="302" text="Seleccione una Ejecución para agregar ejecuciones académicas (Seleccione Encargado antes)" fontSize="9"/>
+		<mx:CheckBox x="80" y="342" label="Mostrar ejecuciones no asociadas al encargado" id="chk_eje_tutor" click="chk_eje_tutor_change()" enabled="false"/>
+		<mx:Label x="10" y="219" text="Código"/>
+		<mx:TextInput x="64" y="217" width="111" id="txt_fun_codigo" editable="false"/>
+		<mx:TextInput x="285" y="217" id="txt_fun_rut" editable="false"/>
+		<mx:Label x="242" y="219" text="RUT"/>
+		<mx:Label x="10" y="245" text="Nombre"/>
+		<mx:TextInput x="64" y="243" width="381" id="txt_fun_nombre" editable="false"/>
+		<mx:TextInput x="64" y="268" id="txt_fun_funcion" editable="false"/>
+		<mx:Label x="10" y="270" text="Función"/>
+		
+	</mx:TitleWindow>
+	<mx:Script source="frm_conferencias_ingreso_conferencia_script.as" />
+	<mx:RemoteObject id="ro_ingreso_conferencia" destination="libreria.frm_conferencias_ingreso_conferencia" showBusyCursor="true" fault="error_fx(event)">
+		<mx:method name="muestra_tipo_conferencia" result="result_muestra_tipo_conferencia(event)"/>
+		<mx:method name="muestra_ejecuciones" result="result_muestra_ejecuciones(event)"/>
+		<mx:method name="muestra_ejecuciones_tutor" result="result_muestra_ejecuciones_tutor(event)"/>
+		<mx:method name="agrega_conferencia" result="result_agrega_conferencia(event)"/>
+		<mx:method name="guarda_conferencia_funcionarios" result="result_guarda_conferencia_funcionarios(event)"/>
+		<mx:method name="guarda_conferencia_ejecuciones" result="result_guarda_conferencia_ejecuciones(event)"/>
+	</mx:RemoteObject>	
+	<mx:RemoteObject id="ro_desencripta" destination="libreria.des_encripta" showBusyCursor="true" fault="error_fx(event)">
+		<mx:method name="desencriptar_func_mod_fun_idn" result="result_desencriptar_func_mod_fun_idn(event)" />
+	</mx:RemoteObject>
+
+</mx:Application>

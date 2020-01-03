@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+	<mx:TitleWindow x="274" y="274" width="414" creationComplete="inicio()" xmlns:mx="http://www.adobe.com/2006/mxml" height="379" layout="absolute" title="Tipo de Pago">
+		
+		<mx:Script>
+			<![CDATA[
+				protected function lbl_valor_a_pagar_keyUpHandler(event:KeyboardEvent):void
+				{
+					// TODO Auto-generated method stub
+					if (event.charCode == 13)
+					{
+						this.ns_num_cuotas.setFocus();
+					}
+				}
+				
+				protected function ns_num_cuotas_keyUpHandler(event:KeyboardEvent):void
+				{
+					// TODO Auto-generated method stub
+					if (event.charCode == 13)
+					{
+						this.ns_dia_vencimiento.setFocus();
+					}
+				}
+				
+				protected function ns_dia_vencimiento_keyUpHandler(event:KeyboardEvent):void
+				{
+					// TODO Auto-generated method stub
+					if (event.charCode == 13)
+					{
+						this.lbl_fecha_inicio_pago.setFocus();
+					}
+				}
+				
+				protected function lbl_fecha_inicio_pago_keyUpHandler(event:KeyboardEvent):void
+				{
+					// TODO Auto-generated method stub
+					if (event.charCode == 13)
+					{
+						this.cmb_financiamiento.setFocus();
+					}
+				}
+				
+				protected function cmb_financiamiento_keyUpHandler(event:KeyboardEvent):void
+				{
+					// TODO Auto-generated method stub
+					if (event.charCode == 13)
+					{
+						this.cmb_medio_cobro.setFocus();
+					}
+				}
+				
+				protected function cmb_medio_cobro_keyUpHandler(event:KeyboardEvent):void
+				{
+					// TODO Auto-generated method stub
+					if (event.charCode == 13)
+					{
+						this.btn_aceptar.setFocus();
+					}
+				}
+				
+				protected function btn_aceptar_keyUpHandler(event:KeyboardEvent):void
+				{
+					// TODO Auto-generated method stub
+					if (event.charCode == 13)
+					{
+						this.btn_aceptar_click();
+					}
+				}
+				
+				protected function cmb_financiamiento_changeHandler(event:ListEvent):void
+				{
+					// TODO Auto-generated method stub
+					if (this.cmb_financiamiento.selectedLabel.indexOf('Beca Int.',0) > -1)
+					{
+						this.cmb_medio_cobro.selectedIndex = 5;
+						this.cmb_medio_cobro.enabled = false;
+					}
+					else
+						this.cmb_medio_cobro.enabled = true;
+				}
+				
+			]]>
+		</mx:Script>
+		
+		<mx:DateFormatter id="dfconv" formatString="DD-MM-YYYY"/>
+		<mx:Label x="10" y="189" text="Financiamiento"/>
+		<mx:Button x="10" y="254" label="Cancelar" click="btn_cancelar_click()" id="btn_cancelar"/>
+		
+		<mx:Label x="10" y="215" text="Medio de Cobro"/>
+		
+		
+		
+		<mx:Script source="frm_registro_admision_ingreso_inscripcion_popup_tipo_pago_script.as"/>
+		
+		<mx:RemoteObject id="ro_ingreso_inscripcion" destination="libreria.frm_registro_admision_ingreso_inscripcion" showBusyCursor="true" fault="error_fx(event)">
+			<mx:method name="muestra_financiamiento" result="result_muestra_financiamiento(event)"/>
+			<mx:method name="muestra_medio_cobro" result="result_muestra_medio_cobro(event)"/>
+		</mx:RemoteObject>
+		<mx:Label x="10" y="19" text="Indique un porcentaje o valor a pagar"/>
+		<mx:TextInput x="51" y="45" change="cambio_valor_a_pagar()" id="lbl_valor_a_pagar" keyUp="lbl_valor_a_pagar_keyUpHandler(event)"/>
+		<mx:TextInput id="lbl_porcentaje_a_pagar" x="284" y="45" width="57"
+					  change="cambio_porcentaje()" text="0"/>
+		<mx:NumericStepper change="cambio_cuotas()" x="95" y="89" id="ns_num_cuotas" value="10" minimum="0" maximum="100" stepSize="1" keyUp="ns_num_cuotas_keyUpHandler(event)"/>
+		<mx:NumericStepper  x="130" y="113" id="ns_dia_vencimiento" keyUp="ns_dia_vencimiento_keyUpHandler(event)" value="5" minimum="1" maximum="31" stepSize="1" change="dia_vencimiento_change()"/>
+
+		<mx:Label x="10" y="48" text="Valor"/>
+		<mx:Label x="257" y="48" text="%"/>
+		<mx:Label x="51" y="71" text="Máx. " id="txt_max"/>
+		<mx:Label x="10" y="92" text="N° Cuotas"/>
+		<mx:Label x="10" y="144" text="Fecha Inicio Pago"/>
+		<mx:Label x="10" y="115" text="Dia de Vencimiento"/>
+		<mx:DateField x="131" y="141" width="145" id="lbl_fecha_inicio_pago" keyUp="lbl_fecha_inicio_pago_keyUpHandler(event)" showToday="true" labelFunction="formatea_fecha" formatString="formatea_fecha" firstDayOfWeek="1" monthNames="['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre']" dayNames="['D', 'L', 'M', 'M', 'J', 'V', 'S']" enabled="true" yearNavigationEnabled="true"/>
+		
+		<mx:ComboBox x="122" y="187" id="cmb_financiamiento" width="230" change="cmb_financiamiento_changeHandler(event)" keyUp="cmb_financiamiento_keyUpHandler(event)"></mx:ComboBox>
+		<mx:ComboBox x="122" y="213" id="cmb_medio_cobro" width="230" keyUp="cmb_medio_cobro_keyUpHandler(event)"></mx:ComboBox>
+		<mx:Button x="289" y="254" label="Aceptar" id="btn_aceptar" click="btn_aceptar_click()" keyUp="btn_aceptar_keyUpHandler(event)"/>
+		<mx:Label x="176" y="91" text="Valor cuota"/>
+		<mx:Label id="txt_valor_cuota" x="284" y="91" text="0"/>
+	</mx:TitleWindow>
+	

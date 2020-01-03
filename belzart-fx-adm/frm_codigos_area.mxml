@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:TitleWindow xmlns:mx="http://www.adobe.com/2006/mxml" creationComplete="inicio()" layout="absolute"  x="148" y="68" width="234" height="396" title="Códigos de Area">
+	
+	<mx:Script>
+		<![CDATA[
+			protected function dg_comunas_keyUpHandler(event:KeyboardEvent):void
+			{
+				// TODO Auto-generated method stub
+				if (event.charCode == 13)
+				{
+					this.btn_seleccionar_click();
+				}
+			}
+			
+			protected function btn_seleccionar_keyUpHandler(event:KeyboardEvent):void
+			{
+				// TODO Auto-generated method stub
+				if (event.charCode == 13)
+				{
+					this.btn_seleccionar_click();
+				}
+				
+			}
+			
+		]]>
+	</mx:Script>
+	
+	<mx:Label x="10" y="10" text="Seleccione la comuna"/>
+		<mx:Button id="btn_seleccionar" x="115" y="328" label="Seleccionar" click="btn_seleccionar_click()" keyUp="btn_seleccionar_keyUpHandler(event)"/>
+		
+		
+	<mx:Button x="10" y="328" label="Salir" click="btn_cancelar_click()"/>
+	<mx:DataGrid x="10" y="36" width="194" height="176" id="dg_comunas" keyUp="dg_comunas_keyUpHandler(event)">
+		<mx:columns>
+			<mx:DataGridColumn dataField="data" headerText="Comuna"/>
+			<mx:DataGridColumn dataField="label" headerText="Código"/>
+			
+		</mx:columns>
+	</mx:DataGrid>
+	<mx:Script source="frm_codigos_area_script.as"/>
+	<mx:RemoteObject id="ro_ingreso_inscripcion" destination="libreria.frm_registro_admision_ingreso_registro" showBusyCursor="true" fault="error_fx(event)">
+		<mx:method name="muestra_comunas" result="result_muestra_comunas(event)"/>
+	</mx:RemoteObject>
+
+</mx:TitleWindow>

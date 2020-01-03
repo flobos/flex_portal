@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" layout="absolute" xmlns="*" height="100%"  backgroundColor="#E7E7E7"  width="100%" horizontalAlign="center" verticalAlign="middle">
+	
+	<mx:TitleWindow x="0" y="0" width="862" height="543" fontWeight="bold" layout="absolute"
+					title="VideoConferencia">
+		
+	<mx:Accordion x="0" y="0" width="100%" height="100%" id="acc_vc" creationComplete="inicio()">
+		<mx:Canvas width="100%" height="100%" label="VIDEO">
+	
+	<mx:Canvas width="100%" height="100%"  backgroundColor="#e6e6e6">
+		<mx:Button label="Conectar" id="btn_conecta" click="Click_btn_conectar()" x="411" y="50" width="108" height="35" enabled="false" visible="false"/>
+	<mx:TextInput id="txt_fecha_servidor"  width="243" x="137" y="371" visible="false"/>
+	
+	<mx:TextArea width="521" height="50" id="txt_monitor" wordWrap="true" x="10" y="381" editable="false"/>
+	<mx:Label x="10" y="404" text="Monitor" fontWeight="bold"/>
+	<mx:Label x="102" y="373" text="Hora" visible="false"/>
+	<mx:HBox id="videoHBox" x="10" y="20" width="390" height="304">
+		<mx:VideoDisplay width="385" height="302" id="VD_tutor" live="true" autoPlay="true" />
+	</mx:HBox>
+		<mx:HBox id="videoHBox_escritorio" x="408" y="20" width="413" height="304">
+			<mx:VideoDisplay width="406" height="301" id="VD_escritorio" live="true" autoPlay="true" />
+		</mx:HBox>
+	<mx:Button x="629" y="404" label="Finalizar Conferencia" height="35" width="179" enabled="false" id="btn_finalizar_conferencia" click="finalizar_conferencia()"/>
+	<mx:ComboBox x="110" y="332" id="cmb_camaras" change="cambio_camara()" ></mx:ComboBox>
+	<mx:Label x="10" y="334" text="Cámara Tutor"/>
+	<mx:Label x="408" y="334" text="Cámara Escritorio"/>
+	<mx:ComboBox x="547" y="332" id="cmb_camaras_escritorio" change="cambio_camara_escritorio()" ></mx:ComboBox>
+		<mx:Label width="627" id="txt_usuario" text="Usuario: " fontWeight="bold" x="10" y="360"/>
+		<mx:Label x="10" y="430" text="Estado: Aun no Iniciada" fontWeight="bold" width="229" id="txt_estado"/>
+		<mx:Label text="Sala: " width="244" id="txt_sala" fontWeight="bold" x="288" y="430"/>
+		<mx:Button x="629" y="362" id="btn_comenzar" width="179" height="34" label="Comenzar Transmisión" click="conectar()"/>
+		
+
+	</mx:Canvas>
+		</mx:Canvas>
+		<mx:Canvas width="100%" height="100%" label="CHAT">
+			<mx:Canvas width="100%" height="100%"  backgroundColor="#e6e6e6">
+				<mx:List width="206" height="357" id="List_usuarios" x="624" y="36" dataProvider="{lista_usuarios}"/>
+				<mx:TextArea width="603" height="357" id="txt_cuarto" fontSize="{fuente_texto}" wordWrap="true" x="10" y="38" editable="false"/>
+				<mx:TextInput id="txt_mensaje"  width="379" x="50" y="403" maxChars="200" keyUp="txt_msg_keypress(event)"/>
+				<mx:Button label="Enviar" id="btn_enviar" enabled="{enviar_mensaje}" click="Click_btn_enviar();" x="437" y="403"/>
+				<mx:Label x="624" y="10" text="Usuarios" fontWeight="bold"/>
+				<mx:Label x="10" y="405" text="Msg:"/>
+				<mx:NumericStepper id="ns_fuente_texto" x="122" y="10"
+								   change="ns_fuente_texto_changeHandler(event)" maximum="50"
+								   minimum="8" stepSize="2" value="8"/>
+				<mx:Label x="10" y="12" text="Tamaño del texto"/>
+			
+			
+			</mx:Canvas>	
+		</mx:Canvas>	
+
+	</mx:Accordion>
+	<mx:Script source="frm_video_conferencia_tutor_script.as"/>
+	
+	
+</mx:TitleWindow>
+<mx:RemoteObject id="ro_gestion_conferencias" destination="libreria.frm_conferencias_gestion_conferencias_tutor" showBusyCursor="true" fault="error_fx(event)">
+		<mx:method name="obtiene_usuario" result="result_obtiene_usuario(event)"/>
+		
+	</mx:RemoteObject>	
+</mx:Application>

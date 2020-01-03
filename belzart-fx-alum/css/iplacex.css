@@ -1,0 +1,293 @@
+Application {
+   backgroundImage: Embed(source="brushedmetal.jpg");
+   backgroundColor: #869ca7;
+   backgroundGradientColors: #9bafb9, #68808c;
+   backgroundGradientAlphas: 1, 1;
+   themeColor: #aacadd;
+}
+
+Button {
+   cornerRadius: 5;
+   textIndent: 0;
+   paddingLeft: 3;
+   paddingRight: 3;
+   paddingTop: 0;
+   paddingBottom: 0;
+   letterSpacing: 0;
+   highlightAlphas: 0.3, 0;
+   fillAlphas: 0.6, 0.4, 0.75, 0.65;
+   fillColors: #ffffff, #cccccc, #ffffff, #eeeeee;
+   color: #0b333c;
+   textRollOverColor: #0b333c;
+   textSelectedColor: #0b333c;
+   borderColor: #aab3b3;
+   themeColor: #009dff;
+   fontFamily: Verdana;
+   fontSize: 11;
+}
+
+.mybuttonBarButtonStyle {
+   highlightAlphas: 0.3, 0;
+   fillAlphas: 0.57, 0.4, 0.75, 0.65;
+   fillColors: #ffffff, #cccccc, #ffffff, #eeeeee;
+   color: #0b333c;
+   textRollOverColor: #0b333c;
+   textSelectedColor: #0b333c;
+   borderColor: #aab3b3;
+   themeColor: #009dff;
+   fontFamily: Verdana;
+   fontSize: 11;
+}
+
+.mybuttonBarFirstButtonStyle {
+   cornerRadius: 5;
+}
+
+.mybuttonBarLastButtonStyle {
+   cornerRadius: 5;
+}
+
+ComboBox {
+   cornerRadius: 5;
+   color: #0b333c;
+   borderColor: #b7babc;
+   highlightAlphas: 0.3, 0;
+   fillAlphas: 0.6, 0.4, 0.75, 0.65;
+   fillColors: #ffffff, #cccccc, #ffffff, #eeeeee;
+   backgroundAlpha: 0.5;
+   selectionColor: #7fcdfe;
+   textSelectedColor: #0b333c;
+   useRollOver: true;
+   rollOverColor: #aadeff;
+   textRollOverColor: #0b333c;
+   themeColor: #009dff;
+   alternatingItemColors: #ffffff, #ffffff;
+   openDuration: 250;
+   closeDuration: 250;
+   textAlign: left;
+   fontFamily: Verdana;
+   fontSize: 11;
+   letterSpacing: 0;
+   dropDownStyleName: "myComboBoxDropDowns";
+}
+
+.myComboBoxDropDowns {
+   borderColor: #919495;
+   color: #0b333c;
+   textAlign: left;
+   fontFamily: Verdana;
+   fontSize: 11;
+   shadowDirection: center;
+   dropShadowColor: #000000;
+}
+
+/*DataGrid {
+   backgroundAlpha: 1;
+   backgroundColor: #ffffff;
+   alternatingItemColors: #ffffff, #eff1f2;
+   headerColors: #e6eeee, #ffffff;
+   horizontalGridLines: false;
+   letterSpacing: 0;
+   verticalGridLines: true;
+   verticalGridLineColor: #cccccc;
+   rollOverColor: #cbecff;
+   textRollOverColor: #0b333c;
+   borderThickness: 1;
+   borderColor: #b7babc;
+   selectionColor: #aacadd;
+   color: #0b333c;
+   textSelectedColor: #0b333c;
+   textIndent: 0;
+   dropShadowEnabled: true;
+   shadowDistance: 0;
+   shadowDirection: right;
+   dropShadowColor: #000000;
+   fontFamily: Verdana;
+   fontSize: 11;
+   headerStyleName: "mydataGridHeaderStyle";
+}*/
+
+.mydataGridHeaderStyle {
+   color: #0b333c;
+   fontFamily: Verdana;
+   fontSize: 11;
+}
+
+.mydateChooserHeaderStyle {
+   color: #0b333c;
+   fontFamily: Verdana;
+   fontSize: 11;
+
+}
+
+.mydateChooserWeekDayStyle {
+   color: #0b333c;
+
+}
+
+.mydateChooserTodayStyle {
+   color: #ffffff;
+   fontFamily: Verdana;
+   fontSize: 11;
+}
+
+HDividedBox {
+   dividerAffordance: 6;
+   dividerAlpha: 0.75;
+   dividerColor: #6f7777;
+   dividerThickness: 2;
+}
+
+/*HRule {
+   strokeColor: #c4cccc;
+   shadowColor: #eeeeee;
+   strokeWidth: 2;
+}*/
+
+HScrollBar {
+   cornerRadius: 4;
+   highlightAlphas: 0.3, 0;
+   fillAlphas: 0.6, 0.4, 0.75, 0.65;
+   fillColors: #ffffff, #cccccc, #ffffff, #eeeeee;
+   trackColors: #94999b, #e7e7e7;
+   themeColor: #009dff;
+   borderColor: #b7babc;
+}
+
+
+.myhSliderLabelStyle {
+   letterSpacing: 0;
+   color: #0b333c;
+   fontFamily: Verdana;
+   fontSize: 11;
+}
+
+
+LinkButton {
+   color: #494949;
+}
+
+List {
+   backgroundAlpha: 0.69;
+   backgroundColor: #ffffff;
+   alternatingItemColors: #ffffff, #ffffff;
+   useRollOver: true;
+   borderStyle: inset;
+   selectionColor: #7fcdfe;
+   color: #0b333c;
+   textSelectedColor: #0b333c;
+   textIndent: 0;
+   letterSpacing: 0;
+   selectionDuration: 250;
+   dropShadowEnabled: true;
+   shadowDistance: 2;
+   shadowDirection: right;
+   dropShadowColor: #000000;
+   fontFamily: Verdana;
+   fontSize: 11;
+   textAlign: left;
+}
+
+
+Panel {
+   borderColor: #b7babc;
+   borderAlpha: 0.0;
+   borderThicknessLeft: 10;
+   borderThicknessTop: 0;
+   borderThicknessBottom: 10;
+   borderThicknessRight: 10;
+   roundedBottomCorners: true;
+   cornerRadius: 6;
+   headerHeight: 30;
+   backgroundAlpha: 0.78;
+   highlightAlphas: 0, 0;
+   headerColors: #e7e7e7, #d9d9d9;
+   footerColors: #e7e7e7, #c7c7c7;
+   backgroundColor: #ffffff;
+   dropShadowEnabled: true;
+   shadowDistance: 1;
+   shadowDirection: right;
+   dropShadowColor: #000000;
+   titleStyleName: "mypanelTitle";
+}
+
+.mypanelTitle {
+   letterSpacing: 0;
+   color: #0b333c;
+   textAlign: left;
+   fontFamily: Verdana;
+   fontSize: 11;
+}
+
+
+TextInput {
+   borderStyle: inset;
+   borderColor: #b7babc;
+   backgroundAlpha: 0.7;
+   backgroundColor: #ffffff;
+   color: #0b333c;
+   textAlign: left;
+   letterSpacing: 0;
+   paddingLeft: 0;
+   paddingRight: 0;
+   fontFamily: Verdana;
+   fontSize: 11;
+   dropShadowEnabled: false;
+   shadowDirection: right;
+   shadowDistance: 2;
+   dropShadowColor: #000000;
+}
+
+ToolTip {
+   backgroundAlpha: 0.6;
+   letterSpacing: 0;
+   backgroundColor: #2d2d2d;
+   color: #efefef;
+}
+
+Tree {
+   backgroundAlpha: 0.5;
+   rollOverColor: #aadeff;
+   textRollOverColor: #2b333c;
+   borderStyle: solid;
+   borderThickness: 1;
+   borderColor: #b7babc;
+   selectionColor: #7fceff;
+   textSelectedColor: #2b333c;
+   textIndent: 0;
+   letterSpacing: 0;
+   indentation: 15;
+   openDuration: 250;
+   selectionDuration: 250;
+   dropShadowEnabled: false;
+   fontFamily: Verdana;
+   fontSize: 11;
+   cornerRadius: 0;
+}
+
+VDividedBox {
+   dividerAffordance: 6;
+   dividerAlpha: 0.75;
+   dividerColor: #6f7777;
+   dividerThickness: 3;
+}
+
+VScrollBar {
+   cornerRadius: 4;
+   highlightAlphas: 0.3, 0;
+   fillAlphas: 0.6, 0.4, 0.75, 0.65;
+   fillColors: #ffffff, #cccccc, #ffffff, #eeeeee;
+   trackColors: #94999b, #e7e7e7;
+   themeColor: #009dff;
+   borderColor: #b7babc;
+}
+
+
+
+.myvSliderLabelStyle {
+   letterSpacing: 0;
+   color: #0b333c;
+   fontFamily: Verdana;
+   fontSize: 11;
+}
+

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" layout="absolute" minWidth="955" minHeight="600" initialize="inicio()">
+	<mx:DateFormatter id="dfconv" formatString="YYYY-MM-DD" />
+	<mx:TitleWindow width="675" height="516" horizontalCenter="0" layout="absolute"
+					title="Gestión de Pagos" verticalCenter="0">
+		<mx:Label x="10" y="10" text="Ingrese RUT a consultar"/>
+		<mx:TextInput id="lbl_rut" x="158" y="8" keyUp="lbl_rut_presskey(event)" maxChars="12"/>
+		<mx:Button id="btn_buscar" x="479" y="8" label="Buscar" click="valida_rut(this.lbl_rut.text)"/>
+		<mx:DataGrid id="dg_deudas" x="10" y="60" width="635" height="100" editable="false">
+			<mx:columns>
+				<mx:DataGridColumn dataField="campo_uno" headerText="ID" width="30"/>
+				<mx:DataGridColumn dataField="campo_dos" headerText="Carrera"/>
+				<mx:DataGridColumn dataField="campo_tres" headerText="Alumno" width="200"/>
+				<mx:DataGridColumn dataField="campo_cuatro" headerText="Período" width="60"/>
+				<mx:DataGridColumn dataField="campo_cinco" headerText="Fecha" width="100"/>
+				<mx:DataGridColumn dataField="campo_seis" visible="false" />
+				<mx:DataGridColumn dataField="campo_siete"  visible="false"/>
+				<mx:DataGridColumn dataField="campo_ocho"  visible="false"/>
+			</mx:columns>
+		</mx:DataGrid>
+		<mx:Label x="10" y="35" text="Detalle de deudas"/>
+		<mx:Button id="btn_seleccionar" x="506" y="168" width="139" label="Seleccionar"
+				   click="seleccionar_deuda()"/>
+		<mx:Label x="10" y="199" text="Detalle de Operaciones"/>
+		<mx:DataGrid id="dg_operaciones" x="10" y="218" width="635" height="170" editable="false">
+			<mx:columns>
+				<mx:DataGridColumn dataField="campo_uno" visible="false" />
+				<mx:DataGridColumn dataField="campo_dos" headerText="Fecha" width="100"/>
+				<mx:DataGridColumn dataField="campo_tres" headerText="Detalle"/>
+				<mx:DataGridColumn dataField="campo_cuatro" headerText="Cargos" width="100"/>
+				<mx:DataGridColumn dataField="campo_cinco" headerText="Abonos" width="100"/>
+			</mx:columns>
+		</mx:DataGrid>
+		<mx:HRule x="10" y="36" width="635"/>
+		<mx:HRule x="10" y="199" width="635"/>
+		<mx:TextInput id="lbl_total_cobros" x="446" y="396" width="98" editable="false"/>
+		<mx:TextInput id="lbl_total_abonos" x="547" y="396" width="98" editable="false"/>
+		<mx:Label x="393" y="398" text="Totales"/>
+		
+		<mx:Button id="btn_ver_desglose" x="10" y="396" label="Ver Desglose" click="ver_desglose()"/>
+		
+		<mx:HBox x="310" y="10" width="162" height="28">
+			<mx:RadioButton label="Alumno" id="rb_alumno" groupName="radiogroup1" selected="true"/>
+			<mx:RadioButton label="Pagador" id="rb_pagador" groupName="radiogroup1"/>
+		</mx:HBox>
+		<mx:Button x="583" y="8" label="Nuevo" click="limpiar_pantalla();"/>
+		<mx:Button x="10" y="444" label="Ingresar Pago" click="ingresar_pago()"/>
+	</mx:TitleWindow>
+	<mx:Script source="frm_registro_admision_pagos_script.as"/>
+	
+	<mx:RemoteObject id="ro_pagos" destination="libreria.frm_registro_admision_pagos" showBusyCursor="true" fault="error_fx(event)">
+		<mx:method name="busca_deudas" result="result_busca_deudas(event)"/>
+		<mx:method name="busca_deudas_por_alumno" result="result_busca_deudas(event)"/>
+		<mx:method name="busca_operaciones" result="result_busca_operaciones(event)"/>
+		<mx:method name="busca_totales" result="result_busca_totales(event)"/>
+		<mx:method name="busca_deuda_mes" result="result_busca_deuda_mes(event)"/>
+		</mx:RemoteObject>
+</mx:Application>

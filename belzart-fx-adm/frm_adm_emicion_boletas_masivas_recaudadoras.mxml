@@ -1,0 +1,322 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" layout="absolute" minWidth="955" minHeight="600" creationComplete="inicio()">
+	<mx:TitleWindow x="0" y="0" width="982" height="515" layout="absolute"
+					title="Emision Boletas Masivas">
+		<mx:Canvas x="0" y="0" width="952" height="80">
+			<mx:ComboBox id="cmb_recaudadora" x="156" y="36" width="184" change="cmb_recaudadora_changeHandler(event)"></mx:ComboBox>
+			
+			<mx:Label x="10" y="38" height="22" color="#2732CD" fontSize="10" fontWeight="normal"
+					  text="Cod sistema - Convenio:"/>
+			<mx:Label x="10" y="10" height="22" color="#2732CD" fontSize="10" fontWeight="normal"
+					  text="Desde:"/>
+			<mx:Label x="190" y="10" height="22" color="#2732CD" fontSize="10" fontWeight="normal"
+					  text="Hasta:"/>
+			<mx:HRule x="9" y="62" width="933"/>
+			<mx:Button id="btn_recaudadora" x="354" y="7" label="Ver Recaudacion" click="btn_recaudadora_clickHandler(event)" />
+			<mx:Label id="lbl_registros" x="354" y="38" fontWeight="bold"/>
+			<mx:Label id="lbl_fun_rut" x="618" y="9" visible="false"/>
+			<mx:DateField id="df_inicio" x="63" y="8" formatString="DD-MM-YYYY" showToday="true"  firstDayOfWeek="1" monthNames="['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre']" dayNames="['D', 'L', 'M', 'M', 'J', 'V', 'S']"/>
+			<mx:DateField id="df_termino" x="234" y="8" formatString="DD-MM-YYYY" showToday="true"  firstDayOfWeek="1" monthNames="['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre']" dayNames="['D', 'L', 'M', 'M', 'J', 'V', 'S']"/>
+			<mx:TextInput id="txt_fun" x="483" y="7" visible="false"/>
+	
+		</mx:Canvas>
+		<mx:VBox x="10" y="88" width="942" height="318">
+			<mx:Repeater id="rp_pagos" >
+				<mx:HBox>
+					
+					<mx:CheckBox id="chk_ok" width="10" label="{rp_pagos.currentItem.campo_uno}"
+								 fontSize="8" toolTip="{rp_pagos.currentItem.campo_uno}"/>
+					<mx:Label id="lbl_mat_idn" width="80" text="{rp_pagos.currentItem.campo_dos}" toolTip="Matricula" fontSize="10" />
+					<mx:Label id="lbl_alu_rut" width="85" text="{rp_pagos.currentItem.campo_tres}" toolTip="Rut" fontSize="10"/>
+					<mx:Label id="lbl_nombre" width="150" text="{rp_pagos.currentItem.campo_cuatro}" toolTip="Nombre" fontSize="10"/>
+					<mx:Label id="lbl_car_nombre" width="150" text="{rp_pagos.currentItem.campo_cinco}" toolTip="Carrera"  fontSize="10"/>
+					<mx:Label id="lbl_pag_num_cuota" width="20" text="{rp_pagos.currentItem.campo_seis}" toolTip="Cuota"  fontSize="10"/>
+					<mx:Label id="lbl_vencimiento" width="80" text="{rp_pagos.currentItem.campo_siete}" toolTip="Fecha Venc." fontSize="10"/>
+					<mx:Label id="lbl_pag_valor_cancelado" width="50" text="{rp_pagos.currentItem.campo_ocho}" toolTip="Valor Cancelado" fontSize="10" />
+					<mx:Label id="lbl_fecha_pago" width="80" text="{rp_pagos.currentItem.campo_nueve}" toolTip="Fecha Pago" fontSize="10"/>
+					<mx:Label id="lbl_lot_pag_idn" width="0" text="{rp_pagos.currentItem.campo_diez}" toolTip="Cod. lote" fontSize="10" />
+					<mx:Label id="lbl_fecha_impresion" width="80" text="{rp_pagos.currentItem.campo_doce}" toolTip="Fecha Impresion Boleta" fontSize="10" />
+					<mx:Label id="lbl_num_bol" width="50" text="{rp_pagos.currentItem.campo_once}" toolTip="Boleta" fontSize="10" />
+				
+					
+					
+				</mx:HBox>
+			</mx:Repeater>
+		</mx:VBox>
+		<mx:Canvas x="10" y="413" width="942" height="60">
+			
+			
+			<mx:CheckBox id="chk_todos" x="0" y="-2" label="Quitar Seleccion"
+						 click="seleccionar_todo()" enabled="true" selected="true"/>
+			<mx:Label x="5" y="31" color="#2732CD" fontSize="12" fontWeight="normal"
+					  text="Generar boletas por:"/>
+			<mx:ComboBox id="cmb_insti_boleta" x="142" y="30" change="cmb_insti_boleta_changeHandler(event)" width="155"/>
+			
+			<mx:HRule x="9" y="21" width="923"/>
+			<mx:Button id="btn_generar" x="304" y="30" label="1-Generar Boletas"
+					   click="btn_generar_clickHandler(event)" enabled="false" width="147" icon="@Embed(source='imagenes/guardar.png')"/>
+			<mx:Button id="btn_imprime" x="783" y="27" label="Imprimir Boletas" click="btn_imprime_clickHandler(event)" icon="@Embed(source='imagenes/inpresion.gif')"/>
+			<mx:DateField x="464" y="31" width="112" id="df_fecha_impresion" formatString="DD-MM-YYYY" showToday="true" firstDayOfWeek="1" monthNames="['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre']" dayNames="['D', 'L', 'M', 'M', 'J', 'V', 'S']"/>
+			<mx:Button x="583" y="30" label="Fecha Impresion" click="btn_fecha_impresion_clickHandler(event)" width="141" id="btn_fecha_impresion" icon="@Embed(source='imagenes/edit.gif')"/>
+		</mx:Canvas>
+	</mx:TitleWindow>
+	
+	
+	
+	<mx:RemoteObject id="ro_boleteo_recaudadora" destination="libreria.frm_adm_emicion_boletas_masivas_recaudadoras" showBusyCursor="true" fault="error_fx(event)">
+		<mx:method name="muestra_recaudadora" result="result_muestra_recaudadora(event)" />
+		<mx:method name="muestra_cuotas" result="result_muestra_cuotas(event)" />
+		<mx:method name="muestra_institucion" result="result_muestra_institucion(event)" />
+		<mx:method name="actualiza_boleta_pagos" result="result_actualiza_boleta_pagos(event)" />
+		<mx:method name="actualiza_fecha_impresion" result="result_actualiza_fecha_impresion(event)" />
+		
+	
+	</mx:RemoteObject>
+	
+	
+	
+	
+	
+	<mx:Script><![CDATA[
+		import flash.net.URLRequest;
+		
+		import libreria.*;
+		
+		import mx.collections.ArrayCollection;
+		import mx.controls.Alert;
+		import mx.events.CalendarLayoutChangeEvent;
+		import mx.events.ListEvent;
+		import mx.events.ValidationResultEvent;
+		import mx.managers.*;
+		import mx.rpc.events.*;
+		import mx.validators.Validator;
+		
+		public var fun_rut:String 
+		public var url_frame:URLRequest;
+		//func_mod_fun_idn = ;
+		
+		
+		private function inicio():void{
+			
+			this.txt_fun.text = Application.application.parameters.func_mod_fun_idn
+			
+			this.ro_boleteo_recaudadora.muestra_institucion()
+			
+		}
+	
+		private function result_muestra_recaudadora(event:ResultEvent):void{
+			
+			this.cmb_recaudadora.dataProvider = event.result
+		
+		}
+		
+		private function result_muestra_cuotas(event:ResultEvent):void{
+		
+			
+			var arreglo_cuota_todas:Object;
+			var i:Number
+			var monto_total:Number
+			var cuotas_boleteadas:Number
+			
+			var hola:String
+			
+			
+			this.rp_pagos.dataProvider = event.result;
+			
+			arreglo_cuota_todas = rp_pagos.dataProvider
+				
+			monto_total = 0
+			cuotas_boleteadas = 0
+				
+			
+			for(i = 0; i < arreglo_cuota_todas.length ; i++)
+			{
+				
+				if (lbl_num_bol[i].text != '') {
+					chk_ok[i].selected = true
+					chk_ok[i].enabled = false
+					cuotas_boleteadas++
+						
+				}
+			
+				monto_total = monto_total + Number(lbl_pag_valor_cancelado[i].text)
+			}
+				
+		this.lbl_registros.text = 'Nº de Cuotas : ' + event.result.length + '. Monto Total : ' + monto_total  + '. Con Boleta : ' + cuotas_boleteadas
+		
+		}
+		
+		private function result_muestra_institucion(event:ResultEvent):void{
+		
+		this.cmb_insti_boleta.dataProvider = event.result;
+		
+		}
+		
+		private function result_actualiza_boleta_pagos(event:ResultEvent):void{
+				
+			mx.controls.Alert.show('Boleta ingresadas exitosamente','Exito')
+			ro_boleteo_recaudadora.muestra_cuotas(this.cmb_recaudadora.selectedItem.data, this.df_inicio.text, this.df_termino.text)
+				
+		
+		}
+		
+		
+		
+		
+		private function error_fx(event:FaultEvent):void
+		{
+			Alert.show(event.fault.faultString,"Error");
+		}
+		
+	
+		protected function btn_recaudadora_clickHandler(event:MouseEvent):void
+		{
+			
+			ro_boleteo_recaudadora.muestra_recaudadora(this.df_inicio.text, this.df_termino.text )
+		}
+		
+		protected function cmb_recaudadora_changeHandler(event:ListEvent):void
+		{
+			rp_pagos.dataProvider = undefined;
+			ro_boleteo_recaudadora.muestra_cuotas(this.cmb_recaudadora.selectedItem.data, this.df_inicio.text, this.df_termino.text)
+			
+		}
+		
+		
+		protected function btn_fecha_impresion_clickHandler(event:MouseEvent):void
+		{
+			
+			
+			if (this.df_fecha_impresion.text == ""){
+				
+				Alert.show("Debe seleccionar una fecha.","Informacion")
+				
+			}else{
+			
+		    	ro_boleteo_recaudadora.actualiza_fecha_impresion(this.cmb_recaudadora.selectedItem.data,this.df_fecha_impresion.text)
+			
+			}
+			
+			
+			
+		}
+		
+		protected function btn_generar_clickHandler(event:MouseEvent):void
+		{
+			
+			
+			
+			if (this.cmb_insti_boleta.selectedItem.label == "-- Seleccione --"){
+				
+				Alert.show("Debe seleccionar una institucion para generar boletas","Informacion")
+			
+			}else{
+			
+				var j:Number	
+				var conta:Number
+				var largo:Number
+				var arreglo_cuotas:Object;
+				var arreglo_cuotas_aceptadas:ArrayCollection = new ArrayCollection;
+				
+				conta = 0
+				largo =  rp_pagos.dataProvider.length	
+				
+				for(j = 0; j < largo ; j++)
+				{
+					
+					if (chk_ok[j].selected == true && chk_ok[j].enabled == true) {
+						
+						var o_campo:obj_tres_campos = new obj_tres_campos;
+						o_campo.campo_uno = chk_ok[j].label;
+						o_campo.campo_dos = this.txt_fun.text
+						o_campo.campo_tres = this.cmb_insti_boleta.selectedItem.data
+						
+						arreglo_cuotas_aceptadas.addItem(o_campo);
+						conta++ 
+					}
+					
+				}
+				
+				
+				this.ro_boleteo_recaudadora.actualiza_boleta_pagos(arreglo_cuotas_aceptadas)
+					
+			
+			}
+			
+			
+		
+			
+			
+		}
+		
+		
+		private function seleccionar_todo():void
+		{
+			if (chk_todos.selected==true)
+			{
+				chk_todos.label="Quitar Seleccion";
+				seleccion(true);
+			}
+			else
+			{
+				seleccion(false);
+				chk_todos.label="Seleccionar Todo";
+			}	
+		}
+		
+		
+		private function seleccion(valor:Boolean):void
+		{
+			var i:int; 
+			for(i = 0; i < rp_pagos.dataProvider.length; i++) 
+			{
+				
+				if (chk_ok[i].enabled == true) {
+					chk_ok[i].selected=valor
+				}		
+			}
+			
+			
+		}
+		
+		protected function cmb_insti_boleta_changeHandler(event:ListEvent):void
+		{
+			
+			 this.btn_generar.enabled = true
+		
+		}
+		
+		
+		private function result_actualiza_fecha_impresion(event:ResultEvent):void{
+		
+		
+		
+		ro_boleteo_recaudadora.muestra_cuotas(this.cmb_recaudadora.selectedItem.data, this.df_inicio.text, this.df_termino.text)
+		
+		
+		}
+		
+		protected function btn_imprime_clickHandler(event:MouseEvent):void{
+			
+			if (this.cmb_recaudadora.selectedItem.label == "-- Seleccione --"){
+				
+				Alert.show("Debe seleccionar una recaudacion","Informacion")
+				
+			}else{
+			
+				url_frame = new URLRequest("http://164.77.193.133/reportes_flex_net/frm_reporte_boleta_recaudacion.aspx?codigo=" + this.cmb_recaudadora.selectedItem.data);
+				navigateToURL(url_frame, "_blank");
+				
+			}
+			
+			
+			
+		}
+		
+	
+		
+	]]></mx:Script>
+
+	
+</mx:Application>
+   

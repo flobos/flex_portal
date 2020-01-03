@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" layout="absolute" height="100%" width="100%" fontWeight="normal">
+	<mx:TitleWindow width="692" height="812" layout="absolute" initialize="inicio()" horizontalCenter="20" fontWeight="normal" top="10">
+		<mx:ComboBox y="17" width="302" id="cmb_ejecucion" change="cmb_ejecucion_change()" left="73"></mx:ComboBox>
+		<mx:Label x="10" y="19" text="Ejecución" fontWeight="bold"/>
+		<mx:ComboBox id="cmb_tipo_prueba" y="70" right="386" width="202"
+					 change="cmb_tipo_prueba_change()" labelField="campo_dos" textAlign="left"></mx:ComboBox>
+		<mx:Label x="10" y="72" text="Prueba" fontWeight="bold"/>
+		
+			
+		<mx:VRule x="94" y="398" width="2" height="113"/>
+		<mx:VRule x="404" y="398" width="2" height="113"/>
+		<mx:VRule x="489" y="398" width="2" height="113"/>
+		<mx:Canvas x="10" y="398" width="612" height="113" borderStyle="solid" cornerRadius="10" enabled="false" id="canvas_ramos">
+			
+			<mx:VBox  x="0" y="3" height="80%" width="583">
+				<mx:Repeater id="rp_ramos">
+					<mx:HBox width="583">
+						<mx:Label 					width="3" 	/>
+						<mx:CheckBox id="chk_ok" width="16"/>
+						<mx:Label id="lbl_cod" 		width="45" 	text="{rp_ramos.currentItem.campo_uno}" />
+						<mx:Label id="lbl_ramo" 	width="300"	toolTip="{rp_ramos.currentItem.campo_dos}" 		text="{rp_ramos.currentItem.campo_dos}"/>
+						<mx:Label id="lbl_jornada"	width="80"	toolTip="{rp_ramos.currentItem.campo_tres}"	text="{rp_ramos.currentItem.campo_tres}"/>
+						<mx:Label id="lbl_seccion" 	width="81"	toolTip="{rp_ramos.currentItem.campo_cuatro}"	text="{rp_ramos.currentItem.campo_cuatro}"/>
+					</mx:HBox>
+				</mx:Repeater>
+			</mx:VBox>
+		</mx:Canvas>
+		<mx:Label x="11" y="148" text="Unidad" fontWeight="bold"/>
+		<mx:ComboBox y="146" textAlign="left" id="cmb_unidad" left="73" width="202"></mx:ComboBox>
+		<mx:Label x="295" y="155" text="Cant. Preguntas" fontWeight="bold"/>
+		<mx:Label x="342" y="185" text="Puntaje" fontWeight="bold"/>
+		<mx:Label x="50" y="383" text="Código" fontWeight="bold" textDecoration="underline"/>
+		<mx:Label x="99" y="383" text="Ramo" fontWeight="bold" textDecoration="underline"/>
+		<mx:Label x="404" y="383" text="Jornada" fontWeight="bold" textDecoration="underline"/>
+		<mx:Label x="490" y="383" text="Sección" fontWeight="bold" textDecoration="underline"/>
+		
+		
+		
+		<mx:Canvas x="10" y="271" width="430" height="97" borderStyle="solid" cornerRadius="10">
+			
+			<mx:VBox   height="90" width="427">
+				<mx:Repeater id="rp_ramos_selec">
+					<mx:HBox width="407" height="18" x="10" y="271">
+						<mx:Button id="btn_elimina_selec" width="15" height="15" icon="@Embed(source='imagenes/delete.gif')" click="btn_elimina_selec_click(event)"/>
+						<mx:Label id="lbl_unidad_selec" width="75"	toolTip="{rp_ramos_selec.currentItem.campo_cuatro}"	text="{rp_ramos_selec.currentItem.campo_cuatro}"/>
+						<mx:Label id="lbl_clase_selec" width="74"	toolTip="{rp_ramos_selec.currentItem.campo_nueve}"	text="{rp_ramos_selec.currentItem.campo_nueve}"/>
+						<mx:Label id="lbl_cantidad_selec" 	width="55"	toolTip="{rp_ramos_selec.currentItem.campo_siete}"	text="{rp_ramos_selec.currentItem.campo_siete}" textAlign="center"/>
+						<mx:Label id="lbl_porcentaje_selec" 	width="41"	toolTip="{rp_ramos_selec.currentItem.campo_ocho}"	text="{rp_ramos_selec.currentItem.campo_ocho}" textAlign="right"/>
+						<mx:Label id="lbl_correlativo" width="0" text="{rp_ramos_selec.currentItem.campo_uno}" visible="false"/>
+						<mx:Label id="lbl_tipo_pregunta_selec" width="74" toolTip="{rp_ramos_selec.currentItem.campo_seis}"	text="{rp_ramos_selec.currentItem.campo_seis}"/>
+						<mx:Label id="lbl_cod_unidad" width="0" text="{rp_ramos_selec.currentItem.campo_dos}" visible="false"/>
+						<mx:Label id="lbl_cod_clase" width="0" text="{rp_ramos_selec.currentItem.campo_cinco}" visible="false"/>
+						<mx:Label id="lbl_cod_tip_pregunta" width="0" text="{rp_ramos_selec.currentItem.campo_tres}" visible="false"/>
+						<!--<mx:Label id="lbl_prueba_selec" width="78"	toolTip="{rp_ramos_selec.currentItem.campo_cinco}"	text="{rp_ramos_selec.currentItem.campo_cinco}"/>-->
+					</mx:HBox>
+				</mx:Repeater>
+			</mx:VBox>
+			
+		</mx:Canvas>
+		
+		
+		
+		<mx:CheckBox x="24" y="519" label="Seleccionar Todo" click="chk_todos_click()" id="chk_todos" selected="false" enabled="false"/>
+		<mx:Label x="10" y="201" text="Pregunta" fontWeight="bold"/>
+		<mx:ComboBox x="73" y="199" id="cmb_tip_pregunta" width="202" textAlign="left"></mx:ComboBox>
+		<mx:Button x="518" y="153" label="Agregar" icon="@Embed(source='imagenes/edit_add.png')" id="btn_agrega" click="btn_agregar_click()"/>
+		<mx:Button x="532" y="519" label="Guardar" click="btn_guardar_click()" id="btn_guardar" icon="@Embed(source='imagenes/guardar.png')"/>
+		<mx:NumericStepper x="404" y="153" id="num_cantidad" maximum="500" minimum="0"/>
+		<mx:NumericStepper x="404" y="183" id="num_ponderacion" maximum="100" minimum="0"/>
+		<mx:VRule x="101" y="271" width="1" height="91"/>
+		<mx:VRule x="177" y="271" width="15" height="91"/>
+		<mx:VRule x="238" y="271" width="3" height="91"/>
+		<mx:VRule x="317" y="271" width="3" height="91"/>
+		<mx:Label x="438" y="281" text=" Objetivas" fontWeight="bold"/>
+		<mx:Label x="438" y="300" text="Desarrollo" fontWeight="bold" height="16"/>
+		<mx:Label x="504" y="260" text="Cantidad" fontWeight="bold"/>
+		<mx:Label x="569" y="260" text="Puntaje" fontWeight="bold"/>
+		<mx:Label x="509" y="281" width="51" id="lbl_total_obj_cantidad" textAlign="right"/>
+		<mx:Label x="569" y="281" width="53" id="lbl_total_obj_ponderacion" textAlign="right"/>
+		<mx:Label x="509" y="300" width="51" id="lbl_total_des_cantidad" textAlign="right"/>
+		<mx:Label x="569" y="300" width="53" id="lbl_total_des_ponderacion" textAlign="right"/>
+		<mx:Label x="11" y="245" text="Unidad" fontWeight="bold" textDecoration="underline"/>
+		<mx:Label x="177" y="245" text="Cantidad" fontWeight="bold" textDecoration="underline"/>
+		<mx:Label x="325" y="245" text="Tip. Pregunta" fontWeight="bold" textDecoration="underline"/>
+		<mx:Label x="265" y="245" text="Puntaje" fontWeight="bold" textDecoration="underline"/>
+		<mx:Label x="464" y="324" text="Total" fontStyle="normal" fontWeight="bold"/>
+		<mx:Label x="509" y="324" width="51" id="lbl_total_cantidad" textAlign="right"/>
+		<mx:Label x="569" y="324" width="53" id="lbl_total_ponderacion" textAlign="right"/>
+		
+		
+		<mx:VRule x="91" y="593" width="2" height="113"/>
+		<mx:VRule x="159" y="593" width="2" height="113"/>
+		<mx:VRule x="220" y="593" width="2" height="113"/>
+		<mx:VRule x="284" y="593" width="2" height="113"/>
+		<mx:VRule x="347" y="593" width="2" height="113"/>
+		<mx:VRule x="414" y="593" width="2" height="113"/>
+		<mx:VRule x="479" y="593" width="2" height="113"/>
+		<mx:VRule x="527" y="593" width="2" height="113"/>
+		<mx:VRule x="563" y="593" width="2" height="113"/>
+	
+		
+		<mx:Button x="444" y="519" label="Nuevo" id="btn_nuevo" click="btn_nuevo_click()" icon="@Embed(source='imagenes/nuevo.png')"/>
+		<mx:Label x="37" y="574" text="Código" fontWeight="bold" textDecoration="underline"/>
+		<mx:Label x="106" y="574" text="Ramo" fontWeight="bold" textDecoration="underline"/>
+		<mx:Label x="170" y="574" text="Jornada" fontWeight="bold" textDecoration="underline"/>
+		<mx:Label x="229" y="574" text="Sección" fontWeight="bold" textDecoration="underline"/>
+		<mx:Label x="292" y="574" text="Prueba" fontWeight="bold" textDecoration="underline"/>
+		<mx:Label x="360" y="574" text="Unidad" fontWeight="bold" textDecoration="underline"/>
+		<mx:Label x="426" y="574" text="Clase" fontWeight="bold" textDecoration="underline"/>
+		<mx:Label x="483" y="574" text="Tipo" fontWeight="bold" textDecoration="underline"/>
+		<mx:Label x="526" y="574" text="Cant." fontWeight="bold" textDecoration="underline"/>
+		<mx:Label x="565" y="574" text="Puntos" fontWeight="bold" textDecoration="underline"/>
+		<mx:Canvas x="10" y="592" width="612" height="114" borderStyle="solid" cornerRadius="10">
+			
+			
+			<mx:VBox  x="0" y="1" height="85%" width="591">
+				<mx:Repeater id="rp_ramos_ok">
+					<mx:HBox id="hbox_ramos_ok" width="591" height="20">
+						<mx:CheckBox id="chk_ramo_ok" width="16"/>
+						<mx:Label id="lbl_eje_idn"  width="51" toolTip="Código: {rp_ramos_ok.currentItem.campo_uno}" text="{rp_ramos_ok.currentItem.campo_uno}" textAlign="left"/>
+						<mx:Label id="lbl_cur_nombre"  width="67" toolTip="Ramo: {rp_ramos_ok.currentItem.campo_dos}"	text="{rp_ramos_ok.currentItem.campo_dos}"/>
+						<mx:Label id="lbl_tip_jor_nombre"  width="44" toolTip="Jornada: {rp_ramos_ok.currentItem.campo_tres}" text="{rp_ramos_ok.currentItem.campo_tres}"/>
+						<mx:Label id="lbl_sec_nombre"  width="64" toolTip="Sección: {rp_ramos_ok.currentItem.campo_cuatro}"	text="{rp_ramos_ok.currentItem.campo_cuatro}"/>
+						<mx:Label id="lbl_tipo_pru_idn"  width="48"	toolTip="Tipo Prueba: {rp_ramos_ok.currentItem.campo_cinco}"	text="{rp_ramos_ok.currentItem.campo_cinco}" />
+						<mx:Label id="lbl_uni_nombre"  width="66" toolTip="Unidad: {rp_ramos_ok.currentItem.campo_seis}" text="{rp_ramos_ok.currentItem.campo_seis}"/>
+						<mx:Label id="lbl_cla_nombre"  width="55" toolTip="Clase: {rp_ramos_ok.currentItem.campo_siete}" text="{rp_ramos_ok.currentItem.campo_siete}"/>
+						<mx:Label id="lbl_tip_preg_tipo"  width="39" toolTip="Tipo Pregunta: {rp_ramos_ok.currentItem.campo_ocho}" text="{rp_ramos_ok.currentItem.campo_ocho}"/>
+						<mx:Label id="lbl_tip_pru_cantidad"  width="25"	toolTip="Cantidad: {rp_ramos_ok.currentItem.campo_nueve}" text="{rp_ramos_ok.currentItem.campo_nueve}"/>
+						<mx:Label id="lbl_tip_pru_porcentaje"  width="33" toolTip="Porcentaje: {rp_ramos_ok.currentItem.campo_diez}" text="{rp_ramos_ok.currentItem.campo_diez}"/>
+					</mx:HBox>
+				</mx:Repeater>
+			</mx:VBox>
+			
+		</mx:Canvas>
+		<mx:Button x="449" y="729" label="Eliminar Seleccionados" id="btn_elimina" click="btn_elimina_click()" icon="@Embed(source='imagenes/eliminar.png')"/>
+		<mx:CheckBox x="25" y="729" label="Seleccionar Todo" click="chk_todos_ok_click()" id="chk_todos_ok" selected="false" enabled="true"/>
+		<mx:HRule x="10" y="52" width="612"/>
+		<mx:Label x="535" y="17" id="lbl_codigo_ejecucion" width="68"/>
+		<mx:Label x="484" y="17" text="Código" fontWeight="bold"/>
+		<mx:HRule x="10" y="562" width="612"/>
+		<mx:HRule x="10" y="376" width="612" height="3"/>
+		<mx:HRule x="10" y="130" width="612" height="8"/>
+		<mx:Label x="311" y="72" text="Puntaje Total" fontWeight="bold"/>
+		<mx:TextInput x="404" y="70" width="48" id="txt_puntaje" maxChars="3" restrict="0-9" keyDown="txt_puntaje_keypress(event)" text="0"/>
+		<mx:Label x="468" y="72" text="Exigencia" fontWeight="bold"/>
+		<mx:Label x="482" y="102" text="Tiempo" fontWeight="bold"/>
+		<mx:ComboBox x="535" y="70" width="68" id="cmb_exigencia"></mx:ComboBox>
+		<mx:HRule x="10" y="229" width="612" height="8"/>
+		<mx:NumericStepper value="0" id="st_tiempo" stepSize="5" maximum="120" x="538" y="100"/>
+		<mx:Label x="11" y="174" text="Clase" fontWeight="bold"/>
+		<mx:ComboBox y="172" textAlign="left" id="cmb_clase" left="73" width="202"></mx:ComboBox>
+		<mx:Label x="102" y="245" text="Clase" fontWeight="bold" textDecoration="underline"/>
+		
+		
+	</mx:TitleWindow>
+	
+	<mx:Script source="frm_objetivas_asigna_prueba_unidad_script.as"/>
+	
+	<mx:RemoteObject id="ro_asigna_prueba_unidad" destination="libreria.frm_objetivas_asigna_prueba_unidad" showBusyCursor="true" fault="error_fx(event)">
+		<mx:method name="muestra_ejecuciones" result="result_muestra_ejecuciones(event)"/>
+		<mx:method name="muestra_tipo_prueba" result="result_muestra_tipo_prueba(event)"/>
+		<mx:method name="muestra_unidades" result="result_muestra_unidades(event)"/>
+		<mx:method name="muestra_ramos_ejecucion" result="result_muestra_ramos_ejecucion(event)"/>
+		<mx:method name="muestra_ramos_ejecucion_con_prueba" result="result_muestra_ramos_ejecucion_con_prueba(event)"/>
+		<mx:method name="muestra_tipo_pregunta" result="result_muestra_tipo_pregunta(event)"/>
+		<mx:method name="elimina_ramos_ok" result="muestra_ramos_ok()"/>
+		<mx:method name="guarda_prueba_unidad" result="muestra_ramos_ok()"/>
+		<mx:method name="muestra_clase" result="result_muestra_clases(event)"/>
+	</mx:RemoteObject>
+	
+	<mx:RemoteObject id="ro_desencripta" destination="libreria.des_encripta" showBusyCursor="true">
+		<mx:method name="desencriptar_func_mod_fun_idn" result="result_desencriptar_func_mod_fun_idn(event)"/>
+	</mx:RemoteObject>
+	
+</mx:Application>

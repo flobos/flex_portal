@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+	<mx:TitleWindow xmlns:mx="http://www.adobe.com/2006/mxml" x="55" y="31" width="869" height="382" layout="absolute" initialize="inicio()" title="Listado Completo de VideoConferencias" textDecoration="none" fontWeight="normal">
+		<mx:DataGrid x="10" y="36" width="829" height="266" id="dg_conferencias" >
+			<mx:columns>
+				<mx:DataGridColumn headerText="Código" dataField="campo_uno" width="60"/>
+				<mx:DataGridColumn headerText="Título" dataField="campo_dos"/>
+				<mx:DataGridColumn headerText="Estado" dataField="campo_tres" width="100"/>
+				<mx:DataGridColumn headerText="Tipo" dataField="campo_cuatro" width="90"/>
+				<mx:DataGridColumn headerText="N°Máx." dataField="campo_cinco" width="50"/>
+				<mx:DataGridColumn headerText="Fecha Inicio" dataField="campo_seis" width="170"/>
+				<mx:DataGridColumn headerText="Duración" dataField="campo_siete" width="70"/>
+			</mx:columns>
+		</mx:DataGrid>
+		<mx:Label x="10" y="10" text="Videoconferencias asignadas:" textDecoration="underline"/>
+		<mx:Button x="726" y="310" label="Salir" width="113" click="btn_cancelar_click()"/>
+		<mx:Script source="frm_conferencias_gestion_conferencias_tutor_popup_todas_script.as" />
+		<mx:RemoteObject id="ro_gestion_conferencias" destination="libreria.frm_conferencias_gestion_conferencias_tutor" showBusyCursor="true" fault="error_fx(event)">
+			<mx:method name="muestra_conferencias_total" result="result_muestra_conferencias_total(event)"/>
+		</mx:RemoteObject>	
+
+	</mx:TitleWindow>
+	

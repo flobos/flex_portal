@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Module xmlns:mx="http://www.adobe.com/2006/mxml" width="100%" height="100%" creationComplete="inicio()" backgroundColor="#CCCCCC" >
+<mx:DateFormatter id="dfconv" formatString="DD-MM-YYYY"/>
+<mx:TitleWindow width="664" height="561" x="5" y="5" title="Calendario de Pruebas" >
+
+  <mx:Canvas width="624" height="511">
+    <mx:ComboBox x="71" y="13" id="cmb_eje_aca" width="536" height="22" change="cmb_eje_aca_change(event)" >
+    </mx:ComboBox>
+    <mx:Label x="5" y="13"  text="Ramo:" fontWeight="bold" />
+    <mx:DataGrid id="dg_fecha_notas" x="5" y="62" width="610" height="92" >
+      <mx:columns>
+        <mx:Array>
+		  <mx:DataGridColumn headerText="Proceso Evaluativo" dataField="campo_cinco" />
+          <mx:DataGridColumn headerText="Tipo Evaluación" dataField="campo_uno" />
+          <mx:DataGridColumn headerText="Disponible Desde" dataField="campo_dos" textAlign="center" />
+          <mx:DataGridColumn headerText="Rendir Hasta" dataField="campo_tres" textAlign="center" />
+        </mx:Array>
+      </mx:columns>
+    </mx:DataGrid>
+    <mx:DataGrid id="dg_biblio_aca" x="5" y="168" width="610" height="104" >
+      <mx:columns>
+        <mx:Array>
+          <mx:DataGridColumn headerText="Nombre Unidad" dataField="campo_dos" width="380" />
+          <mx:DataGridColumn headerText="Fecha Disponible" dataField="campo_tres" width="130" textAlign="center" />
+          <mx:DataGridColumn headerText="Fecha Bajada" dataField="campo_cuatro" width="100" textAlign="center" />
+        </mx:Array>
+      </mx:columns>
+    </mx:DataGrid>
+    <mx:DataGrid id="dg_foros_sincronicos" x="5" y="285" width="610" height="87" >
+      <mx:columns>
+        <mx:Array>
+          <mx:DataGridColumn headerText="Título" dataField="campo_uno" width="320" />
+          <mx:DataGridColumn headerText="Fecha Disponible" dataField="campo_dos" width="145" textAlign="center" />
+          <mx:DataGridColumn headerText="Fecha Bajada" dataField="campo_tres" width="145" textAlign="center" />
+        </mx:Array>
+      </mx:columns>
+    </mx:DataGrid>
+    <mx:DataGrid id="dg_foros_Asincronicos" x="5" y="384"  width="610" height="86" >
+      <mx:columns>
+        <mx:Array>
+          <mx:DataGridColumn headerText="Título" dataField="campo_uno"  width="320" />
+          <mx:DataGridColumn headerText="Fecha Disponible" dataField="campo_dos" width="145" textAlign="center" />
+          <mx:DataGridColumn headerText="Fecha Bajada" dataField="campo_tres" width="145" textAlign="center"  />
+        </mx:Array>
+      </mx:columns>
+    </mx:DataGrid>
+    <mx:Label x="5" y="44"  text="Disponibilidad y Rendición de Pruebas" fontWeight="bold" />
+    <mx:Label x="5" y="154"  text="Materiales en WEB" fontWeight="bold" />
+    <mx:Label x="5" y="271"  text="Foros Sincrónicos" fontWeight="bold" />
+    <mx:Label x="4" y="370"  text="Foros Asincrónicos" fontWeight="bold" />
+    <mx:Button x="5" y="472"  label="Calendario Imprimible" id="btn_imprimir" width="179" height="33" click="btn_imprimir_click(event)" visible="true" />
+	
+  </mx:Canvas>
+</mx:TitleWindow>
+  
+  <mx:Script source="frm_calendarios_script.as" />
+  <mx:RemoteObject id="ro_calendarios" destination="libreria_alm.frm_calendarios" showBusyCursor="true" fault="error_fx(event)">
+	
+	<mx:method name="ro_carga_eje_aca_por_toma" result="result_datos_carga_eje_aca_por_toma(event)" />
+	<mx:method name="ro_carga_fechas_notas_toma" result="result_datos_carga_fechas_notas_toma(event)" />	
+	<mx:method name="ro_carga_fechas_bibliotecas_academicas" result="result_datos_carga_fechas_bibliotecas_academicas(event)" />			
+	<mx:method name="ro_carga_fechas_foro_sincronico" result="result_datos_carga_fechas_foro_sincronico(event)" />
+  	<mx:method name="ro_carga_fechas_foro_Asincronico" result="result_datos_carga_fechas_foro_Asincronico(event)" />
+ 
+  </mx:RemoteObject>  
+  
+  </mx:Module>

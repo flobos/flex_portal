@@ -1,0 +1,21 @@
+/* CSS file */
+
+global
+{
+	fontSize: 12;
+	roundedBottomCorners: true;
+	color: #FFFFFF;
+	fontWeight: bold;
+}
+Tree
+{
+	color: #333333;
+	fontSize: 11;
+	fontWeight: bold;
+	cornerRadius: 6;
+	borderStyle: inset;
+}
+Panel
+{
+	roundedBottomCorners: true;
+}

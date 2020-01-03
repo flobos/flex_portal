@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:TitleWindow initialize="inicio()" xmlns:mx="http://www.adobe.com/2006/mxml" layout="absolute" width="680" height="506" title="Belzart FX - Función -&gt; Campus -&gt; Modalidad">
+	<mx:Label x="24" y="10" text="Función Asignada"/>
+	<mx:Label x="24" y="58" text="Institución / Campus / Modalidad"/>
+	<mx:ComboBox id="cmb_funcion" change="cmb_funcion_change()" x="24" y="28" width="349"></mx:ComboBox>
+	<mx:ComboBox id="cmb_campus_modalidad" x="24" y="77" width="349" change="cmb_modalidad_change()"></mx:ComboBox>
+	<mx:Button x="558" y="77" label="Aceptar" click="btn_aceptar_click()" id="btn_aceptar" enabled="false" width="73"/>
+	<mx:Label x="414" y="105" width="217" id="lbl_nombre"/>
+	<mx:HRule x="26" y="122" width="605"/>
+	<mx:DataGrid id="dg_ramos" x="26" y="131" width="605" height="315" itemClick="dg_ramos_selecciona()">
+		<mx:columns>
+			<mx:DataGridColumn headerText="Ramo" dataField="campo_dos" width="400"/>
+			<mx:DataGridColumn headerText="Ejecucion" dataField="campo_tres" width="150"/>
+		</mx:columns>
+	</mx:DataGrid>
+
+
+	<mx:RemoteObject id="ro_frm_main_frame" destination="libreria.frm_main_frame" showBusyCursor="true" fault="error_fx(event)">
+		<mx:method name="muestra_funcion" result="result_muestra_funcion(event)" />
+		<mx:method name="muestra_campus_modalidad" result="result_muestra_campus_modalidad(event)" />
+		<mx:method name="muestra_ejecuciones_academicas" result="result_muestra_ejecuciones_academicas(event)" />
+	</mx:RemoteObject>
+	
+	<mx:RemoteObject id="echoRO" destination="libreria.EchoService" showBusyCursor="true" fault="error_fx(event)">
+		<mx:method name="return_sub_entidad_identificacion" result="result_return_sub_entidad_identificacion(event)"/>
+		<mx:method name="funcion_modalidad"/>
+	</mx:RemoteObject>
+
+	<mx:Script source="frm_funcion_modalidad_popup_script.as"/>
+	<mx:SWFLoader x="414" y="13" source="imagenes/logo_belzart.png"/>
+	
+</mx:TitleWindow>
